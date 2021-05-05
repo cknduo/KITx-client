@@ -1,10 +1,10 @@
-# EvolveU Cohort 6 - Project 2
+# EvolveU Cohort 6 - Project 2 - Front End
 
 App Title & Description
 
 ## Installation
 
-You'll need [React](https://reactjs.org) libraries installed using Node Package Manager [NPM](https://www.npmjs.com/package/npm/) in the application folder to run this software:
+You'll need [React](https://www.npmjs.com/package/react) libraries installed using Node Package Manager [NPM](https://www.npmjs.com/package/npm/) in the application folder to run the front end of this software:
 
 ```zsh
 npm install
