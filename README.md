@@ -23,6 +23,6 @@ npm start
 
 This is a group project of EvolveU Cohort 6. A joint effort of [mkhan-11](https://github.com/mKhan-11), [pstorres-github](https://github.com/pstorres-github), [cknduo](https://github.com/cknduo), [atr11](https://github.com/atr11).
 
-## Creditations
+## Attributions
 
 -- Credit for using any open source or licensed items.
