@@ -1,5 +1,5 @@
 {
-  "name": "c6-project2-frontend",
+  "name": "c6-project2",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -34,19 +34,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "description": "App Title & Description",
-  "main": "index.js",
-  "devDependencies": {},
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mKhan-11/c6-project2-frontend.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/mKhan-11/c6-project2-frontend/issues"
-  },
-  "homepage": "https://github.com/mKhan-11/c6-project2-frontend#readme"
+  }
 }
