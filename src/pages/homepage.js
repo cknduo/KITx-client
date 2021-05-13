@@ -1,36 +1,30 @@
 import React, { useState, useEffect } from 'react'
 
-const HomePage = () => {
-    const [user, setUser] = useState([])
+const HomePage = props => {
+    const [courses, setCourses] = useState([])
 
     useEffect(() => {
-        const getUser = async () => {
-            let response = await fetch('/users/60917ac1f7ccfb4de4eb5d31')
+        const getCourses = async () => {
+            let response = await fetch('/courses')
             let data = await response.json()
-            setUser(data)
+            setCourses(data)
             console.log(data)
         }
-        getUser()
-        console.log({user})
+        getCourses()
+        console.log(courses)
     }, [])
-
-    // useEffect(() => {
-    //     // POST request using fetch inside useEffect React hook
-    //     const addUserOptions = {
-    //         method: 'POST',
-    //         headers: { 'Content-Type': 'application/json' },
-    //         body: JSON.stringify({ title: 'React Hooks POST Request Example' })
-    //     };
-    //     fetch('/users', addUserOptions)
-    //         .then(response => response.json())
-    //         .then(data => setPostId(data.id));
-    
-    // // empty dependency array means this effect will only run once (like componentDidMount in classes)
-    // }, []);
 
     return (
         <div className='homepage'>
-            {user.firstName}
+            <div className='welcome'>
+                <span> Welcome Section </span> 
+            </div>
+            <hr />
+            <div className='courses-preview'>
+                {courses.map(course => {
+                    return <p>{course.courseName}</p>
+                })}
+            </div>
         </div>
     )
 }
