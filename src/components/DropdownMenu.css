@@ -1,0 +1,59 @@
+.dropdown {
+    font-size: 0.9rem;
+    position: absolute;
+    top: 3.5rem;
+    width: 12rem;
+    transform: translateX(-45);
+    background-color: rgb(177, 208, 255);
+    overflow: hidden;
+}
+
+.menu-item {
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    transition: background 500ms;
+    padding: 0.2rem 0.8rem;
+}
+
+.menu-item .icon-button {
+    margin-right: 0.8rem;
+    width: 1.2rem;
+}
+
+.menu-item:hover {
+    background-color: rgb(217, 232, 255);
+}
+
+.menu-primary-enter {
+    position: absolute;
+    transform: translateX(-110%);
+}
+
+.menu-primary-enter-active {
+    transform: translateX(0%);
+    transition: all 500ms ease;
+}
+
+.menu-primary-exit {
+    position: absolute;
+}
+
+.menu-primary-exit-active {
+    transform: translateX(-110%);
+    transition: all 500ms ease;
+}
+
+.menu-secondary-enter {
+    transform: translateX(110%);
+}
+
+.menu-secondary-enter-active {
+    transform: translateX(0%);
+    transition: all 500ms ease;
+}
+
+.menu-secondary-exit-active {
+    transform: translateX(110%);
+    transition: all 500ms ease;
+}
