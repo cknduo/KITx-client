@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Switch, Route } from 'react-router-dom'
 
 import './App.css'
-import Header from './components/Header'
+import PublicHeader from './components/PublicHeader'
 import HomePage from './pages/homepage'
 import SignInSignUpPage from './pages/signin-signup'
 import StudentDash from './pages/student-dash'
@@ -11,7 +11,7 @@ import CourseDetails from './pages/course-details'
 function App() {
   return (
     <div>
-      <Header />
+      <PublicHeader />
       <Switch>
         <Route exact path='/' component={HomePage} />
         <Route exact path='/signin' component={SignInSignUpPage} />
