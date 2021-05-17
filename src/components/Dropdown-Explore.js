@@ -4,9 +4,9 @@ import { CSSTransition } from 'react-transition-group'
 import { ReactComponent as ChevronIcon } from '../assets/chevron.svg'
 import { ReactComponent as BackArrowIcon } from '../assets/left-arrow.svg'
 
-import './DropdownMenu.css'
+import './Dropdown.css'
 
-const DropdownMenu = () => {
+const DropdownExplore = () => {
     const [activeMenu, setActiveMenu] = useState('main')
 
     function DropdownItem(props) {
@@ -79,4 +79,4 @@ const DropdownMenu = () => {
     )
 }
 
-export default DropdownMenu
+export default DropdownExplore

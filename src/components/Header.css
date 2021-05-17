@@ -27,6 +27,7 @@
 }
 
 .option {
+    display: flex;
     padding: 0 2rem;
     cursor: pointer;
 }
