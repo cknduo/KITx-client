@@ -7,6 +7,7 @@ import HomePage from './pages/homepage'
 import SignInSignUpPage from './pages/signin-signup'
 import StudentDash from './pages/student-dash'
 import CourseDetails from './pages/course-details'
+import ShoppingCart from './pages/shoppingcart'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Switch>
         <Route exact path='/' component={HomePage} />
         <Route exact path='/signin' component={SignInSignUpPage} />
+        <Route exact path='/cart' component={ShoppingCart} />
         <Route exact path='/student' component={StudentDash} />
         <Route exact path='/:id' component={CourseDetails} />
       </Switch>

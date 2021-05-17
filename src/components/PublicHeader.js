@@ -24,7 +24,10 @@ const PublicHeader = () => (
 
             <div className='options right'>
                 <Link className='option' to='/teach'>
-                TEACH
+                    TEACH
+                </Link>
+                <Link className='option' to='/cart'>
+                    CART
                 </Link>
                 <Link className='option' to='/signin'>
                     SIGN IN
