@@ -1,14 +1,12 @@
 import React from 'react'
-/*import SignUp from './components/SignUp'*/
+import SignIn from '../components/SignIn'
+import SignUp from '../components/SignUp'
 
 const SignInSignUpPage = () => (
     <div className='signin-signup'>
-        SIGN IN AND SIGN UP HERE!
+        <SignIn />
+        <SignUp />
     </div>
-/*    <div>
-      <SignUp />
-    </div>    
-*/
 )
 
 export default SignInSignUpPage
