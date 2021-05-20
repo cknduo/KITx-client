@@ -14,7 +14,7 @@ const TeacherHeader = () => (
             <HeaderStaticSection />
 
             <div className='options right'>
-                <Link className='option' to='/teacher-dash'>
+                <Link className='option' to='/teacher/:id'>
                     My Teaching
                 </Link>
                 <div className='option'>
