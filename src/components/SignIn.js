@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Axios from "axios"
 
+import FormInput from './Form-Input'
 import './SignIn.css'
 
 const SignIn = () => {
@@ -30,25 +31,25 @@ const SignIn = () => {
   }
 
   return (
-    <div>
-      <div>
-        <h1>Sign In</h1>
-        <div>
-        <input
-          placeholder="Email"
-          onChange={(e) => setLoginUsername(e.target.value)}
-        />
-        <input
-          placeholder="Password"
-          onChange={(e) => setLoginPassword(e.target.value)}
-        />
-        </div>
-        <div><button onClick={login}>Submit</button></div>
-      </div>
+    <div className='sign-in'>
+      <FormInput
+        type='email'
+        handleChange={(e) => setLoginUsername(e.target.value)}
+        label='Email'
+        required
+      />
+      <FormInput
+        type='password'
+        handleChange={(e) => setLoginPassword(e.target.value)}
+        label='Password'
+        required
+      />
 
-      <div>
-        {data ? <h1>Welcome Back {data.username}</h1> : null}
-      </div>
+      <button className='sign-in-button' onClick={login}>
+        Sign In
+      </button>
+
+      {data ? <h1>Welcome Back {data.username}</h1> : null}
     </div>
   );
 }

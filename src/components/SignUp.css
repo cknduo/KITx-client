@@ -1,0 +1,24 @@
+.sign-up {
+    width: 100%
+}
+
+.sign-up-button {
+    float: right;
+    min-width: 25%;
+    height: 2rem;
+    letter-spacing: 0.5px;
+    font-size: 1rem;
+    color: white;
+    background-color: rgb(108, 167, 255);
+    border: none;
+    outline: none;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.sign-up-button:hover {
+    border: 2px solid black;
+}

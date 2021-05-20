@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import Axios from "axios"
 
+import FormInput from './Form-Input'
 import './SignUp.css'
 
 const SignUp = () => {
@@ -42,65 +43,61 @@ const SignUp = () => {
   };
 
   return (
-    <div className="Signup">
-    <div>
+    <div className="sign-up">
       {/* Authentication */}
-      <h1>Sign Up</h1>
-      <div><input
-        placeholder="Email"
+      <FormInput
+        type='email'
         onChange={(e) => setRegisterUsername(e.target.value)}
+        label='Email'
+        required
       />
-      <input
-        placeholder="Password"
+      <FormInput
+        type='password'
         onChange={(e) => setRegisterPassword(e.target.value)}
+        label='Password'
+        required
       />
-      </div>
 
       {/* User Information */}
-      <div>
-      <input
-        placeholder="Account Type"
+      <FormInput
         onChange={(e) => setregisterAccountType(e.target.value)} // student or teacher
+        label='Account Type'
+        required
       />
-      </div>
-      <div>
-      <input
-        placeholder="First Name"
+      <FormInput
         onChange={(e) => setregisterFirstName(e.target.value)}
+        label='First Name'
+        required
       />
-      <input
-        placeholder="Last Name"
+      <FormInput
         onChange={(e) => setregisterLastName(e.target.value)}
+        label='Last Name'
+        required
       />
-      </div>
-      <input
-        placeholder="Address"
+      <FormInput
         onChange={(e) => setregisterAddress(e.target.value)}
+        label='Street Address'
       />
-      <div>
-      <input
-        placeholder="Postal Code or Zip Code"
-        onChange={(e) => setregisterPostalCode(e.target.value)}
-      />
-      <input
-        placeholder="Province or State"
-        onChange={(e) => setregisterProvince(e.target.value)}
-      />
-      </div>
-      <div>
-      <input
-        placeholder="City"
+      <FormInput
         onChange={(e) => setregisterCity(e.target.value)}
+        label='City'
+      />    
+      <FormInput
+        onChange={(e) => setregisterProvince(e.target.value)}
+        label='Province'
       />
-      <input
-        placeholder="Country"
+      <FormInput
+        onChange={(e) => setregisterPostalCode(e.target.value)}
+        label='Postal Code'
+      />
+      <FormInput
         onChange={(e) => setregisterCountry(e.target.value)}
+        label='Country'
       />
-      </div>
 
-      <div><button onClick={register}>Submit</button></div>
-    </div>
-
+      <button className='sign-up-button' onClick={register}>
+        Register
+      </button>
     </div>
   )
 }
@@ -108,7 +105,6 @@ const SignUp = () => {
 export default SignUp
 
 // email
-// confirm email
 // password --- weak/strong?
 // confirm password
 // I accept the [Terms of Use] & [Privacy Policy] --> checkbox

@@ -16,7 +16,7 @@ const PublicHeader = () => {
                     <Link className='option' to='/teach'>
                         Teach
                     </Link>
-                    <Link className='option' to='/signin'>
+                    <Link className='option' to='/sign-in'>
                         Sign In
                     </Link>
                 </div>
