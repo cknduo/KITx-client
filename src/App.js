@@ -2,26 +2,36 @@ import React, { useState, useEffect } from 'react'
 import { Switch, Route } from 'react-router-dom'
 
 import './App.css'
-import PublicHeader from './components/PublicHeader'
+
+import HeaderPublic from './components/Header-Public'
+import HeaderStudent from './components/Header-Student'
+import HeaderTeacher from './components/Header-Teacher'
+
 import HomePage from './pages/homepage'
+import Teach from './pages/teach'
 import SignInSignUpPage from './pages/signin-signup'
-import StudentDash from './pages/student-dash'
-import TeacherDash from './pages/teacher-dashboard'
+import StudentDashboard from './pages/student-dashboard'
+import TeacherDashboard from './pages/teacher-dashboard'
 import CourseDetails from './pages/course-details'
+import ShoppingCart from './pages/shoppingcart'
 
 function App() {
   return (
     <div>
-      <PublicHeader />
+      <HeaderPublic />
+      <HeaderStudent />
+      <HeaderTeacher />
       <Switch>
         <Route exact path='/' component={HomePage} />
-        <Route exact path='/signin' component={SignInSignUpPage} />
-        <Route exact path='/student' component={StudentDash} />
-        <Route exact path='/teacher' component={TeacherDash} />
-        <Route exact path='/:id' component={CourseDetails} />
+        <Route exact path='/teach' component={Teach} />
+        <Route exact path='/sign-in' component={SignInSignUpPage} />
+        <Route exact path='/cart' component={ShoppingCart} />
+        <Route exact path='/student/:id' component={StudentDashboard} />
+        <Route exact path='/teacher/:id' component={TeacherDashboard} />
+        <Route exact path='/course/:id' component={CourseDetails} />
       </Switch>
     </div>
-  );
+  )
 }
 
 export default App;

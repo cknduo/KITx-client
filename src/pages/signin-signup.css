@@ -1,0 +1,44 @@
+.signin-signup {
+    display: flex;
+    justify-content: center;
+}
+
+.option-tabs {
+    width: 90%;
+}
+
+.tab-container {
+    min-width: 60%;
+}
+
+.tab-options {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+    border-bottom: 3px solid rgb(108, 167, 255);
+}
+
+.signin-signup-button {
+    min-width: 50%;
+    height: 2rem;
+    letter-spacing: 0.5px;
+    font-size: 1rem;
+    color: white;
+    background-color: rgb(177, 208, 255);
+    border: none;
+    outline: none;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.active-view {
+    background-color: rgb(108, 167, 255);
+}
+
+.tab-content {
+    display: flex;
+    justify-content: center;
+}
