@@ -19,6 +19,16 @@ const CourseDetails = props => {
         return ''
     }
 
+    const addToCart = ()=>{
+        const courseToAdd = {
+            courseID: course._id, 
+            imageURL: course.imageURL, 
+            courseTitle: course.courseName, 
+            price: course.coursePrice
+        }
+        props.setCart( item => [...item, courseToAdd])
+    }
+
     return (
         <div className='course-details'>
             <ul className='course-descriptions'>
@@ -31,7 +41,12 @@ const CourseDetails = props => {
             <ul className='kit-details'>
                 <h2>Required Kit: {course.requiredKits.kitName}</h2>
             </ul>
+            
+            <div>
+                <button className='enroll-button' onClick={addToCart}> ENROLL NOW !</button>
+            </div>
         </div>
+
     )
 }
 

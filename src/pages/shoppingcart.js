@@ -1,50 +1,62 @@
 import React, { useState, useEffect } from 'react'
+import CartItem from '../components/Cart-Item'
 
-// const ShoppingCart = () => (
-//     <div>
-//         You've reached the SHOPPING CART!
-//     </div>
-// )
+const ShoppingCart = ( {cart, setCart} ) => {
+   
+    React.useEffect(() => {
+        console.log("localstorage.getItem("cart") = ")
+        console.log(localStorage.getItem("cart"))
+        const parsedCart = Number(localStorage.getItem("cart") || 0)
+        console.log("parsedCart= ", parsedCart)
+        setCart(parsedCart)
+      }, [])
+    
+      React.useEffect(() => {
+        localStorage.setItem("cart", cart)
+      }, [cart])
 
+    const removeCartItem = (courseID) => {
+        setCart(cart => cart.filter((item) => item.courseID !== courseID)) 
+    }
 
-const ShoppingCart = props => {
+    const clearCart = () => {
+        //setCart(cart => cart.filter((item) => item.courseID === 0))
+        setCart(cart = [])
+    }
 
-    console.log("just triggered the Shopping Cart screen!")
-
-    const [cart, setCart] = useState([])
-
-    useEffect(() => {
-        const getCart = async () => {
-            let response = await fetch('/carts/12345')
-            let data = await response.json()
-            setCart(data)
-            console.log("As part of the UseEffect/getCart function, showing the DATA object...")
-            console.log(data)
-        }
-        getCart()
-        console.log("At the end of the UseEffect function, showing the CART object...")
-        console.log(cart)
-    }, []) 
-
-    console.log("log CART, CART.cartID, and CART.cartItems objects prior to refresh of page ...")
-    console.log(cart)
-    console.log(cart.cartID)
-    console.log(cart.cartItems)
-
+    
     return (
         <div className='shoppingcart'>
             <h1>SHOPPING CART</h1>
-            <br /> <hr />  <br />
-            <div className='cartitems'>
-                Cart ID = {cart.cartID}
-                <br />
-                <ul>
-                    {cart.cartItems}
-                </ul>
-                {/* {cart.cartItems.map(item => (
-                    <p>{item}</p>
-                ))} */}
+            <br /> <br /> <hr />  <br />
 
+            <br /> <br /> <hr />  <br />
+            <div className='cartitems'>
+                {cart.length === 0 &&
+                    <h3>No items in your cart</h3>
+                }
+                {cart.map(item => (<CartItem removeCartItem={removeCartItem} item={item} />))}
+            </div>
+            <div>Subtotal</div>
+            <br /> <br /> <br />
+            <div>
+                <button
+                    className='clear-cart-button'
+                    type='button'
+                    disabled={cart.length === 0}
+                    onClick={clearCart}
+                >
+                    CLEAR CART
+                </button>
+            
+                <button 
+                    className='checkout-button'
+                    type='button'
+                    disabled={cart.length === 0}
+                    // onClick={checkOut}
+                >
+                    CHECKOUT
+                </button>
             </div>
         </div>
     )

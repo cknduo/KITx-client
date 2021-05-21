@@ -1,0 +1,21 @@
+.cart-item {
+  display:flex;
+  width:100%;
+  align-items: center;
+}
+
+.image-container {
+  width:25%;
+}
+
+.title {
+  width:25%;
+}
+
+.price {
+  width:25%;
+}
+
+.remove-button {
+  width:25%;
+}
