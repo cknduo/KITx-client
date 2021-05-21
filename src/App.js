@@ -6,6 +6,7 @@ import PublicHeader from './components/PublicHeader'
 import HomePage from './pages/homepage'
 import SignInSignUpPage from './pages/signin-signup'
 import StudentDash from './pages/student-dash'
+import TeacherDash from './pages/teacher-dashboard'
 import CourseDetails from './pages/course-details'
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route exact path='/' component={HomePage} />
         <Route exact path='/signin' component={SignInSignUpPage} />
         <Route exact path='/student' component={StudentDash} />
+        <Route exact path='/teacher' component={TeacherDash} />
         <Route exact path='/:id' component={CourseDetails} />
       </Switch>
     </div>
