@@ -20,12 +20,12 @@ const CourseDetails = props => {
     }
 
     const addToCart = ()=>{
-        const courseToAdd = {
-            courseID: course._id, 
-            imageURL: course.imageURL, 
-            courseTitle: course.courseName, 
-            price: course.coursePrice
-        }
+        // const courseToAdd = {
+        //     courseID: course._id 
+        //     imageURL: course.imageURL, 
+        //     courseTitle: course.courseName,
+        // }
+        const courseToAdd = course._id
         props.setCart( item => [...item, courseToAdd])
     }
 

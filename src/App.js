@@ -17,20 +17,33 @@ import ShoppingCart from './pages/shoppingcart'
 
 function App() {
 
+  console.log("WELCOME to APP.JS Home of the APP!!!!")
+  
+
   const [cart,setCart] = useState([
-    {
-      courseID: 1,
-      imageURL: "https://b3h2.scene7.com/is/image/BedBathandBeyond/325343469473702p?$imagePLP$&wid=256&hei=256",
-      courseTitle: "Intro to Chloe's Pottery",
-      price: 2000,
-    },
-    {
-      courseID: 2,
-      imageURL: "https://az837918.vo.msecnd.net/publishedimages/listings/13258/en-CA/images/1/stone-wood-steel-M-3.jpg",
-      courseTitle: "Intro to Thor's Blacksmithery",
-      price: 1000,
-    }
+    "60930ed5ceed3a654c87a71a","609f1807201b091de34f18ff"
+    // {
+    //   courseID: "60930ed5ceed3a654c87a71a"
+      // imageURL: "https://b3h2.scene7.com/is/image/BedBathandBeyond/325343469473702p?$imagePLP$&wid=256&hei=256",
+      // courseTitle: "Three Phase AC Electrical Circuit Design",
+    // },
+    // {
+    //   courseID: "609f1807201b091de34f18ff"
+      // imageURL: "https://az837918.vo.msecnd.net/publishedimages/listings/13258/en-CA/images/1/stone-wood-steel-M-3.jpg",
+      // courseTitle: "Chemistry of Food",
+    // }
   ])
+
+  // React.useEffect(() => {
+  //   console.log("Calling useEffect 1 on APP.JS")
+  //   // const parsedCart = Number(localStorage.getItem("cart") || 0)
+  //   // console.log("parsedCart= ", parsedCart)
+  //   setCart(cart)
+  // }, [])
+
+  // React.useEffect(() => {
+  //   localStorage.setItem("cart", cart)
+  // }, [cart])
 
   return (
     <div>
@@ -43,7 +56,6 @@ function App() {
         <Route exact path='/teach' component={Teach} />
         <Route exact path='/signin' component={SignInSignUpPage} />
         <Route exact path='/cart' render={()=>(<ShoppingCart cart={cart} setCart={setCart} />)} />
-        {/* <Route exact path='/cart' render={(props)=>(<ShoppingCart {...props} />)} /> */}
         {/* <Route exact path='/cart' component={ShoppingCart} /> */}
         <Route exact path='/student-dash' component={StudentDash} />
         <Route exact path='/teacher-dash' component={TeacherDash} />

@@ -1,44 +1,48 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import CartItem from '../components/Cart-Item'
 
-const ShoppingCart = ( {cart, setCart} ) => {
+const ShoppingCart = ( { cart, setCart } ) => {
+
+    //Define STATE for variable "subtotal"
+    const [subtotal, setSubtotal] = useState(0)
    
-    React.useEffect(() => {
-        console.log("localstorage.getItem("cart") = ")
-        console.log(localStorage.getItem("cart"))
-        const parsedCart = Number(localStorage.getItem("cart") || 0)
-        console.log("parsedCart= ", parsedCart)
-        setCart(parsedCart)
-      }, [])
-    
-      React.useEffect(() => {
-        localStorage.setItem("cart", cart)
-      }, [cart])
+    console.log("Welcome to ShoppingCart!!!")
 
-    const removeCartItem = (courseID) => {
-        setCart(cart => cart.filter((item) => item.courseID !== courseID)) 
-    }
-
+    //"CLEAR THE CART" Function gets called by button 'onClick'
     const clearCart = () => {
-        //setCart(cart => cart.filter((item) => item.courseID === 0))
-        setCart(cart = [])
+        setCart([])
+        setSubtotal(0)
     }
 
-    
+    // useEffect(() => {
+    //     //rerender shopping cart
+    //     console.log("Triggered useEffect on ShoppingCart")
+    //     console.log("Cart looks like: ", cart)
+    //     setCart(cart)
+
+    //   },[cart])
+
     return (
         <div className='shoppingcart'>
             <h1>SHOPPING CART</h1>
-            <br /> <br /> <hr />  <br />
-
-            <br /> <br /> <hr />  <br />
+            <br /> <br />
             <div className='cartitems'>
                 {cart.length === 0 &&
                     <h3>No items in your cart</h3>
                 }
-                {cart.map(item => (<CartItem removeCartItem={removeCartItem} item={item} />))}
+
+                {/* {cart.map(item => (<p>{item}</p>))} */}
+
+                {cart.map(mapItem => (<CartItem mapItem={mapItem} cart={cart} setCart={setCart} subtotal={subtotal} setSubtotal={setSubtotal} />))}
+
             </div>
-            <div>Subtotal</div>
-            <br /> <br /> <br />
+            <br /> <br />
+            {cart.length !== 0 &&
+                <div> Subtotal  ${subtotal}
+
+                </div>
+            }
+            <br /> <br />
             <div>
                 <button
                     className='clear-cart-button'
@@ -58,6 +62,7 @@ const ShoppingCart = ( {cart, setCart} ) => {
                     CHECKOUT
                 </button>
             </div>
+            <br /> <br />
         </div>
     )
 }
