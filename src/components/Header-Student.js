@@ -16,7 +16,7 @@ const StudentHeader = ( {cartSize}) => (
             <HeaderStaticSection />
 
             <div className='options right'>
-                <Link className='option' to='/student-dash'>
+                <Link className='option' to='/student/:id'>
                     My Learning
                 </Link>
                 <div className='option'>
