@@ -22,7 +22,8 @@ const HomePage = props => {
             <hr />
             <div className='courses-preview'>
                 {courses.map(course => {
-                    return <p>{course.courseName}</p>
+                    // Fixed "Each child in a list should have a unique 'key' prop" Warning in Browser Console
+                    return <div key={course._id}><p>{course.courseName}</p></div>
                 })}
             </div>
         </div>

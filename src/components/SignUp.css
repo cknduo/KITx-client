@@ -1,10 +1,104 @@
 .sign-up {
-    width: 100%
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.account-type-prompt {
+    margin-right: 1rem;
+}
+
+.radio-container {
+    display: flex;
+    align-items: center;
+}
+
+.name-container {
+    margin-top: 0.5rem;
+    display: grid;
+    grid-template-columns: 4fr 0.5fr 4fr;
+}
+
+.first-name {
+    grid-column: 1 / 2;
+}
+
+.last-name {
+    grid-column: 3 / 4;
+}
+
+.auth-container {
+    margin-top: 1rem;
+}
+
+.email-container {
+    display: grid;
+    grid-template-columns: 4fr 0.5fr 4fr;
+}
+
+.email {
+    grid-column: 1 / 2;
+}
+
+.confirm-email {
+    grid-column: 3 / 4;
+}
+
+.password-container {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: 4fr 0.5fr 4fr;
+}
+
+.password {
+    grid-column: 1 / 2;
+}
+
+.confirm-password {
+    grid-column: 3 / 4;
+}
+
+.address-container {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.city-and-postal-code {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: 4fr 0.5fr 4fr;
+}
+
+.city {
+    grid-column: 1 / 2;
+}
+
+.postal-code {
+    grid-column: 3 / 4;
+}
+
+.provinces-and-country {
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: 4fr 0.5fr 4fr;
+}
+
+.provinces-states {
+    grid-column: 1 / 2;
+}
+
+.country {
+    grid-column: 3 / 4;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
 }
 
 .sign-up-button {
-    float: right;
-    min-width: 25%;
+    margin-top: 2rem;
+    width: 39%;
     height: 2rem;
     letter-spacing: 0.5px;
     font-size: 1rem;
