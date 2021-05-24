@@ -1,10 +1,12 @@
 .sign-in {
-    width: 100%;
+    width: 50%;
+    margin-top: 2rem;
 }
 
 .sign-in-button {
+    margin-top: 2rem;
     float: right;
-    min-width: 25%;
+    min-width: 30%;
     height: 2rem;
     letter-spacing: 0.5px;
     font-size: 1rem;

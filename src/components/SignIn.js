@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import Axios from "axios"
 
-import FormInput from './Form-Input'
+import TextField from '@material-ui/core/TextField';
 import './SignIn.css'
 
-const SignIn = () => {
+const SignIn = ({ setUserID, setAccountType }) => {
   const [loginUsername, setLoginUsername] = useState("")
   const [loginPassword, setLoginPassword] = useState("")
-  const [data, setData] = useState(null)
+  const [data, setData] = useState(null) //Eventually this all its uses will be removed
 
   const login = async () => {
     const loginRes = await Axios({
@@ -28,21 +28,27 @@ const SignIn = () => {
     })
     setData(getRes.data)
     console.log(getRes.data)
+
+    //Sets User ID up the chain through signin-signup page to App.js {Using deconstruction}
+    setUserID(getRes.data.userID)
   }
 
   return (
     <div className='sign-in'>
-      <FormInput
+      <TextField
+        fullWidth
+        label="Email"
         type='email'
-        handleChange={(e) => setLoginUsername(e.target.value)}
-        label='Email'
-        required
+        required={true}
+        onChange={(e) => setLoginUsername(e.target.value)}
       />
-      <FormInput
+      <TextField
+        style={{ margin: "1rem 0rem" }}
+        fullWidth
+        label="Password"
         type='password'
-        handleChange={(e) => setLoginPassword(e.target.value)}
-        label='Password'
-        required
+        required={true}
+        onChange={(e) => setLoginPassword(e.target.value)}
       />
 
       <button className='sign-in-button' onClick={login}>
