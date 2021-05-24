@@ -17,44 +17,21 @@ import ShoppingCart from './pages/shoppingcart'
 
 function App() {
 
-  console.log("WELCOME to APP.JS Home of the APP!!!!")
-  
-
-  const [cart,setCart] = useState([
-    // "60930ed5ceed3a654c87a71a","609f1807201b091de34f18ff"
-    // {
-      // courseID: "60930ed5ceed3a654c87a71a",
-      // coursePrice: 0,
-      // imageURL: "https://b3h2.scene7.com/is/image/BedBathandBeyond/325343469473702p?$imagePLP$&wid=256&hei=256",
-      // courseTitle: "Three Phase AC Electrical Circuit Design",
-    // },
-    // {
-      // courseID: "609f1807201b091de34f18ff",
-      // coursePrice: 0,
-      // imageURL: "https://az837918.vo.msecnd.net/publishedimages/listings/13258/en-CA/images/1/stone-wood-steel-M-3.jpg",
-      // courseTitle: "Chemistry of Food",
-    // }
-  ])
+  // Establish Shopping Cart STATE, to be accessible for all components
+  const [cart,setCart] = useState([])
 
   return (
     <div>
       <HeaderPublic />
-      {/* <HeaderStudent /> */}
       <HeaderStudent cartSize={cart.length} />
       <HeaderTeacher />
       <Switch>
         <Route exact path='/' component={HomePage} />
         <Route exact path='/teach' component={Teach} />
-        <Route exact path='/signin' component={SignInSignUpPage} />
+        <Route exact path='/sign-in' component={SignInSignUpPage} />
         <Route exact path='/cart' render={()=>(<ShoppingCart cart={cart} setCart={setCart} />)} />
-        {/* <Route exact path='/cart' component={ShoppingCart} /> */}
-        {/* <Route exact path='/student-dash' component={StudentDash} /> */}
-        {/* <Route exact path='/teacher-dash' component={TeacherDash} /> */}
-        {/* <Route exact path='/:id' component={CourseDetails} /> */}
-        {/* <Route exact path='/:id' render={()=>(<CourseDetails setCart={setCart} />)} /> */}
         <Route exact path='/student/:id' component={StudentDashboard} />
         <Route exact path='/teacher/:id' component={TeacherDashboard} />
-        {/* <Route exact path='/course/:id' component={CourseDetails} /> */}
         <Route exact path='/course/:id' render={()=>(<CourseDetails cart={cart} setCart={setCart} />)} />
       </Switch>
     </div>

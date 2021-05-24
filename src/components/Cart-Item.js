@@ -5,10 +5,6 @@ import './Cart-Item.css'
 
 const CartItem = ( {mapItem, cart, setCart, subtotal, setSubtotal} ) => {
 
-  console.log("**Welcome to the CartItem component!")
-  console.log("* Current CART state = ",cart)
-  console.log("* Current SUBTOTAL state = ",subtotal)
-
   // Define STATE for variables to be displayed: "coursePhotoURL", "courseName", and "price"
   const [price, setPrice] = useState(0)
   const [courseName, setCourseName] = useState("")
@@ -39,8 +35,6 @@ const CartItem = ( {mapItem, cart, setCart, subtotal, setSubtotal} ) => {
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   // Function to update the CART state with information pulled from backend
   const populateCartDetails = (itemID, URL, title, cost) => {
-    console.log("+++ Welcome to POPULATE CART DETAILS function!!")
-    console.log("Current STATE of Cart = ", cart)
     let indexInArray = cart.findIndex(item => item.courseID === itemID)
     if (indexInArray > -1) {
       // Update the Shopping Cart with related course details as required 

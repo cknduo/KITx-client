@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Axios from "axios"
 
 import CartItem from '../components/Cart-Item'
+// import CourseDetails from '../pages/course-details'
 import addNewDBCart from '../functions/AddNewDBCart.js'
 
 const ShoppingCart = ( { cart, setCart } ) => {
@@ -9,9 +10,11 @@ const ShoppingCart = ( { cart, setCart } ) => {
     //Define STATE for variable "subtotal"
     const [subtotal, setSubtotal] = useState(0)
 
-    console.log("++Welcome to the ShoppingCart page!")
-    console.log("+ Current CART state = ",cart)
-    console.log("+ Current SUBTOTAL state = ",subtotal)
+    // Retrieve USER Information if exists
+    let userID = "12345"
+    let userFirstName = "Pam"
+    // let userID = "60ab2fc2f7d205756ee946f4"
+    // let userFirstName = "Westley"
 
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // "CLEAR THE CART" Function gets called by button 'onClick'
@@ -42,7 +45,9 @@ const ShoppingCart = ( { cart, setCart } ) => {
     useEffect(() => {
         // Get the userID from state, and retrieve user's cart details
         // if they exist.
-        let userID = "12345"
+
+        // Update UserName field here??
+        // let userID = "12345"
         let tempCartArray = []
         const loadUserCartList = async () => {
             // let cartInfo = await getCart(userID)
@@ -94,7 +99,8 @@ const ShoppingCart = ( { cart, setCart } ) => {
 
     return (
         <div className='shoppingcart'>
-            <h1>SHOPPING CART</h1>
+            <h1> SHOPPING CART</h1>
+            <h4> Welcome {userFirstName}, here are the courses you are about to purchase:</h4>
             <br /> <br />
             <div className='cartitems'>
                 {cart.length === 0 &&
@@ -102,16 +108,47 @@ const ShoppingCart = ( { cart, setCart } ) => {
                 }
 
                 {/* {cart.map(item => (<p>{item}</p>))} */}
+                {/* <dl> */}
+                    {/* <li key={number.toString()}> */}
+                    {/* <dt> */}
+                        {/* {cart.map(mapItem => (<CartItem mapItem={mapItem} cart={cart} setCart={setCart} subtotal={subtotal} setSubtotal={setSubtotal} />))} */}
+                    {/* </dt> */}
+                {/* </dl> */}
                 {cart.map(mapItem => (<CartItem mapItem={mapItem} cart={cart} setCart={setCart} subtotal={subtotal} setSubtotal={setSubtotal} />))}
-                
+
+{/* function NumberList(props) {
+  const numbers = props.numbers;
+  const listItems = numbers.map((number) =>
+    <li key={number.toString()}>
+      {number}
+    </li>
+  );
+  return (
+    <ul>{listItems}</ul>
+  );
+} */}
+
+
+
 
             </div>
             <br /> <br />
             {cart.length !== 0 &&
                 <div> Subtotal  ${subtotal}
-
                 </div>
             }
+            <br />
+            {/* <div>
+                <button
+                    className='button'
+                    type='button'
+                    // linkTo='/course/609f1807201b091de34f18ff'
+                    // onClick='/course/609f1807201b091de34f18ff'
+                    // onClick={()=>(<CourseDetails cart={cart} setCart={setCart} />)}
+                >
+                    Go To Course: Chemistry of Food
+                </button>
+            </div> */}
             <br /> <br />
             <div>
                 <button
