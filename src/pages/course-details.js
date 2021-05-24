@@ -20,14 +20,29 @@ const CourseDetails = props => {
     }
 
     const addToCart = ()=>{
-        // const courseToAdd = {
-        //     courseID: course._id 
+        const courseToAdd = {
+            courseID: course._id,
+            coursePrice: 0, 
         //     imageURL: course.imageURL, 
         //     courseTitle: course.courseName,
-        // }
-        const courseToAdd = course._id
+        }
+        // const courseToAdd = course._id
         props.setCart( item => [...item, courseToAdd])
     }
+
+    const courseInCart = ()=>{
+        let isInCart = false
+        if (props.cart.length !== 0){
+            for (let counter = 0; counter < props.cart.length; counter++) {
+                if (props.cart[counter].courseID === course._id){
+                    isInCart = true
+                    return (isInCart)
+                }
+            }
+        }
+        return (isInCart)
+    }
+
 
     return (
         <div className='course-details'>
@@ -43,7 +58,9 @@ const CourseDetails = props => {
             </ul>
             
             <div>
-                <button className='enroll-button' onClick={addToCart}> ENROLL NOW !</button>
+                <button className='enroll-button' 
+                    disabled={courseInCart() === true}
+                    onClick={addToCart}> ENROLL NOW !</button>
             </div>
         </div>
 

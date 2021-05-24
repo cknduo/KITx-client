@@ -5,26 +5,20 @@ import './Cart-Item.css'
 
 const CartItem = ( {mapItem, cart, setCart, subtotal, setSubtotal} ) => {
 
-  // Define STATED for building subtotal arrays
-  const [itemsForSubtotal, setItemsForSubtotal] = useState([])
-  const [finalList, setFinalList] = useState([500,500])
+  console.log("**Welcome to the CartItem component!")
+  console.log("* Current CART state = ",cart)
+  console.log("* Current SUBTOTAL state = ",subtotal)
 
   // Define STATE for variables to be displayed: "coursePhotoURL", "courseName", and "price"
   const [price, setPrice] = useState(0)
   const [courseName, setCourseName] = useState("")
   const [coursePhotoURL, setCoursePhotoURL] = useState("")
 
-  console.log("Welcome to CartItem!!!")
-  console.log("State of itemsForSubtotal = ",itemsForSubtotal)
-
+  // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   // REMOVE ITEM FROM CART function, called by 'onClick' of X button
-  const removeCartItem = (arrayItemID, cost) => { 
-
-    // Update subtotal  
-    setSubtotal(subtotal - cost)
-    
+  const removeCartItem = (arrayItemID) => {     
     // Remove item from CART
-    setCart(cart => cart.filter((item) => item !== arrayItemID)) 
+    setCart(cart => cart.filter((item) => item.courseID !== arrayItemID)) 
     
     // NOTE: The following use of SPLICE was not working consistently.
     // As per recommendation, we will use FILTER instead.
@@ -40,106 +34,78 @@ const CartItem = ( {mapItem, cart, setCart, subtotal, setSubtotal} ) => {
     //     setCart(updatedCart)
     //   }
   }
+  //----------------------------------------------------------------------------
 
-  // Declare function for adding/pushing new price onto the "itemsForSubtotal" state array
-  const addPriceToState = (newPrice, stateArray, setFunction) => setFunction(stateArray => [...stateArray, newPrice])
+  //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  // Function to update the CART state with information pulled from backend
+  const populateCartDetails = (itemID, URL, title, cost) => {
+    console.log("+++ Welcome to POPULATE CART DETAILS function!!")
+    console.log("Current STATE of Cart = ", cart)
+    let indexInArray = cart.findIndex(item => item.courseID === itemID)
+    if (indexInArray > -1) {
+      // Update the Shopping Cart with related course details as required 
+      
+      // Create temporary copy of the object found in the array at the index specified above
+      let tempObject = Object.assign({}, cart[indexInArray]) 
+      // Update the price on the temporary object  
+      tempObject.coursePrice = cost
+      // Replace the array element's object in the temporary Cart
+      cart[indexInArray] = tempObject
+    }
+  }
+  //----------------------------------------------------------------------------
 
-
+  //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   // This is the MAIN Use-Effect function that retrieves current course-related
   // information from the backend and then accumulates the prices to be included
   // in the SUBTOTAL.
   useEffect(() => {
-    console.log("Welcome to CartItem's MAIN UseEffect!")
     const getCourseDetails = () => {
       Axios({
         method: "GET",
         withCredentials: true,
-        url: `/courses/${mapItem}`,
+        url: `/courses/${mapItem.courseID}`,
       }).then((res) => {
-        console.log("Course info found, looks like: ")
-        console.log(res.data)
-
         setPrice(res.data.coursePrice)
         setCourseName(res.data.courseName)
-        // setCoursePhotoURL(res.data.coursePhotoURL)
+
+        //REPLACE LINE BELOW WITH THIS CODE WHEN URL is in DATABASE FILE ::  setCoursePhotoURL(res.data.coursePhotoURL)
         setCoursePhotoURL("https://www.trademarksandbrandsonline.com/media/image/unnamed-1--1.jpg")
 
-        console.log("Price of this particular course is = ", res.data.coursePrice)
+        //REPLACE LINE BELOW WITH THIS CODE WHEN URL is in DATABASE FILE ::  populateCartDetails(res.data._id, res.data.coursePhotoURL, res.data.courseName, res.data.coursePrice)
+        populateCartDetails(res.data._id, "https://www.trademarksandbrandsonline.com/media/image/unnamed-1--1.jpg", res.data.courseName, res.data.coursePrice)
 
-        // Add this item to our list of subTotal prices
-        // let newListOfPrices = itemsForSubtotal.push(res.data.coursePrice)
-        // setItemsForSubtotal(newListOfPrices)
-
-        
-        addPriceToState(res.data.coursePrice, itemsForSubtotal, setItemsForSubtotal)
-        // setItemsForSubtotal( itemPrice => [...itemPrice, res.data.coursePrice])
-
-        //setTempSubtotal(tempSubtotal + res.data.coursePrice)
-        // updateSubtotal(res.data.coursePrice)
-        // console.log("Finished updating SUBTOTAL state")
-        
+        // pretend to update the subTotal on ShoppingCart to trigger a refresh
+        setSubtotal(subtotal + res.data.coursePrice)
       })
     }
     getCourseDetails()
   },[cart])
-
-
-  const sumOfItemsForSubtotal = (whichState) => {
-    console.log("$$$$$$ Welcome to sumOfItemsForSubtotal!!!")
-    let sum = 0
-    console.log("STATE of itemsForSubtotal = ",whichState)
-    if (whichState.length !== 0){
-      for (let counter = 0; counter < whichState.length; counter++) {
-        console.log("itemsForSubtotal at position ", counter)
-        console.log(" is = ", whichState[counter])
-        sum += whichState[counter]
-        console.log("Rolling sum = ", sum)
-      }
-    }
-    return sum
-  }
+  //----------------------------------------------------------------------------
   
-
-  // When each cycle is complete, replace the REAL subtotal on ShoppingCart with
-  // the temporary subtotal accumulated on this component
-  
-  useEffect(() => {
-    console.log("++++++ Welcome To CartItem UseEffect for SubTotal Replacement!!!")
-    console.log("itemsForSubtotal state = ",itemsForSubtotal)
-    //let sumToMove = sumOfItemsForSubtotal(itemsForSubtotal)
-    //setSubtotal(sumToMove)
-    let priceFromList = () => {
-      if(itemsForSubtotal.length !== 0)
-      return (itemsForSubtotal[0])
-    }
-    addPriceToState(priceFromList,finalList,setFinalList)
-  },[itemsForSubtotal])
-
-
-  useEffect(() => {
-    let sumToMove = sumOfItemsForSubtotal(finalList)
-    setSubtotal(sumToMove)
-
-  },[finalList])
-
-
-
   return(
     <div className='cart-item'>
-      <div className='image-container'> <img src={`${coursePhotoURL}`} alt="course image" width="200" height="150" /> </div>
-      <span className='title'>{courseName}</span>
-      <span className='price'>${price}</span>
-      <div className='remove-button' onClick=
-        {() => removeCartItem(mapItem,price)}
-        // Note: No longer use the following code. Replaced with single function call above.
-        // {() => {
-        //   console.log("courseID to be removed = ", mapItem);
-        //   console.log("PriceToRemoveFromSubtotal = ", price);
-        //   setSubtotal(subtotal - price);
-        //   removeCartItem(mapItem);
-        // }} 
-      >
-        &#10005;</div>
+      {!courseName &&
+        <div className='cart-item'>
+          <div className='image-container'> <img src={"https://cdn0.iconfinder.com/data/icons/mobile-ui-outline/512/__Folder_Not_Exist_Delete_Emty_Cross-512.png"} alt="course dne" width="200" height="150" /> </div>
+          <span>This course ({mapItem.courseID}) no longer exists, please remove from cart.</span>
+          <div className='remove-button' onClick=
+            {() => removeCartItem(mapItem.courseID)} 
+          >
+            &#10005;</div>
+        </div>
+      }
+      {courseName &&
+        <div className='cart-item'>
+          <div className='image-container'> <img src={`${coursePhotoURL}`} alt="course image" width="200" height="150" /> </div>
+          <span className='title'>{courseName}</span>
+          <span className='price'>${price}</span>
+          <div className='remove-button' onClick=
+            {() => removeCartItem(mapItem.courseID)} 
+          >
+            &#10005;</div>
+        </div>
+      } 
     </div>
   )
 }
