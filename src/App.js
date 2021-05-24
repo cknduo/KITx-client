@@ -19,9 +19,10 @@ function App() {
 
   // Establish Shopping Cart STATE, to be accessible for all components
   const [cart,setCart] = useState([])
+
   const [accountType, setAccountType] = useState("")
   const [userID, setUserID] = useState("")
-
+  
   useEffect(() => {
     console.log("User ID exported to App.js is: ", userID)
     // Pass {userID} into teacher and student dashboard when ready for integration
