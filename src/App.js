@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Switch, Route } from 'react-router-dom'
 
 import './App.css'
@@ -16,19 +16,23 @@ import CourseDetails from './pages/course-details'
 import ShoppingCart from './pages/shoppingcart'
 
 function App() {
+
+  // Establish Shopping Cart STATE, to be accessible for all components
+  const [cart,setCart] = useState([])
+
   return (
     <div>
       <HeaderPublic />
-      <HeaderStudent />
+      <HeaderStudent cartSize={cart.length} />
       <HeaderTeacher />
       <Switch>
         <Route exact path='/' component={HomePage} />
         <Route exact path='/teach' component={Teach} />
         <Route exact path='/sign-in' component={SignInSignUpPage} />
-        <Route exact path='/cart' component={ShoppingCart} />
+        <Route exact path='/cart' render={()=>(<ShoppingCart cart={cart} setCart={setCart} />)} />
         <Route exact path='/student/:id' component={StudentDashboard} />
         <Route exact path='/teacher/:id' component={TeacherDashboard} />
-        <Route exact path='/course/:id' component={CourseDetails} />
+        <Route exact path='/course/:id' render={()=>(<CourseDetails cart={cart} setCart={setCart} />)} />
       </Switch>
     </div>
   )

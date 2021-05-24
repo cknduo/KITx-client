@@ -19,6 +19,31 @@ const CourseDetails = props => {
         return ''
     }
 
+    const addToCart = ()=>{
+        const courseToAdd = {
+            courseID: course._id,
+            coursePrice: 0, 
+        //     imageURL: course.imageURL, 
+        //     courseTitle: course.courseName,
+        }
+        // const courseToAdd = course._id
+        props.setCart( item => [...item, courseToAdd])
+    }
+
+    const courseInCart = ()=>{
+        let isInCart = false
+        if (props.cart.length !== 0){
+            for (let counter = 0; counter < props.cart.length; counter++) {
+                if (props.cart[counter].courseID === course._id){
+                    isInCart = true
+                    return (isInCart)
+                }
+            }
+        }
+        return (isInCart)
+    }
+
+
     return (
         <div className='course-details'>
             <ul className='course-descriptions'>
@@ -31,7 +56,14 @@ const CourseDetails = props => {
             <ul className='kit-details'>
                 <h2>Required Kit: {course.requiredKits.kitName}</h2>
             </ul>
+            
+            <div>
+                <button className='enroll-button' 
+                    disabled={courseInCart() === true}
+                    onClick={addToCart}> ENROLL NOW !</button>
+            </div>
         </div>
+
     )
 }
 
