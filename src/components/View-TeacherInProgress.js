@@ -33,11 +33,11 @@ const ViewTeacherInProgress = ({teacherID, courseUpdated}) => {
                 fileID:"",
                 description:""
             },
-            modulesFiles: {
+            modulesFiles: [{
                 fileID:"",
                 fileName:"",
                 description:"",    
-            }
+            }]
         }
          
         // create new entry in course DB
