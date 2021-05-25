@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+
+import Card from '../components/Card'
+import './homepage.css'
 
 const HomePage = props => {
     const [courses, setCourses] = useState([])
@@ -16,14 +20,26 @@ const HomePage = props => {
 
     return (
         <div className='homepage'>
-            <div className='welcome'>
-                <span> Welcome Section </span> 
+            <div className='landing'>
+                <h1 className='landing-title'>EXPERIENCE OUR CAMPUS WHEREVER YOU ARE</h1>
+                <Link to='/sign-in'>
+                    <button className='landing-btn'>START LEARNING</button>
+                </Link>
             </div>
-            <hr />
+            <div className='courses-preview-title'><h2>Featured Courses</h2></div>
             <div className='courses-preview'>
                 {courses.map(course => {
                     // Fixed "Each child in a list should have a unique 'key' prop" Warning in Browser Console
-                    return <div key={course._id}><p>{course.courseName}</p></div>
+                    return (
+                            <Card 
+                                courseID={course._id}
+                                courseImage={course.courseImage.filename}
+                                courseName={course.courseName}
+                                courseDescription={course.description}      
+                                courseKit={course.requiredKits.kitName}
+                                courseRating={course.rating}                          
+                            />
+                    )
                 })}
             </div>
         </div>
