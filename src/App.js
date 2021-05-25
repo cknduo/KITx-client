@@ -42,7 +42,7 @@ function App() {
         <Route exact path='/' component={HomePage} />
         <Route exact path='/teach' component={Teach} />
         <Route exact path='/sign-in' render={() => (<SignInSignUpPage setUserID={setUserID} setAccountType={setAccountType}/>)} />
-        <Route exact path='/cart' render={()=>(<ShoppingCart cart={cart} setCart={setCart} />)} />
+        <Route exact path='/cart' render={()=>(<ShoppingCart cart={cart} setCart={setCart} userID={userID}/>)} />
         <Route exact path='/student/:id' component={StudentDashboard} />
         <Route exact path='/teacher/:id' component={TeacherDashboard} />
         <Route exact path='/course/:id' render={()=>(<CourseDetails cart={cart} setCart={setCart} />)} />

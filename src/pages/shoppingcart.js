@@ -4,22 +4,38 @@ import Axios from "axios"
 import CartItem from '../components/Cart-Item'
 // import CourseDetails from '../pages/course-details'
 import addNewDBCart from '../functions/AddNewDBCart.js'
+import modifyDBCartItems from '../functions/ModifyDBCartItems'
+import getUserInfo from '../functions/GetUserInfo'
 
-const ShoppingCart = ( { cart, setCart } ) => {
+
+const ShoppingCart = ( { cart, setCart, userID } ) => {
 
     //Define STATE for variable "subtotal"
     const [subtotal, setSubtotal] = useState(0)
 
-    // Retrieve USER Information if exists
-    let userID = "12345"
-    let userFirstName = "Pam"
-    // let userID = "60ab2fc2f7d205756ee946f4"
+    // Define USER Information if exists
+    let userFirstName = ""
+    let currentUser = ""
+    // currentUser = userID
+    currentUser = "12345"
+    // currentUser = "67890"
+
+    // Retrieve userName from DB
+    if (currentUser !== "") {
+        // userFirstName = getUserInfo(currentUser)   
+    }
+    userFirstName = "Pam"
+    // let currentUser = "60ab2fc2f7d205756ee946f4"
     // let userFirstName = "Westley"
 
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // "CLEAR THE CART" Function gets called by button 'onClick'
     const clearCart = () => {
         setCart([])
+        if (currentUser !== ""){
+            let newCartArray = []
+            // modifyDBCartItems(currentUser,newCartArray)  
+        }
         setSubtotal(0)
     }
     //---------------------------------------------------------------------
@@ -43,43 +59,48 @@ const ShoppingCart = ( { cart, setCart } ) => {
     // existing/persisted CART record alread saved in the database for the
     // current user (if there is a user logged in). 
     useEffect(() => {
-        // Get the userID from state, and retrieve user's cart details
+        // Using the currentUser ID, retrieve user's cart details
         // if they exist.
 
-        // Update UserName field here??
-        // let userID = "12345"
-        let tempCartArray = []
-        const loadUserCartList = async () => {
-            // let cartInfo = await getCart(userID)
-            let getCart = await Axios({
-                method: "GET",
-                withCredentials: true,
-                url: `/carts/${userID}`,
-            })
-            // If data is found, loop through the array of items
-            // and add each item to the CART state with price = 0.
-            if (getCart.data) {
-                // Loop through the array of cart items in the DB
-                if (getCart.data.cartItems.length !== 0){
-                    for (let counter = 0; counter < getCart.data.cartItems.length; counter++) {
-                        //Insert a new entry into the CART state, in proper format.
-                        let objectToAdd = {
-                            courseID: getCart.data.cartItems[counter],
-                            coursePrice: 0, 
+        // As a precaution, update UserName field here
+        // currentUser = userID
+    
+        // Only attempt to populate an EMPTY cart. Never overwrite a
+        // cart that already has items.
+        if (cart.length === 0) {
+            let tempCartArray = []
+            const loadUserCartList = async () => {
+                // let cartInfo = await getCart(currentUser)
+                let getCart = await Axios({
+                    method: "GET",
+                    withCredentials: true,
+                    url: `/carts/${currentUser}`,
+                })
+                // If data is found, loop through the array of items
+                // and add each item to the CART state with price = 0.
+                if (getCart.data) {
+                    // Loop through the array of cart items in the DB
+                    if (getCart.data.cartItems.length !== 0){
+                        for (let counter = 0; counter < getCart.data.cartItems.length; counter++) {
+                            //Insert a new entry into the CART state, in proper format.
+                            let objectToAdd = {
+                                courseID: getCart.data.cartItems[counter],
+                                coursePrice: 0, 
+                            }
+                            tempCartArray[counter] = objectToAdd
                         }
-                        tempCartArray[counter] = objectToAdd
                     }
+                    setCart(tempCartArray)
                 }
-                setCart(tempCartArray)
+                else {
+                    //Create an empty cart for user
+                    console.log("NO CART FOUND. Need to create empty one for DB.")
+                    const emptyArray = []
+                    addNewDBCart(currentUser,emptyArray)
+                }
             }
-            else {
-                //Create an empty cart for user
-                console.log("NO CART FOUND. Need to create empty one for DB.")
-                const emptyArray = []
-                addNewDBCart(userID,emptyArray)
-            }
+            loadUserCartList()
         }
-        loadUserCartList()
     },[])
     //---------------------------------------------------------------------
 
@@ -94,7 +115,10 @@ const ShoppingCart = ( { cart, setCart } ) => {
     
         // Moved the following call to the "setSubtotal" trigger function into "sumCart"
         // setSubtotal(sumCart())
-    },[cart,subtotal])
+
+    })  // Call this effect EVERY TIME!
+
+    // },[cart,subtotal])
     //---------------------------------------------------------------------
 
     return (
@@ -106,50 +130,16 @@ const ShoppingCart = ( { cart, setCart } ) => {
                 {cart.length === 0 &&
                     <h3>No items in your cart</h3>
                 }
-
-                {/* {cart.map(item => (<p>{item}</p>))} */}
-                {/* <dl> */}
-                    {/* <li key={number.toString()}> */}
-                    {/* <dt> */}
-                        {/* {cart.map(mapItem => (<CartItem mapItem={mapItem} cart={cart} setCart={setCart} subtotal={subtotal} setSubtotal={setSubtotal} />))} */}
-                    {/* </dt> */}
-                {/* </dl> */}
-                {cart.map(mapItem => (<CartItem mapItem={mapItem} cart={cart} setCart={setCart} subtotal={subtotal} setSubtotal={setSubtotal} />))}
-
-{/* function NumberList(props) {
-  const numbers = props.numbers;
-  const listItems = numbers.map((number) =>
-    <li key={number.toString()}>
-      {number}
-    </li>
-  );
-  return (
-    <ul>{listItems}</ul>
-  );
-} */}
-
-
-
-
+                {cart.map(mapItem => {
+                    return <div key={mapItem.courseID}><p><CartItem mapItem={mapItem} cart={cart} setCart={setCart} subtotal={subtotal} setSubtotal={setSubtotal} /></p></div>
+                })}
             </div>
             <br /> <br />
             {cart.length !== 0 &&
                 <div> Subtotal  ${subtotal}
                 </div>
             }
-            <br />
-            {/* <div>
-                <button
-                    className='button'
-                    type='button'
-                    // linkTo='/course/609f1807201b091de34f18ff'
-                    // onClick='/course/609f1807201b091de34f18ff'
-                    // onClick={()=>(<CourseDetails cart={cart} setCart={setCart} />)}
-                >
-                    Go To Course: Chemistry of Food
-                </button>
-            </div> */}
-            <br /> <br />
+            <br /><br /><br />
             <div>
                 <button
                     className='clear-cart-button'
