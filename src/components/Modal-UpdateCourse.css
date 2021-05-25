@@ -1,0 +1,83 @@
+.container {
+    display: grid;
+    grid-template-columns: 500px 500px;
+    grid-template-rows: auto auto auto auto auto auto
+
+}
+
+/*.formgrid {
+    grid-column:1; grid-row:2
+   
+
+
+}
+.course-title{
+    grid-column:1; grid-row:1
+}*/
+
+.course-image{
+    margin:10px;
+    grid-column:1; grid-row:1;
+    border: 2px solid rgb(173, 172, 172);
+    border-radius: 10px;
+    box-shadow: 5px 5px rgba(0,0,0,0.5);
+    padding: 10px;
+}
+
+.certificate{
+    margin:10px;
+    grid-column:2; grid-row:1;
+    border: 2px solid rgb(173, 172, 172);
+    border-radius: 10px;
+    box-shadow: 5px 5px rgba(0,0,0,0.5);
+    padding: 10px;
+}
+
+.course-material{
+    margin:10px;
+    grid-row:3;
+    grid-column: span 2;
+    border: 2px solid rgb(173, 172, 172);
+    border-radius: 10px;
+    box-shadow: 5px 5px rgba(0,0,0,0.5);
+    padding: 10px
+}
+
+.formgrid{
+    margin:10px;
+    grid-row:4;
+    grid-column: span 2;
+    border: 2px solid rgb(173, 172, 172);
+    border-radius: 10px;
+    box-shadow: 5px 5px rgba(0,0,0,0.5);
+    padding: 10px
+}
+
+.course-description{
+    grid-column:1; grid-row:3
+
+
+}
+
+.kit-info{
+    margin:10px;
+    grid-row:2;
+    grid-column: span 2;
+    border: 2px solid rgb(173, 172, 172);
+    border-radius: 10px;
+    box-shadow: 5px 5px rgba(0,0,0,0.5);
+    padding: 10px;
+
+}
+
+.content-upload{
+    grid-column:1; grid-row:5
+
+}
+
+
+
+.price{
+    grid-column:1; grid-row:6
+
+}
