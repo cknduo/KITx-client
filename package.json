@@ -5,11 +5,8 @@
   "proxy": "http://localhost:3000",
   "dependencies": {
     "@material-ui/core": "^4.11.4",
-<<<<<<< HEAD
     "@material-ui/icons": "^4.11.2",
-=======
     "@material-ui/lab": "^4.0.0-alpha.58",
->>>>>>> 854a12f6ff263659e3a78cf49e2390ce9ad81287
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.6",
     "@testing-library/user-event": "^12.8.3",
