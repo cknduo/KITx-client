@@ -17,7 +17,7 @@ const TeacherDash = () => {
         const teacherID = "60a2ece8201b091de34f1902"
 
 
-    const [viewMode, setViewMode] = useState('Current')
+    const [viewMode, setViewMode] = useState('Active')
 
     const [user, setUser] = useState(null)
     //const [updateCourseID, setUpdateCourseID] = useState(null)
@@ -41,45 +41,46 @@ const TeacherDash = () => {
         return null
     }
 
-   
-     
-        return (
-            <div className='signin-signup'>
-                <div className='tab-container'>
-                <strong>Welcome back {user && user.firstName} {user && user.lastName} </strong><br/>
-            User id: {user && user._id}
-    
-            <div className='tab-options'>
-                        <button 
-                            className={`${viewMode === 'Current' ? 'active-view' : ''} signin-signup-button`}
-                            onClick={() => setViewMode('Current')}
-                        >
-                            Current
-                        </button>
-                        <button 
-                            className={`${viewMode === 'InProgress' ? 'active-view' : ''} signin-signup-button`}
-                            onClick={() => setViewMode('InProgress')}
-                        >
-                            In Progress
-                        </button>
-                        <button 
-                            className={`${viewMode === 'Archived' ? 'active-view' : ''} signin-signup-button`}
-                            onClick={() => setViewMode('Archived')}
-                        >
-                            Archived
-                        </button>
-
-                    </div>
-                    <div className='tab-content'>
-                        {viewMode === 'Current' && <ViewTeacherCurrent teacherID={teacherID}/>}
-                        {viewMode === 'InProgress' && <ViewTeacherInProgress teacherID={teacherID} courseUpdated={toggleCourseUpdated} />}    
-                        {viewMode === 'Archived' && <ViewTeacherArchived teacherID={teacherID}/>}    
-
-                    </div>
+    return (
+        <div className='teacher-dashboard'>
+            <div className='dashboard-tab-container'>
+                
+                <div className='dashboard-user-details'>
+                    <h3>Welcome back {user && user.firstName} {user && user.lastName}</h3>
+                    <p>Your Account Number: {user && user._id}</p>                    
                 </div>
+
+                <div className='dashboard-tab-options'>
+                    <button 
+                        className={`${viewMode === 'Active' ? 'dashboard-active-view' : ''} dashboard-tab-btn`}
+                        onClick={() => setViewMode('Active')}
+                    >
+                        ACTIVE
+                    </button>
+                    <button 
+                        className={`${viewMode === 'InProgress' ? 'dashboard-active-view' : ''} dashboard-tab-btn`}
+                        onClick={() => setViewMode('InProgress')}
+                    >
+                        IN THE MAKING
+                    </button>
+                    <button 
+                        className={`${viewMode === 'Archived' ? 'dashboard-active-view' : ''} dashboard-tab-btn`}
+                        onClick={() => setViewMode('Archived')}
+                    >
+                        ARCHIVED
+                    </button>
+                </div>
+
+                <div className='dashboard-tab-content'>
+                    {viewMode === 'Current' && <ViewTeacherCurrent teacherID={teacherID}/>}
+                    {viewMode === 'InProgress' && <ViewTeacherInProgress teacherID={teacherID} courseUpdated={toggleCourseUpdated} />}    
+                    {viewMode === 'Archived' && <ViewTeacherArchived teacherID={teacherID}/>}    
+                </div>
+
             </div>
-        )
-    }
+        </div>
+    )
+}
     
 
 

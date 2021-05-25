@@ -75,7 +75,9 @@ const TableTeacherCourses = ({teacherID, /*courseAdded,*/ courseStatus}) => {
                       variant="contained"
                       color="primary"
                       size="small"
-                      style={{ marginLeft: 16 }}>GO TO COURSE PAGE
+                      style={{ marginLeft: 16 }}
+              >
+                VIEW COURSE PAGE
               </Button>
               </TableCell>
             </TableRow>

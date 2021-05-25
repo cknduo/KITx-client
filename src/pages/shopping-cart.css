@@ -1,0 +1,9 @@
+.shopping-cart {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.shopping-cart-container {
+    width: 90%;
+}
