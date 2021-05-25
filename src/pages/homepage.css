@@ -1,0 +1,70 @@
+.homepage {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.landing {
+    width: 100vw;
+    height: 40rem;
+    background-image: url('https://images.pexels.com/photos/4491881/pexels-photo-4491881.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom right;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;    
+}
+
+.landing-title {
+    color: white;
+    margin: 5rem 0 3rem 0;
+    text-shadow: rgb(0, 0, 0) 1px 0 20px;
+}
+
+.landing-btn {
+    padding: 1rem 2rem;
+    letter-spacing: 0.5px;
+    font-family: inherit;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: white;
+    background-color: rgb(108, 167, 255);
+    border: 2px solid rgba(0, 0, 0, 0);
+    border-radius: 20px;
+    outline: none;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+}
+
+.landing-btn:hover {
+    transform: scale(1.1);
+}
+
+.courses-preview-title {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.courses-preview {
+    margin: 1rem auto;
+    width: 90%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-gap: 30px;
+}
+
+@media only screen and (min-width: 500px) {
+    .courses-preview {
+      grid-template-columns: 1fr;
+    }  
+}
+
+@media only screen and (min-width: 850px) {
+.courses-preview {
+    grid-template-columns: 1fr 1fr 1fr;
+}
+}

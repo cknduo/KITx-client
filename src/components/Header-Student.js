@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import DropdownIconNav from './Dropdown-IconNav'
 import DropdownProfile from './Dropdown-Profile'
 import HeaderStaticSection from './Header-StaticSection'
+import Badge from '@material-ui/core/Badge'
 import { ReactComponent as ShoppingBox } from '../assets/shopping-box.svg'
 import { ReactComponent as User } from '../assets/user.svg'
 import './Header.css'
@@ -20,9 +21,9 @@ const StudentHeader = ( {cartSize}) => (
                     My Learning
                 </Link>
                 <div className='option'>
-                    <DropdownIconNav icon={<ShoppingBox />} linkTo='/cart' />
-                    {/* <span class='badge' id='lblCartCount'> {cartSize} </span> */}
-                    <span className='cart-badge' id='cart-counter'>{cartSize}</span>
+                    <Badge badgeContent={cartSize} color="error">
+                        <DropdownIconNav icon={<ShoppingBox />} linkTo='/cart' />
+                    </Badge>
                 </div>
                 <div className='option'>
                     <DropdownIconNav icon={<User />} linkTo='#'>
