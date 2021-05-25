@@ -50,6 +50,7 @@ const UploadModuleMaterial = ({ courseID, fileUse, description}) => {
             await fileUpload()
             console.log("submit")
             alert(JSON.stringify(values, null, 2))
+            alert(JSON.stringify(uploadedFile, null, 2))
 
             /* Update course database with file information */
             const update = {
@@ -79,7 +80,7 @@ const UploadModuleMaterial = ({ courseID, fileUse, description}) => {
         let data = new FormData()
         data.append('file', fileInfo)
 
-        const fileUploadData = await Axios.post(`/courseMaterial/upload/${courseID}/${fileUse}/${description}`, data, {
+        const fileUploadData = await Axios.post(`/courseMaterial/upload/`, data, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -87,6 +88,7 @@ const UploadModuleMaterial = ({ courseID, fileUse, description}) => {
         let file = await fileUploadData.data
         setIsSuccessful(true)
         setUploadedFile(file) 
+        console.log("This is the file that was uploaded", file)
     }
 
      

@@ -29,7 +29,7 @@ const UploadCourseMaterial = ({ courseID, fileUse, description }) => {
         let data = new FormData()
         data.append('file', fileInfo)
 
-        const fileUploadData = await Axios.post(`/courseMaterial/upload/${courseID}/${fileUse}/${description}`, data, {
+        const fileUploadData = await Axios.post(`/courseMaterial/upload/`, data, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }

@@ -4,6 +4,11 @@ import * as yup from 'yup';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
+import FormControl from '@material-ui/core/FormControl'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import RadioGroup from '@material-ui/core/RadioGroup'
+import Radio from '@material-ui/core/Radio'
+import FormLabel from '@material-ui/core/FormLabel';
 
 import './Modal-UpdateCourse.css'
 
@@ -22,6 +27,8 @@ const FormCourseData = ({ course, teacherID }) => {
 
     const classes = useStyles()
 
+    //const [courseStatus, setCourseStatus] = useState("draft") // Default selection is Student
+
     const validationSchema = yup.object({
         courseName: yup
             .string('Enter course name'),
@@ -36,7 +43,8 @@ const FormCourseData = ({ course, teacherID }) => {
         coursePrice: yup
             .string('Enter course price'),
         //            .required('Course price is required')
-
+        courseStatus: yup
+//        .string('Enter course price'),
         /*  NEED TO ADD COURSE STATUS AS A DROPDOWN*/
 
     })
@@ -46,7 +54,8 @@ const FormCourseData = ({ course, teacherID }) => {
         description: course.description,
         //preRequisites: course.preRequisites,
         keywords: course.keywords,
-        coursePrice: course.coursePrice
+        coursePrice: course.coursePrice,
+        courseStatus: course.courseStatus
     }
     //}   
 
@@ -65,6 +74,7 @@ const FormCourseData = ({ course, teacherID }) => {
                 teacher: teacherID, // pass in instructor name
                 rating: null, // placeholder to future rating given by student to course
                 coursePrice: values.coursePrice,
+                courseStatus: values.courseStatus
             }
             const addCourseOptions = {
                 method: 'PUT',
@@ -153,6 +163,15 @@ const FormCourseData = ({ course, teacherID }) => {
                 error={formik.touched.coursePrice && Boolean(formik.errors.coursePrice)}
                 helperText={formik.touched.coursePrice && formik.errors.coursePrice}
             />
+
+            <h3> Course Status</h3>
+                <RadioGroup defaultValue={course.courseStatus} name="courseStatus">
+                    <FormControlLabel value="Current" control={<Radio color="primary" />} label="Current" />
+                    <FormControlLabel value='Draft' control={<Radio color="primary" />} label="In Progress" />
+                    <FormControlLabel value='Archived' control={<Radio color="primary" />} label="Archived" />
+                </RadioGroup>
+
+
             <Button color="primary" variant="contained" type="submit">
                 Submit
         </Button>

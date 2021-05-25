@@ -12,6 +12,7 @@ const ModalUpdateCourse = ({ courseID, teacherID }) => {
 
     const [course, setCourse] = useState(null)
 
+
     useEffect(() => {
         const getCourse = async () => {
             let response = await fetch(`/courses/${courseID}`)
@@ -55,8 +56,8 @@ const ModalUpdateCourse = ({ courseID, teacherID }) => {
 
             <div className="course-material">
                 <h3> Course Materials </h3>
-                <UploadModuleMaterial courseID={courseID} fileUse={"module"} course={course} module={modules} />
                 <TableCourseMaterial courseID={courseID} course={course} module={modules} />
+                <UploadModuleMaterial courseID={courseID} fileUse={"module"} course={course} />
             </div>
 
             <div className="formgrid">
@@ -64,6 +65,8 @@ const ModalUpdateCourse = ({ courseID, teacherID }) => {
                 <h4> Course ID#: {courseID}</h4>
                 <FormCourseData course={course} teacher={teacherID} />
             </div>
+
+
 
         </div>
     )
