@@ -4,6 +4,7 @@ import Axios from "axios"
 import CartItem from '../components/Cart-Item'
 // import CourseDetails from '../pages/course-details'
 import addNewDBCart from '../functions/AddNewDBCart.js'
+import './shopping-cart.css'
 
 const ShoppingCart = ( { cart, setCart } ) => {
 
@@ -98,78 +99,75 @@ const ShoppingCart = ( { cart, setCart } ) => {
     //---------------------------------------------------------------------
 
     return (
-        <div className='shoppingcart'>
-            <h1> SHOPPING CART</h1>
-            <h4> Welcome {userFirstName}, here are the courses you are about to purchase:</h4>
-            <br /> <br />
-            <div className='cartitems'>
-                {cart.length === 0 &&
-                    <h3>No items in your cart</h3>
-                }
+        <div className='shopping-cart'>
+            <div className='shopping-cart-container'>
+                <h4> Welcome {userFirstName}, here are the courses you are about to purchase:</h4>
+                <div className='shopping-cart-items'>
+                    {cart.length === 0 &&
+                        <h3>No items in your cart</h3>
+                    }
 
-                {/* {cart.map(item => (<p>{item}</p>))} */}
-                {/* <dl> */}
-                    {/* <li key={number.toString()}> */}
-                    {/* <dt> */}
-                        {/* {cart.map(mapItem => (<CartItem mapItem={mapItem} cart={cart} setCart={setCart} subtotal={subtotal} setSubtotal={setSubtotal} />))} */}
-                    {/* </dt> */}
-                {/* </dl> */}
-                {cart.map(mapItem => (<CartItem mapItem={mapItem} cart={cart} setCart={setCart} subtotal={subtotal} setSubtotal={setSubtotal} />))}
+                    {/* {cart.map(item => (<p>{item}</p>))} */}
+                    {/* <dl> */}
+                        {/* <li key={number.toString()}> */}
+                        {/* <dt> */}
+                            {/* {cart.map(mapItem => (<CartItem mapItem={mapItem} cart={cart} setCart={setCart} subtotal={subtotal} setSubtotal={setSubtotal} />))} */}
+                        {/* </dt> */}
+                    {/* </dl> */}
+                    {cart.map(mapItem => (<CartItem mapItem={mapItem} cart={cart} setCart={setCart} subtotal={subtotal} setSubtotal={setSubtotal} />))}
 
-{/* function NumberList(props) {
-  const numbers = props.numbers;
-  const listItems = numbers.map((number) =>
-    <li key={number.toString()}>
-      {number}
-    </li>
-  );
-  return (
-    <ul>{listItems}</ul>
-  );
-} */}
-
-
-
-
-            </div>
-            <br /> <br />
-            {cart.length !== 0 &&
-                <div> Subtotal  ${subtotal}
+    {/* function NumberList(props) {
+    const numbers = props.numbers;
+    const listItems = numbers.map((number) =>
+        <li key={number.toString()}>
+        {number}
+        </li>
+    );
+    return (
+        <ul>{listItems}</ul>
+    );
+    } */}
                 </div>
-            }
-            <br />
-            {/* <div>
-                <button
-                    className='button'
-                    type='button'
-                    // linkTo='/course/609f1807201b091de34f18ff'
-                    // onClick='/course/609f1807201b091de34f18ff'
-                    // onClick={()=>(<CourseDetails cart={cart} setCart={setCart} />)}
-                >
-                    Go To Course: Chemistry of Food
-                </button>
-            </div> */}
-            <br /> <br />
-            <div>
-                <button
-                    className='clear-cart-button'
-                    type='button'
-                    disabled={cart.length === 0}
-                    onClick={clearCart}
-                >
-                    CLEAR CART
-                </button>
-            
-                <button 
-                    className='checkout-button'
-                    type='button'
-                    disabled={cart.length === 0}
-                    // onClick={checkOut}
-                >
-                    CHECKOUT
-                </button>
+                <br /> <br />
+                {cart.length !== 0 &&
+                <div> 
+                    Subtotal ${subtotal}
+                </div>
+                }
+                <br />
+                {/* <div>
+                    <button
+                        className='button'
+                        type='button'
+                        // linkTo='/course/609f1807201b091de34f18ff'
+                        // onClick='/course/609f1807201b091de34f18ff'
+                        // onClick={()=>(<CourseDetails cart={cart} setCart={setCart} />)}
+                    >
+                        Go To Course: Chemistry of Food
+                    </button>
+                </div> */}
+                <br /> <br />
+                <div>
+                    <button
+                        className='clear-cart-button'
+                        type='button'
+                        disabled={cart.length === 0}
+                        onClick={clearCart}
+                    >
+                        CLEAR CART
+                    </button>
+                
+                    <button 
+                        className='checkout-button'
+                        type='button'
+                        disabled={cart.length === 0}
+                        // onClick={checkOut}
+                    >
+                        CHECKOUT
+                    </button>
+                </div>
+                <br /> <br />
             </div>
-            <br /> <br />
         </div>
     )
 }

@@ -7,12 +7,12 @@ import './Card.css'
 const Card = ({ courseID, courseImage, courseName, courseDescription, courseKit, courseRating }) => {
     return (
         <div className='card-container'>
-            <img src={courseImage} alt='course-img' />
+            <img src={courseImage} alt='course-img' className='card-img' />
             <div className='card-content'>
-                <h4>{courseName}</h4>
+                <h4 className='card-content-title'>{courseName}</h4>
                 <p className='card-content-description'>{courseDescription}</p>
                 <h5>Kit: {courseKit}</h5>
-                <div>
+                <div className='card-content-rating'>
                     <Rating
                         value={courseRating}
                         precision={0.1}

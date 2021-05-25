@@ -24,7 +24,7 @@
 }
 
 .landing-btn {
-    padding: 1rem 2rem;
+    padding: 0.8rem 1.8rem;
     letter-spacing: 0.5px;
     font-family: inherit;
     font-size: 1.2rem;
@@ -57,14 +57,14 @@
     grid-gap: 30px;
 }
 
-@media only screen and (min-width: 500px) {
+@media only screen and (min-width: 600px) {
     .courses-preview {
-      grid-template-columns: 1fr;
+      grid-template-columns: 1fr 1fr;
     }  
 }
 
-@media only screen and (min-width: 850px) {
+@media only screen and (min-width: 1200px) {
 .courses-preview {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 }
