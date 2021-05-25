@@ -1,0 +1,48 @@
+.course-details {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.course-details-container {
+    width: 90%;
+    margin: 0.5rem 0 2rem 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.course-details-header {
+    display: flex;
+    flex-direction: column;
+}
+
+.course-details-title {
+    align-self: center;
+}
+
+.course-details-enroll-btn {
+    align-self: flex-end;
+}
+
+.enroll-btn {
+    padding: 0.5rem 1rem;
+    letter-spacing: 0.5px;
+    color: white;
+    font-family: inherit;
+    background-color: rgb(108, 167, 255);
+    border: 2px solid rgba(0, 0, 0, 0);
+    border-radius: 20px;
+    outline: none;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+}
+
+.enroll-btn:hover {
+    transform: scale(1.05);
+}
+
+.enroll-btn:disabled {
+    background-color: rgb(153, 153, 153);
+    transform: none;
+    cursor: default;
+}

@@ -13,7 +13,7 @@ import SignInSignUpPage from './pages/signin-signup'
 import StudentDashboard from './pages/student-dashboard'
 import TeacherDashboard from './pages/teacher-dashboard'
 import CourseDetails from './pages/course-details'
-import ShoppingCart from './pages/shoppingcart'
+import ShoppingCart from './pages/shopping-cart'
 
 function App() {
 
