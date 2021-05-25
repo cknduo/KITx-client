@@ -4,7 +4,7 @@ import SignUp from '../components/SignUp'
 
 import './signin-signup.css'
 
-const SignInSignUpPage = () => {
+const SignInSignUpPage = ({ setUserID, setAccountType }) => {
     const [viewMode, setViewMode] = useState('SignInView')
 
     return (
@@ -25,7 +25,7 @@ const SignInSignUpPage = () => {
                     </button>
                 </div>
                 <div className='tab-content'>
-                    {viewMode === 'SignInView' && <SignIn />}
+                    {viewMode === 'SignInView' && <SignIn setUserID={setUserID} setAccountType={setAccountType} />}
                     {viewMode === 'SignUpView' && <SignUp />}    
                 </div>
             </div>

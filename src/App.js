@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Switch, Route } from 'react-router-dom'
 
 import './App.css'
@@ -20,15 +20,28 @@ function App() {
   // Establish Shopping Cart STATE, to be accessible for all components
   const [cart,setCart] = useState([])
 
+  const [accountType, setAccountType] = useState("")
+  const [userID, setUserID] = useState("")
+  
+  useEffect(() => {
+    console.log("User ID exported to App.js is: ", userID)
+    // Pass {userID} into teacher and student dashboard when ready for integration
+  }, [userID])
+
   return (
     <div>
+      {/* Headers */}
+      {/* {accountType === '' && <HeaderPublic />}
+      {accountType === 'student' && <HeaderStudent />}
+      {accountType === 'teacher' && <HeaderTeacher />} */}
       <HeaderPublic />
       <HeaderStudent cartSize={cart.length} />
       <HeaderTeacher />
+
       <Switch>
         <Route exact path='/' component={HomePage} />
         <Route exact path='/teach' component={Teach} />
-        <Route exact path='/sign-in' component={SignInSignUpPage} />
+        <Route exact path='/sign-in' render={() => (<SignInSignUpPage setUserID={setUserID} setAccountType={setAccountType}/>)} />
         <Route exact path='/cart' render={()=>(<ShoppingCart cart={cart} setCart={setCart} />)} />
         <Route exact path='/student/:id' component={StudentDashboard} />
         <Route exact path='/teacher/:id' component={TeacherDashboard} />
