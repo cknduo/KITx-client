@@ -128,6 +128,7 @@ const useStyles = makeStyles({
     color: 'blue',
     fontWeight: 'bold',
   },
+  
 });
 
 const useRowStyles = makeStyles({
@@ -139,6 +140,7 @@ const useRowStyles = makeStyles({
     headerCell: {
       color: 'blue',
       fontWeight: 'bold',
+  
     }
   
 });

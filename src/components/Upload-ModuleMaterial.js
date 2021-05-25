@@ -99,6 +99,18 @@ const UploadModuleMaterial = ({ courseID, fileUse, description}) => {
             <form className={classes.root} onSubmit={formik.handleSubmit}>
 
                 <TextField
+                    id="materialModuleNumber"
+                    name="materialModuleNumber"
+                    label="Module Number"
+                    variant="filled"
+                    style={{ margin: "16px 0px" }}
+                    //value={formik.values.materialModuleNumber}
+                    onChange={formik.handleChange}
+                    error={formik.touched.materialModuleNumber && Boolean(formik.errors.materialModuleNumber)}
+                    helperText={formik.touched.materialModuleNumber && formik.errors.materialModuleNumber}
+                />
+
+                <TextField
                     id="materialDescription"
                     name="materialDescription"
                     label="Material description"
@@ -110,17 +122,7 @@ const UploadModuleMaterial = ({ courseID, fileUse, description}) => {
                     helperText={formik.touched.materialDescription && formik.errors.materialDescription}
                 />
 
-                <TextField
-                    id="materialModuleNumber"
-                    name="materialModuleNumber"
-                    label="Module Number"
-                    variant="filled"
-                    style={{ margin: "16px 0px" }}
-                    //value={formik.values.materialModuleNumber}
-                    onChange={formik.handleChange}
-                    error={formik.touched.materialModuleNumber && Boolean(formik.errors.materialModuleNumber)}
-                    helperText={formik.touched.materialModuleNumber && formik.errors.materialModuleNumber}
-                />
+
 
                 <input type="file" name="file" id="file" onChange={filechangeHandler}/>
 

@@ -38,13 +38,13 @@ const FormCourseData = ({ course, teacherID }) => {
         //           .required('Course description is required'),
         preRequisites: yup
             .string('Enter the preRequisites for your course'),
-        keywords: yup
-            .string('Enter some keywords for your course'),
+        /*keywords: yup
+            .string('Enter some keywords for your course'),*/
         coursePrice: yup
             .string('Enter course price'),
         //            .required('Course price is required')
         courseStatus: yup
-//        .string('Enter course price'),
+            .string('Enter course status'),
         /*  NEED TO ADD COURSE STATUS AS A DROPDOWN*/
 
     })
@@ -53,7 +53,7 @@ const FormCourseData = ({ course, teacherID }) => {
         courseName: course.courseName,
         description: course.description,
         //preRequisites: course.preRequisites,
-        keywords: course.keywords,
+        /*keywords: course.keywords,*/
         coursePrice: course.coursePrice,
         courseStatus: course.courseStatus
     }
@@ -70,7 +70,7 @@ const FormCourseData = ({ course, teacherID }) => {
                 courseName: values.courseName,
                 description: values.description,
                 //preRequisites: values.preRequisites,
-                keywords: values.keywords,  // work on parsing into array
+                /*keywords: values.keywords,*/  // work on parsing into array
                 teacher: teacherID, // pass in instructor name
                 rating: null, // placeholder to future rating given by student to course
                 coursePrice: values.coursePrice,
@@ -134,7 +134,7 @@ const FormCourseData = ({ course, teacherID }) => {
             onChange={formik.handleChange}
             error={formik.touched.preRequisites && Boolean(formik.errors.preRequisites)}
             helperText={formik.touched.preRequisites && formik.errors.preRequisites}
-        />*/}
+        />
 
             <TextField
                 fullWidth
@@ -148,7 +148,7 @@ const FormCourseData = ({ course, teacherID }) => {
                 onChange={formik.handleChange}
                 error={formik.touched.keywords && Boolean(formik.errors.keywords)}
                 helperText={formik.touched.keywords && formik.errors.keywords}
-            />
+            />*/}
 
             <TextField
                 fullWidth
