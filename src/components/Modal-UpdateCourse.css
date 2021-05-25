@@ -35,7 +35,7 @@
 
 .course-material{
     margin:10px;
-    grid-row:2;
+    grid-row:3;
     grid-column: span 2;
     border: 2px solid rgb(173, 172, 172);
     border-radius: 10px;
@@ -45,7 +45,7 @@
 
 .formgrid{
     margin:10px;
-    grid-row:3;
+    grid-row:4;
     grid-column: span 2;
     border: 2px solid rgb(173, 172, 172);
     border-radius: 10px;
@@ -60,7 +60,13 @@
 }
 
 .kit-info{
-    grid-column:1; grid-row:4
+    margin:10px;
+    grid-row:2;
+    grid-column: span 2;
+    border: 2px solid rgb(173, 172, 172);
+    border-radius: 10px;
+    box-shadow: 5px 5px rgba(0,0,0,0.5);
+    padding: 10px;
 
 }
 
