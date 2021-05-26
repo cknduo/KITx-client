@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Switch, Route } from 'react-router-dom'
+import Axios from "axios"
 
 import './App.css'
 
@@ -18,15 +19,27 @@ import ShoppingCart from './pages/shopping-cart'
 function App() {
 
   // Establish Shopping Cart STATE, to be accessible for all components
-  const [cart,setCart] = useState([])
+  const [cart, setCart] = useState([])
 
   const [accountType, setAccountType] = useState("")
-  const [userID, setUserID] = useState("")
-  
+  const [userID, setUserID] = useState("") // Pass {userID} into teacher and student dashboard when ready for integration
+
   useEffect(() => {
-    console.log("User ID exported to App.js is: ", userID)
-    // Pass {userID} into teacher and student dashboard when ready for integration
-  }, [userID])
+
+    const checkLogin = async () => {
+      const getRes = await Axios({
+        method: "GET",
+        withCredentials: true,
+        url: "/userinfo/user",
+      })
+
+      console.log("Data Received from server is : ", getRes.data)
+      setUserID(getRes.data.userID)
+      console.log("User ID exported to App.js is: ", getRes.data.userID)
+    }
+
+    checkLogin()
+  }, [])
 
   return (
     <div>
@@ -41,11 +54,11 @@ function App() {
       <Switch>
         <Route exact path='/' component={HomePage} />
         <Route exact path='/teach' component={Teach} />
-        <Route exact path='/sign-in' render={() => (<SignInSignUpPage setUserID={setUserID} setAccountType={setAccountType}/>)} />
-        <Route exact path='/cart' render={()=>(<ShoppingCart cart={cart} setCart={setCart} />)} />
+        <Route exact path='/sign-in' render={() => (<SignInSignUpPage setUserID={setUserID} />)} />
+        <Route exact path='/cart' render={() => (<ShoppingCart cart={cart} setCart={setCart} />)} />
         <Route exact path='/student/:id' component={StudentDashboard} />
         <Route exact path='/teacher/:id' component={TeacherDashboard} />
-        <Route exact path='/course/:id' render={()=>(<CourseDetails cart={cart} setCart={setCart} />)} />
+        <Route exact path='/course/:id' render={() => (<CourseDetails cart={cart} setCart={setCart} />)} />
       </Switch>
     </div>
   )
