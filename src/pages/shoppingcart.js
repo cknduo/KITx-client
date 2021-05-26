@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import Axios from "axios"
-
 import CartItem from '../components/Cart-Item'
 // import CourseDetails from '../pages/course-details'
 import addNewDBCart from '../functions/AddNewDBCart.js'
@@ -12,29 +11,24 @@ const ShoppingCart = ( { cart, setCart, userID } ) => {
 
     //Define STATE for variable "subtotal"
     const [subtotal, setSubtotal] = useState(0)
+    // const [userFirstName, setUserFirstName] = useState("")
 
-    // Define USER Information if exists
-    let userFirstName = ""
-    let currentUser = ""
-    // currentUser = userID
-    currentUser = "12345"
-    // currentUser = "67890"
+    // let currentUser = "60a2ece8201b091de34f1902"
+    let userFirstName = "Hard CODED"
+    // setUserFirstName("Hard CODED")
 
-    // Retrieve userName from DB
-    if (currentUser !== "") {
-        // userFirstName = getUserInfo(currentUser)   
-    }
-    userFirstName = "Pam"
-    // let currentUser = "60ab2fc2f7d205756ee946f4"
-    // let userFirstName = "Westley"
 
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // "CLEAR THE CART" Function gets called by button 'onClick'
     const clearCart = () => {
+
+        // Update cart STATE
         setCart([])
-        if (currentUser !== ""){
+        
+        // Update DB
+        if (userID !== ""){
             let newCartArray = []
-            // modifyDBCartItems(currentUser,newCartArray)  
+            modifyDBCartItems(userID,newCartArray)
         }
         setSubtotal(0)
     }
@@ -54,6 +48,51 @@ const ShoppingCart = ( { cart, setCart, userID } ) => {
     }
     //---------------------------------------------------------------------
 
+
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    // useEffect(() => {
+    //     // Define USER Information if exists
+    //     // let currentUser = ""
+    //     // let userFirstName = ""
+
+    //     // Get userID from STATE and find related FirstName of user.
+    //     // currentUser = userID
+    //     // currentUser = Object.assign({}, userID)
+
+    //     //currentUser = "60a2ece8201b091de34f1902"
+    //     if (userID !== "") {
+            
+    //         // setUserFirstName(getUserInfo(userID))  // Retrieve userName from DB
+    //         console.log("FirstName returned to main program from function call = ", userFirstName)
+
+    //         let DBUsersname = ""
+    //         const getUserInfo = async () => {
+    //             const getRes = await Axios({
+    //                 method: "GET",
+    //                 withCredentials: true,
+    //                 url: `/users/${userID}`, 
+    //             })
+            
+    //             DBUsersname = getRes.data.firstName
+    //             if(DBUsersname !== userFirstName){
+    //                 setUserFirstName(DBUsersname)
+    //             }
+    //             console.log("1. usersname = ",DBUsersname)
+    //         }
+    //         getUserInfo()
+            
+    //         console.log("2. state of user name = ", userFirstName)
+
+    //     }
+    //     else {
+    //         console.log("running ELSE condition")
+    //         currentUser = "12345"
+    //         setUserFirstName("12345 USERID STATE NOT FOUND")        
+    //     }
+    // },[]) // call only first time page loads after being navigated to
+    //---------------------------------------------------------------------
+
+
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // This UseEffect function is used to build the CART state from an
     // existing/persisted CART record alread saved in the database for the
@@ -67,18 +106,20 @@ const ShoppingCart = ( { cart, setCart, userID } ) => {
     
         // Only attempt to populate an EMPTY cart. Never overwrite a
         // cart that already has items.
-        if (cart.length === 0) {
+
+        
+        if ((userID !== "") && (cart.length === 0)) {
             let tempCartArray = []
-            const loadUserCartList = async () => {
-                // let cartInfo = await getCart(currentUser)
+            let loadUserCartList = async () => {
                 let getCart = await Axios({
                     method: "GET",
                     withCredentials: true,
-                    url: `/carts/${currentUser}`,
+                    url: `/carts/${userID}`,
                 })
                 // If data is found, loop through the array of items
                 // and add each item to the CART state with price = 0.
-                if (getCart.data) {
+                console.log("cart info for user, or getCart.data = ",getCart.data)
+                if (getCart.data) { // A cart was found for this user in the DB!
                     // Loop through the array of cart items in the DB
                     if (getCart.data.cartItems.length !== 0){
                         for (let counter = 0; counter < getCart.data.cartItems.length; counter++) {
@@ -92,14 +133,14 @@ const ShoppingCart = ( { cart, setCart, userID } ) => {
                     }
                     setCart(tempCartArray)
                 }
-                else {
-                    //Create an empty cart for user
+                else { // No cart was found for this user in DB
                     console.log("NO CART FOUND. Need to create empty one for DB.")
-                    const emptyArray = []
-                    addNewDBCart(currentUser,emptyArray)
+                    // Create an empty cart for user
+                    addNewDBCart(userID,tempCartArray)
                 }
             }
             loadUserCartList()
+                
         }
     },[])
     //---------------------------------------------------------------------
@@ -124,14 +165,15 @@ const ShoppingCart = ( { cart, setCart, userID } ) => {
     return (
         <div className='shoppingcart'>
             <h1> SHOPPING CART</h1>
-            <h4> Welcome {userFirstName}, here are the courses you are about to purchase:</h4>
+            {/* <h4> Welcome {userFirstName}, here are the courses you are about to purchase:</h4> */}
+            <h4> Welcome {userID}, here are the courses you are about to purchase:</h4>
             <br /> <br />
             <div className='cartitems'>
                 {cart.length === 0 &&
                     <h3>No items in your cart</h3>
                 }
                 {cart.map(mapItem => {
-                    return <div key={mapItem.courseID}><p><CartItem mapItem={mapItem} cart={cart} setCart={setCart} subtotal={subtotal} setSubtotal={setSubtotal} /></p></div>
+                    return <div key={mapItem.courseID}><CartItem mapItem={mapItem} cart={cart} setCart={setCart} subtotal={subtotal} setSubtotal={setSubtotal} userID={userID} /></div>
                 })}
             </div>
             <br /> <br />

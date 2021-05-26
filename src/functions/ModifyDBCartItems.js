@@ -7,7 +7,7 @@ const modifyDBCartItems = async (user,itemList) => {
     let modCartReq = await Axios({
             method: "PUT",
             data: {
-                userID: user,
+                // userID: user,
                 cartItems: itemList,
             },
             withCredentials: true,
