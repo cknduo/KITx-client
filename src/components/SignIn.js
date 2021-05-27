@@ -4,10 +4,9 @@ import Axios from "axios"
 import TextField from '@material-ui/core/TextField';
 import './SignIn.css'
 
-const SignIn = ({ setUserID }) => {
+const SignIn = ({ setUserID, setUserInfo, setAccountType }) => {
   const [loginUsername, setLoginUsername] = useState("")
   const [loginPassword, setLoginPassword] = useState("")
-  const [data, setData] = useState(null) //Eventually this all its uses will be removed
 
   const login = async () => {
     const loginRes = await Axios({
@@ -19,13 +18,12 @@ const SignIn = ({ setUserID }) => {
       withCredentials: true,
       url: "/login/",
     })
-    console.log(loginRes)
-
-    setData(loginRes.data)
     console.log(loginRes.data)
 
-    //Sets User ID up the chain through signin-signup page to App.js for the first authentication {Using deconstruction}
-    setUserID(loginRes.data.user._id)
+    //Sets User ID & info up the chain through signin-signup page to App.js for the first authentication {Using deconstruction}
+    setUserID(loginRes.data.userID)
+    setUserInfo(loginRes.data.userInfo)
+    setAccountType(loginRes.data.userInfo.accountType)
   }
 
   return (
@@ -49,10 +47,8 @@ const SignIn = ({ setUserID }) => {
       <button className='sign-in-button' onClick={login}>
         Sign In
       </button>
-
-      {data ? <h1>Welcome Back {data.user.username}</h1> : null}
     </div>
-  );
+  )
 }
 
 export default SignIn

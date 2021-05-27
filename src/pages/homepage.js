@@ -29,9 +29,9 @@ const HomePage = props => {
             <div className='courses-preview-title'><h2>Featured Courses</h2></div>
             <div className='courses-preview'>
                 {courses.map(course => {
-                    // Fixed "Each child in a list should have a unique 'key' prop" Warning in Browser Console
+                    // Fix "Each child in a list should have a unique 'key' prop" Warning in Browser Console
                     return (
-                            <Card 
+                            <Card
                                 courseID={course._id}
                                 courseImage={course.courseImage.filename}
                                 courseName={course.courseName}
