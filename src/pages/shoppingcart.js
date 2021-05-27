@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import Axios from "axios"
 import CartItem from '../components/Cart-Item'
-// import CourseDetails from '../pages/course-details'
 import addNewDBCart from '../functions/AddNewDBCart.js'
 import modifyDBCartItems from '../functions/ModifyDBCartItems'
-import getUserInfo from '../functions/GetUserInfo'
-
 
 const ShoppingCart = ( { cart, setCart, userID } ) => {
 
