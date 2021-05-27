@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import Rating from '@material-ui/lab/Rating'
 import { Link } from 'react-router-dom'
 import modifyDBCartItems from '../functions/ModifyDBCartItems'
+
+import './course-details.css'
 
 const CourseDetails = props => {
     const [course, setCourse] = useState(null)
@@ -76,37 +79,45 @@ const CourseDetails = props => {
         return (isInCart)
     } 
 
-
     return (
         <div className='course-details'>
-            <ul className='course-descriptions'>
-                <h1>{course.courseName}</h1>
-                <h3>{course.description}</h3>
-                <p>Rating: {course.rating}</p>
-                <p>Instructor: {course.instructor}</p>
-                <p>Price: ${course.coursePrice}</p>
-            </ul>
-            <ul className='kit-details'>
-                <h2>Required Kit: {course.requiredKits.kitName}</h2>
-            </ul>
-            
-            <div>
-                {props.userID === "" &&
-                    <Link to={'/sign-in'}>
-                    <button className='login-button'> LOG IN TO ENROLL</button>
-                    </Link>
-                }
-            </div>
-            <div> 
-                {props.userID !== "" &&
-                    <button className='enroll-button' 
-                        disabled={courseInCart() === true}
-                        onClick={addToCart}> ENROLL NOW !
-                        </button>
-                }
+            <div className='course-details-container'>
+                <div className='course-details-header'>
+                    <img src={course.courseImage.filename} alt='course-img' />
+                    <h2 className='course-details-title'>{course.courseName}</h2>
+                    <h4>{course.description}</h4>
+                    <Rating value={course.rating} precision={0.1} readOnly />
+                    <p>Instructor: {course.instructor}</p>
+                    <p>Price: ${course.coursePrice}</p>
+                </div>
+                
+                <div className='course-details-content'>
+                    <h4>Course Content</h4>
+                    {/* <p>{course.modules[0].moduleNumber}. {course.modules[0].description}</p> */}
+                </div>
+
+                <div className='course-details-kits'>
+                    <h4>Required Kit: {course.requiredKits.kitName}</h4>
+                    <p>{course.requiredKits.kitDescription}</p>
+                </div>
+                
+                <div className='course-details-enroll-btn'>
+                    {props.userID === "" &&
+                        <Link to={'/sign-in'}>
+                            <button className='login-button'>LOG IN TO ENROLL</button>
+                        </Link>
+                    }
+                </div>
+
+                <div className='course-details-enroll-btn'> 
+                    {props.userID !== "" &&
+                        <button className='enroll-btn' 
+                            disabled={courseInCart() === true}
+                            onClick={addToCart}>ENROLL NOW</button>
+                    }
+                </div>               
             </div>
         </div>
-
     )
 }
 

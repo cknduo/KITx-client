@@ -3,6 +3,7 @@ import Axios from "axios"
 import CartItem from '../components/Cart-Item'
 import addNewDBCart from '../functions/AddNewDBCart.js'
 import modifyDBCartItems from '../functions/ModifyDBCartItems'
+import './shopping-cart.css'
 
 const ShoppingCart = ( { cart, setCart, userID } ) => {
 
@@ -160,45 +161,47 @@ const ShoppingCart = ( { cart, setCart, userID } ) => {
     //---------------------------------------------------------------------
 
     return (
-        <div className='shoppingcart'>
-            <h1> SHOPPING CART</h1>
-            {/* <h4> Welcome {userFirstName}, here are the courses you are about to purchase:</h4> */}
-            <h4> Welcome {userID}, here are the courses you are about to purchase:</h4>
-            <br /> <br />
-            <div className='cartitems'>
-                {cart.length === 0 &&
-                    <h3>No items in your cart</h3>
-                }
-                {cart.map(mapItem => {
-                    return <div key={mapItem.courseID}><CartItem mapItem={mapItem} cart={cart} setCart={setCart} subtotal={subtotal} setSubtotal={setSubtotal} userID={userID} /></div>
-                })}
-            </div>
-            <br /> <br />
-            {cart.length !== 0 &&
-                <div> Subtotal  ${subtotal}
+        <div className='shopping-cart'>
+            <div className='shopping-cart-container'>
+
+                <h1> SHOPPING CART</h1>
+                {/* <h4> Welcome {userFirstName}, here are the courses you are about to purchase:</h4> */}
+                <h4> Welcome {userID}, here are the courses you are about to purchase:</h4>
+                <div className='shopping-cart-items'>
+                    {cart.length === 0 &&
+                        <h3>No items in your cart</h3>
+                    }
+                    {cart.map(mapItem => {
+                        return <div key={mapItem.courseID}><CartItem mapItem={mapItem} cart={cart} setCart={setCart} subtotal={subtotal} setSubtotal={setSubtotal} userID={userID} /></div>
+                    })}
                 </div>
-            }
-            <br /><br /><br />
-            <div>
-                <button
-                    className='clear-cart-button'
-                    type='button'
-                    disabled={cart.length === 0}
-                    onClick={clearCart}
-                >
-                    CLEAR CART
-                </button>
+                <br /> <br />
+                {cart.length !== 0 &&
+                    <div> Subtotal  ${subtotal}
+                    </div>
+                }
+                <br /><br /><br />
+                <div>
+                    <button
+                        className='clear-cart-button'
+                        type='button'
+                        disabled={cart.length === 0}
+                        onClick={clearCart}
+                    >
+                        CLEAR CART
+                    </button>
             
-                <button 
-                    className='checkout-button'
-                    type='button'
-                    disabled={cart.length === 0}
-                    // onClick={checkOut}
-                >
-                    CHECKOUT
-                </button>
+                    <button 
+                        className='checkout-button'
+                        type='button'
+                        disabled={cart.length === 0}
+                        // onClick={checkOut}
+                    >
+                        CHECKOUT
+                    </button>
+                </div>
+                <br /> <br />
             </div>
-            <br /> <br />
         </div>
     )
 }
