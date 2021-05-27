@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import Axios from "axios"
+import addNewDBCart from './functions/AddNewDBCart.js'
 
 import './App.css'
 
@@ -35,7 +36,6 @@ function App() {
         withCredentials: true,
         url: "/userinfo/user",
       })
-
       setUserID(getRes.data.userID)
       setAccountType(getRes.data.userInfo.accountType)
       setUserInfo(getRes.data.userInfo)
@@ -48,6 +48,42 @@ function App() {
 
     checkLogin()
   }, [])
+
+  useEffect(() => {
+    
+    if (userID !== "") {
+      let loadUserDBCartList = async () => {
+        let tempCartArray = [] // initialize
+        let dbCartArray = []
+        // Retrieve from the database, the list of courses found in user's cart
+        let DBCartItems = await Axios({
+          method: "GET",
+          withCredentials: true,
+          url: `/carts/${userID}`,
+        })
+        if(DBCartItems.data) { // A cart record DOES exist in DB for this user!
+          dbCartArray = DBCartItems.data.cartItems
+          // Loop through the array of cart items in the DB
+          if (dbCartArray.length !== 0){
+            for (let counter = 0; counter < dbCartArray.length; counter++) {
+              //Insert a new entry into the CART state, in proper format.
+              let objectToAdd = {
+                courseID: dbCartArray[counter],
+                coursePrice: 0, 
+              }
+              tempCartArray[counter] = objectToAdd
+            }
+          }
+        }
+        else {
+          // No cart record exists in DB for this user, need to create an empty cart in DB!
+          addNewDBCart(userID,tempCartArray)
+        }
+        setCart(tempCartArray)
+      }
+      loadUserDBCartList()
+    }
+  }, [userID])
 
   return (
     <div>
@@ -64,10 +100,11 @@ function App() {
         <Route exact path='/' component={HomePage} />
         <Route exact path='/teach' component={Teach} />
         <Route exact path='/sign-in' render={() => (<SignInSignUpPage setUserID={setUserID} setUserInfo={setUserInfo} setAccountType={setAccountType} />)} />
-        <Route exact path='/cart' render={() => (<ShoppingCart cart={cart} setCart={setCart} />)} />
+        <Route exact path='/cart' render={() => (<ShoppingCart cart={cart} setCart={setCart} userID={userID}/>)} />
         <Route exact path='/student/:id' component={StudentDashboard} />
         <Route exact path='/teacher/:id' component={TeacherDashboard} />
-        <Route exact path='/course/:id' render={() => (<CourseDetails cart={cart} setCart={setCart} />)} />
+        <Route exact path='/course/:id' render={() => (<CourseDetails cart={cart} setCart={setCart} userID={userID}/>)} />
+
       </Switch>
     </div>
   )
