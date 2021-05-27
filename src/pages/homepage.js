@@ -16,15 +16,19 @@ const HomePage = props => {
         }
         getCourses()
         console.log(courses)
+        console.log(props.accountType)
     }, [])
 
     return (
         <div className='homepage'>
             <div className='landing'>
-                <h1 className='landing-title'>EXPERIENCE OUR CAMPUS WHEREVER YOU ARE</h1>
-                <Link to='/sign-in'>
-                    <button className='landing-btn'>START LEARNING</button>
-                </Link>
+                <p className='landing-title'>EXPERIENCE OUR CAMPUS WHEREVER YOU ARE</p>
+                <div className='landing-btn-container'>
+                    <Link to='/sign-in'>
+                        <button className='landing-btn'>START LEARNING</button>
+                    </Link>                    
+                </div>
+
             </div>
             <div className='courses-preview-title'><h2>Featured Courses</h2></div>
             <div className='courses-preview'>
