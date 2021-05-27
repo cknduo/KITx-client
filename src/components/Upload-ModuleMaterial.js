@@ -12,10 +12,6 @@ import placeholder from '../assets/whale.svg'
 const UploadModuleMaterial = ({ courseID, fileUse, description}) => {
     const [selectedFile, setSelectedFile] = useState()
     const [isSelected, setIsSelected] = useState(false)
-    const [isSuccessful, setIsSuccessful] = useState(false)
-    const [uploadedFile, setUploadedFile] = useState()
-    const [materialAdded, setMaterialAdded] = useState()
-    const [previewImage, setPreviewImage] = useState(placeholder)
 
     const classes = useStyles()
 
@@ -25,10 +21,10 @@ const UploadModuleMaterial = ({ courseID, fileUse, description}) => {
         setIsSelected(true)
         const fileReader = new window.FileReader()
         fileReader.readAsDataURL(file)
-        fileReader.onloadend = () => {
-            setPreviewImage(fileReader.result)
+//        fileReader.onloadend = () => {
+//            setPreviewImage(fileReader.result)
         }
-    }
+    
 
     const formik = useFormik({
         initialValues: {
@@ -47,8 +43,9 @@ const UploadModuleMaterial = ({ courseID, fileUse, description}) => {
             console.log("onSubmit called")
 
             /* Upload File */
-            await fileUpload()
+            let uploadedFile = await fileUpload()
             console.log("submit")
+
             alert(JSON.stringify(values, null, 2))
             alert(JSON.stringify(uploadedFile, null, 2))
 
@@ -85,14 +82,9 @@ const UploadModuleMaterial = ({ courseID, fileUse, description}) => {
                 'Content-Type': 'multipart/form-data'
             }
         })
-        let file = await fileUploadData.data
-        setIsSuccessful(true)
-        setUploadedFile(file) 
-        console.log("This is the file that was uploaded", file)
+        let fileUploaded = await fileUploadData.data
+        return fileUploaded
     }
-
-     
-        
 
     return (
         <div>

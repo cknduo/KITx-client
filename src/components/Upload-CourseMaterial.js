@@ -55,6 +55,12 @@ const UploadCourseMaterial = ({ courseID, fileUse, description }) => {
     } catch (err) {
         console.log(`Problem with posting data`)
     }
+
+    /*if this is a replacement file, delete the existing one from database*/
+    /*delete module file from gridfs database*/
+    
+    /*** CODE REQUIRED ***/
+
     }
 
     return (

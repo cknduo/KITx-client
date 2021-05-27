@@ -4,11 +4,11 @@ const ImageCourseMaterial = ({imageFileID}) => {
 // check if image is uploaded.  If not, use placeholder.
         
           if (imageFileID==="") {
-            return <img src={placeholder} height="200px" width="200px"/>
+            return <img src={placeholder} alt="Placeholder" width="200px"/>
           } else {
-            return <img src={`/courseMaterial/image/${imageFileID}`} height="200px" width="200px"/>
+            return <img src={`/courseMaterial/image/${imageFileID}`} alt="Course" width="200px"/>
+          //return null
           }
-
 
 }
 

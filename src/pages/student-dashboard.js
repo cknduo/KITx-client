@@ -1,9 +1,29 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import './student-dashboard.css'
+import ViewStudentCurrent from '../components/View-StudentCurrent'
+
 
 const StudentDashboard = () => {
     const [viewMode, setViewMode] = useState('Enrolled')
+    const [user, setUser] = useState(null)
+
+    /* hard coded for testing purposes*/ 
+    let studentID = "60ab3978f7d205756ee94709"    
+    
+    useEffect(() => {
+        const getUser = async () => {
+            let response = await fetch(`/users/${studentID}`)
+            let data = await response.json()
+            setUser(data)
+        }
+        getUser()
+    }, [])
+
+    if (!user) {
+        return null
+    }
+
 
     return (
         <div className='student-dashboard'>
@@ -21,16 +41,23 @@ const StudentDashboard = () => {
                     >
                         COMPLETED
                     </button>
-                    <button
+                    {/* <button
                         className={`${viewMode === 'Bookmarked' ? 'dashboard-active-view' : ''} dashboard-tab-btn`}
                         onClick={() => setViewMode('Bookmarked')}
                     >
                         BOOKMARKED
-                    </button>
+                    </button> */}
                     <div className='dashboard-tab-content'>
 
                     </div>
                 </div>
+
+                <div className='dashboard-tab-content'>
+                    {viewMode === 'Enrolled' && <ViewStudentCurrent studentID={studentID} student={user} />}
+                </div>
+
+
+
             </div>
         </div>
     )

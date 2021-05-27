@@ -14,7 +14,7 @@ const TeacherDash = () => {
     
     const { id } = useParams()
     /* Wesley Follis for testing purposes only */
-        const teacherID = "60a2ece8201b091de34f1902"
+        const teacherID = "60ad0d9922a11e2362467c65"
 
 
     const [viewMode, setViewMode] = useState('Active')
@@ -72,7 +72,7 @@ const TeacherDash = () => {
                 </div>
 
                 <div className='dashboard-tab-content'>
-                    {viewMode === 'Current' && <ViewTeacherCurrent teacherID={teacherID}/>}
+                    {viewMode === 'Active' && <ViewTeacherCurrent teacherID={teacherID}/>}
                     {viewMode === 'InProgress' && <ViewTeacherInProgress teacherID={teacherID} courseUpdated={toggleCourseUpdated} />}    
                     {viewMode === 'Archived' && <ViewTeacherArchived teacherID={teacherID}/>}    
                 </div>

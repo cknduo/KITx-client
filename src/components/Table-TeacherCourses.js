@@ -10,7 +10,6 @@ import {
   TableBody,
   TableCell,
   TableContainer,
-  TableHead,
   TableRow,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -30,27 +29,17 @@ const TableTeacherCourses = ({teacherID, /*courseAdded,*/ courseStatus}) => {
   useEffect(() => {
     const getCourses= async () => {
       console.log(courseStatus)
-      // fetch uses the "proxy" value set in client/package.json
       let response = await fetch(`/courses/findByTeacher/${teacherID}?courseStatus=${courseStatus}`);
       let data = await response.json();
       setRows(data);
     };
     getCourses();
-  }, [/*courseAdded*/]);
+  }, []);
 
   return (
     <div>
     <TableContainer component={Paper}>
       <Table aria-label='simple table'>
-        {/* <TableHead>
-          <TableRow>
-            <TableCell className={classes.headerCell}></TableCell>
-            <TableCell className={classes.headerCell}>Course Name</TableCell>
-           <TableCell className={classes.headerCell}></TableCell>
-           <TableCell className={classes.headerCell}>Enrollment Details</TableCell>         
-            <TableCell className={classes.headerCell}></TableCell> 
-          </TableRow>
-        </TableHead>*/}
         <TableBody>
           {rows.map((row) => (
             <TableRow key={row._id}>

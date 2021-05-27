@@ -5,7 +5,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Collapse from '@material-ui/core/Collapse';
 import Button from '@material-ui/core/Button';
@@ -39,7 +38,7 @@ const TableCourseMaterial = ({courseID, materialAdded, course}) => {
                   </TableRow>
               </TableHead>
               <TableBody>
-                    {rows.map((row) => (<Row key={row.moduleNumber} row={row} moduleFiles={moduleFiles} moduleNumber={row.moduleNumber}/> ))}
+                    {rows.map((row) => (<Row key={row.moduleNumber} row={row} moduleFiles={moduleFiles} moduleNumber={row.moduleNumber} courseID={courseID}/> ))}
               </TableBody>
               </Table>
           </TableContainer>
@@ -51,9 +50,42 @@ const TableCourseMaterial = ({courseID, materialAdded, course}) => {
 }
 
 function Row(props) {
-  const { row, moduleFiles, moduleNumber } = props;
+  const { row, moduleFiles, moduleNumber, courseID } = props;
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
+
+  const deleteFile = async (fileID) => {
+
+    /*delete module file from gridfs database*/
+    alert (`request to delete ${fileID}`)
+    try {
+            
+      let response = await fetch(`/coursesMaterials/delete/${fileID}`,
+      {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+      })
+    }    
+    catch (err) {
+          console.log(`Problem deleting data`, err)
+      }
+
+    /*delete module file from course database*/
+    try {
+            
+        let response = await fetch(`/courses/${courseID}/modulefiles/delete/${fileID}`,
+        {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+        })
+    }    
+    catch (err) {
+            console.log(`Problem deleting data`, err)
+        }
+
+
+  }
+
 
   return (
     <React.Fragment>
@@ -104,7 +136,7 @@ function Row(props) {
                                   className={classes.button}
                                   startIcon={<DeleteIcon />}
                                   style={{ marginLeft: 16 }}
-                              >
+                                  onClick={()=>{deleteFile(moduleFilesRow.fileID)}}>
                                  Delete
                               </Button>
                               </TableCell>

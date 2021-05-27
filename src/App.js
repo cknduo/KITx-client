@@ -14,6 +14,8 @@ import StudentDashboard from './pages/student-dashboard'
 import TeacherDashboard from './pages/teacher-dashboard'
 import CourseDetails from './pages/course-details'
 import ShoppingCart from './pages/shopping-cart'
+import StudentLearning from './pages/student-learning'
+
 
 function App() {
 
@@ -46,6 +48,7 @@ function App() {
         <Route exact path='/student/:id' component={StudentDashboard} />
         <Route exact path='/teacher/:id' component={TeacherDashboard} />
         <Route exact path='/course/:id' render={()=>(<CourseDetails cart={cart} setCart={setCart} />)} />
+        <Route exact path='/student/:id/course/:courseid/learn' component={StudentLearning}/>
       </Switch>
     </div>
   )
