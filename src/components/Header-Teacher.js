@@ -7,7 +7,7 @@ import HeaderStaticSection from './Header-StaticSection'
 import { ReactComponent as User } from '../assets/user.svg'
 import './Header.css'
 
-const TeacherHeader = () => (
+const TeacherHeader = ({ logout }) => (
     <div className='header'>
         <div className='options-width'>
 
@@ -15,11 +15,11 @@ const TeacherHeader = () => (
 
             <div className='options right'>
                 <Link className='option' to='/teacher/:id'>
-                    My Teaching
+                    MY TEACHING
                 </Link>
                 <div className='option'>
                     <DropdownIconNav icon={<User />} linkTo='#'>
-                        <DropdownProfile />
+                        <DropdownProfile logout={logout}/>
                     </DropdownIconNav>
                 </div>
             </div>

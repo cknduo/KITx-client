@@ -24,7 +24,7 @@ const DropdownTextNav = props => {
     return (
         <div className='nav-item' ref={ref}>
             <Link to='#' onClick={() => setOpen(!open)}>
-                Explore
+                EXPLORE
             </Link>
             {open && props.children}
         </div>

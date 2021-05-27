@@ -21,12 +21,12 @@ const StudentDashboard = () => {
                     >
                         COMPLETED
                     </button>
-                    <button
+                    {/* <button
                         className={`${viewMode === 'Bookmarked' ? 'dashboard-active-view' : ''} dashboard-tab-btn`}
                         onClick={() => setViewMode('Bookmarked')}
                     >
                         BOOKMARKED
-                    </button>
+                    </button> */}
                     <div className='dashboard-tab-content'>
 
                     </div>
