@@ -4,20 +4,20 @@ import SignUp from '../components/SignUp'
 
 import './signin-signup.css'
 
-const SignInSignUpPage = ({ setUserID, setAccountType }) => {
+const SignInSignUpPage = ({ setUserID, setUserInfo, setAccountType }) => {
     const [viewMode, setViewMode] = useState('SignInView')
 
     return (
         <div className='signin-signup'>
             <div className='tab-container'>
                 <div className='tab-options'>
-                    <button 
+                    <button
                         className={`${viewMode === 'SignInView' ? 'active-view' : ''} signin-signup-button`}
                         onClick={() => setViewMode('SignInView')}
                     >
                         Sign In
                     </button>
-                    <button 
+                    <button
                         className={`${viewMode === 'SignUpView' ? 'active-view' : ''} signin-signup-button`}
                         onClick={() => setViewMode('SignUpView')}
                     >
@@ -25,8 +25,8 @@ const SignInSignUpPage = ({ setUserID, setAccountType }) => {
                     </button>
                 </div>
                 <div className='tab-content'>
-                    {viewMode === 'SignInView' && <SignIn setUserID={setUserID} setAccountType={setAccountType} />}
-                    {viewMode === 'SignUpView' && <SignUp />}    
+                    {viewMode === 'SignInView' && <SignIn setUserID={setUserID} setUserInfo={setUserInfo} setAccountType={setAccountType} />}
+                    {viewMode === 'SignUpView' && <SignUp />}
                 </div>
             </div>
         </div>
