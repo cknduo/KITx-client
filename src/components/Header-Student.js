@@ -10,7 +10,7 @@ import { ReactComponent as ShoppingBox } from '../assets/shopping-box.svg'
 import { ReactComponent as User } from '../assets/user.svg'
 import './Header.css'
 
-const StudentHeader = ( {cartSize}) => (
+const StudentHeader = ({ cartSize, logout }) => (
     <div className='header'>
         <div className='options-width'>
 
@@ -18,7 +18,7 @@ const StudentHeader = ( {cartSize}) => (
 
             <div className='options right'>
                 <Link className='option' to='/student/:id'>
-                    My Learning
+                    MY LEARNING
                 </Link>
                 <div className='option'>
                     <Badge badgeContent={cartSize} color="error">
@@ -27,7 +27,7 @@ const StudentHeader = ( {cartSize}) => (
                 </div>
                 <div className='option'>
                     <DropdownIconNav icon={<User />} linkTo='#'>
-                        <DropdownProfile />
+                        <DropdownProfile logout={logout} />
                     </DropdownIconNav>
                 </div>
             </div>

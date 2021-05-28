@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom'
 
 import DropdownTextNav from './Dropdown-TextNav'
 import DropdownExplore from './Dropdown-Explore'
-import { ReactComponent as Logo } from '../assets/whale.svg'
+import Logo from '../assets/logo.png'
 import './Header.css'
 
 const HeaderStaticSection = () => {
     return (
         <div className='options'>
             <Link to="/">
-                <Logo className='option logo' />
+                <img src={Logo} alt='logo' className='option logo' />
             </Link>
             <div className='option'>
                 <DropdownTextNav>

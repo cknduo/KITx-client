@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
+import Axios from 'axios'
 
 import './Dropdown.css'
 
-const DropdownProfile = () => {
+const DropdownProfile = ({ logout }) => {
+
 
     function DropdownItem(props) {
         return (
-            <a href={props.goToLink} className='menu-item profile-menu-item'>
+            <a href={props.goToLink} className='menu-item profile-menu-item' onClick={props.logout}>
                 {props.children}
             </a>
         )
@@ -17,10 +19,12 @@ const DropdownProfile = () => {
             <div className=''>
                 <DropdownItem>Profile</DropdownItem>
                 <DropdownItem>Transaction History</DropdownItem>
-                <DropdownItem goToLink='/'>Log Out</DropdownItem>
+                <DropdownItem goToLink='/' logout={logout}>Log Out</DropdownItem>
             </div>
         </div>
     )
 }
+
+
 
 export default DropdownProfile

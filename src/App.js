@@ -8,7 +8,7 @@ import './App.css'
 import HeaderPublic from './components/Header-Public'
 import HeaderStudent from './components/Header-Student'
 import HeaderTeacher from './components/Header-Teacher'
-import SignOut from './components/SignOut'
+import Footer from './components/Footer'
 
 import HomePage from './pages/homepage'
 import Teach from './pages/teach'
@@ -87,7 +87,21 @@ function App() {
     }
   }, [userID])
 
+  const logout = async () => {
+    const logoutRes = await Axios({
+        method: "GET",
+        withCredentials: true,
+        url: "/logout/",
+    })
+    console.log(logoutRes.data)
+    setCart([]) //so that Art's Cart can go back to the Start ;)
+    setUserID("")
+    setUserInfo("")
+    setAccountType("")
+  }
+
   return (
+<<<<<<< HEAD
     <div>
       {/* Headers */}
       {/* {accountType === '' && <HeaderPublic />}
@@ -109,6 +123,32 @@ function App() {
         <Route exact path='/student/:id/course/:courseid/learn' component={StudentLearning}/>
 >>>>>>> 2445f76b34a3ac2d23d5bc800987a401a868af1b
       </Switch>
+=======
+    <div className='app'>
+
+      <div className='app-header'>
+        {accountType === '' && <HeaderPublic />}
+        {accountType === 'student' && <HeaderStudent cartSize={cart.length} logout={logout} />}
+        {accountType === 'teacher' && <HeaderTeacher logout={logout} />}    
+      </div>
+
+      <div className='app-content'>
+        <Switch>
+          <Route exact path='/' render={() => (<HomePage accountType={accountType} />)} />
+          <Route exact path='/teach' component={Teach} />
+          <Route exact path='/sign-in' render={() => (<SignInSignUpPage setUserID={setUserID} setUserInfo={setUserInfo} setAccountType={setAccountType} />)} />
+          <Route exact path='/cart' render={() => (<ShoppingCart cart={cart} setCart={setCart} userID={userID}/>)} />
+          <Route exact path='/student/:id' component={StudentDashboard} />
+          <Route exact path='/teacher/:id' component={TeacherDashboard} />
+          <Route exact path='/course/:id' render={() => (<CourseDetails cart={cart} setCart={setCart} userID={userID}/>)} />
+        </Switch>       
+      </div>
+
+      <div className='app-footer'>
+        <Footer />
+      </div>
+      
+>>>>>>> f7d0129cba685bc6a1d5811dd687651b1256dfba
     </div>
   )
 }

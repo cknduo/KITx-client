@@ -1,16 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+
 .homepage {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 100vw;
 }
 
 .landing {
-    width: 100vw;
-    height: 40rem;
-    background-image: url('https://images.pexels.com/photos/4491881/pexels-photo-4491881.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
-    background-repeat: no-repeat;
+    width: 100%;
+    height: 30rem;
+    /* background: 
+        linear-gradient(
+            rgba(99, 57, 237, 0.45), 
+            rgba(99, 57, 237, 0.45)
+        ),
+        url('https://images.pexels.com/photos/5973963/pexels-photo-5973963.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'); */
+    background-image: url('https://images.pexels.com/photos/5973963/pexels-photo-5973963.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
+    /* background-color: #314555;
+    background-blend-mode: luminosity; */
     background-size: cover;
-    background-position: bottom right;
+    background-position: center center;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -19,20 +28,22 @@
 
 .landing-title {
     color: white;
+    font-family: 'Fredoka One', cursive;
+    font-size: 3rem;
     margin: 5rem 0 3rem 0;
-    text-shadow: rgb(0, 0, 0) 1px 0 20px;
+    text-shadow: 5px 5px 1px rgba(0, 169, 236, 0.5);
 }
 
 .landing-btn {
-    padding: 0.8rem 1.8rem;
+    padding: 1rem 2rem;
     letter-spacing: 0.5px;
     font-family: inherit;
     font-size: 1.2rem;
     font-weight: bold;
     color: white;
-    background-color: rgb(108, 167, 255);
-    border: 2px solid rgba(0, 0, 0, 0);
-    border-radius: 20px;
+    background-color: #00a9ec;
+    border: none;
+    border-radius: 50px;
     outline: none;
     cursor: pointer;
     transition: all .2s ease-in-out;
@@ -40,10 +51,12 @@
 
 .landing-btn:hover {
     transform: scale(1.1);
+    box-shadow: 0 0 50px #00a9ec;
 }
 
 .courses-preview-title {
     margin-top: 1rem;
+    color: white;
     display: flex;
     justify-content: center;
 }
@@ -54,7 +67,7 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto;
-    grid-gap: 30px;
+    grid-gap: 40px;
 }
 
 @media only screen and (min-width: 600px) {

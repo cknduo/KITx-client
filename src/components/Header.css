@@ -1,11 +1,8 @@
 .header {
-    position: sticky;
-    background-color: white;
-    height: 2rem;
+    height: 3rem;
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-bottom: 1rem;
     padding: 1rem;
 }
 
@@ -28,11 +25,25 @@
 
 .option {
     display: flex;
-    padding: 0 2rem;
+    padding: 0 1rem;
     cursor: pointer;
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+
+.option:hover {
+    color: #00a9ec;
+}
+
+.option:focus {
+    color: #00a9ec;
 }
 
 .logo {
     height: 2rem;
-    width: 2rem;
+    transition: all .2s ease-in-out;
+}
+
+.logo:hover {
+    transform: scale(1.1);
 }
