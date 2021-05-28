@@ -12,7 +12,6 @@ const ModalUpdateCourse = ({ courseID, teacherID }) => {
 
     const [course, setCourse] = useState(null)
 
-
     useEffect(() => {
         const getCourse = async () => {
             let response = await fetch(`/courses/${courseID}`)
@@ -22,35 +21,32 @@ const ModalUpdateCourse = ({ courseID, teacherID }) => {
         getCourse()
     }, [])
 
-    console.log("course",course)
     if (!course) {
         console.log("Not course!")
         return null
     }
     
-    console.log("course modules",course.modules)
-
-
     let modules = course.modules
-    console.log("module in upload form", modules)
+
     return (
         <div className="container">
 
             <div className="course-image">
                 <h3> Course Image</h3>
                 <ImageCourseMaterial imageFileID={course.courseImage.fileID} />
-                <UploadCourseMaterial courseID={courseID} fileUse={"courseImage"} description={"Course Image"}/>
+                <UploadCourseMaterial currentFileID={course.courseImage.fileID} courseID={courseID} fileUse={"courseImage"} description={"Course Image"}/>
                 
             </div>
 
             <div className="certificate">
                 <h3> Course Certificate</h3>
-                <UploadCourseMaterial courseID={courseID} fileUse={"certificate"} description={"Course Certificate"}/>
+                <UploadCourseMaterial currentFileID={course.certificate.fileID} courseID={courseID} fileUse={"certificate"} description={"Course Certificate"}/>
             </div> 
 
             <div className="kit-info">
                 <h3> Kit Information</h3>
                 <ImageCourseMaterial imageFileID={course.kitImage.fileID} />
+                <UploadCourseMaterial currentFileID={course.kitImage.fileID} courseID={courseID} fileUse={"kitImage"} description={"Kit Image"}/>
                 <FormKitInfo courseID={courseID} course={course}/>
             </div> 
 

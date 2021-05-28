@@ -7,10 +7,6 @@ import TextField from '@material-ui/core/TextField';
 //import Axios from "axios"
 import { makeStyles } from '@material-ui/core/styles';
 
-import UploadCourseMaterial from './Upload-CourseMaterial'
-
-
-
 const FormKitInfo = ({ courseID, fileUse, course }) => {
 
     const classes = useStyles()
@@ -54,8 +50,6 @@ const FormKitInfo = ({ courseID, fileUse, course }) => {
     return (
         <div>
 
-        <UploadCourseMaterial courseID={courseID} fileUse="kitImage" description={"Kit Image"} />
-
         <form className={classes.root} onSubmit={formik.handleSubmit}>
 
         <TextField
@@ -66,7 +60,6 @@ const FormKitInfo = ({ courseID, fileUse, course }) => {
             variant="filled"
             style={{ margin: "16px 0px" }}
             defaultValue={course.requiredKits.kitName}
-            //value={formik.values.kitName}
             onChange={formik.handleChange}
             error={formik.touched.kitName && Boolean(formik.errors.kitName)}
             helperText={formik.touched.kitName && formik.errors.kitName}
@@ -82,7 +75,6 @@ const FormKitInfo = ({ courseID, fileUse, course }) => {
             variant="filled"
             style={{ margin: "16px 0px" }}
             defaultValue={course.requiredKits.kitDescription}
-            //value={formik.values.kitDescription}
             onChange={formik.handleChange}
             error={formik.touched.kitDescription && Boolean(formik.errors.kitDescription)}
             helperText={formik.touched.kitDescription && formik.errors.kitDescription}

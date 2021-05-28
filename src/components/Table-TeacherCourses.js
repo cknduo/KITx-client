@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react'
+
 import ModalUpdateCourse from './Modal-UpdateCourse'
 import ImageCourseMaterial from './Image-CourseMaterial'
 import Modal from 'react-modal'
@@ -13,6 +14,7 @@ import {
   TableRow,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { useHistory } from 'react-router-dom'
 
 const TableTeacherCourses = ({teacherID, /*courseAdded,*/ courseStatus}) => {
   
@@ -25,6 +27,7 @@ const TableTeacherCourses = ({teacherID, /*courseAdded,*/ courseStatus}) => {
   }    
   
   const classes = useStyles();
+  const history = useHistory()
 
   useEffect(() => {
     const getCourses= async () => {
@@ -65,8 +68,8 @@ const TableTeacherCourses = ({teacherID, /*courseAdded,*/ courseStatus}) => {
                       color="primary"
                       size="small"
                       style={{ marginLeft: 16 }}
-              >
-                VIEW COURSE PAGE
+                      onClick={()=>{history.push(`/course/${row._id}`)}}>
+                      VIEW COURSE PAGE
               </Button>
               </TableCell>
             </TableRow>

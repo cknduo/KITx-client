@@ -10,14 +10,14 @@ import { ReactComponent as ShoppingBox } from '../assets/shopping-box.svg'
 import { ReactComponent as User } from '../assets/user.svg'
 import './Header.css'
 
-const StudentHeader = ({ cartSize, logout }) => (
+const StudentHeader = ({ cartSize, logout, userID }) => (
     <div className='header'>
         <div className='options-width'>
 
             <HeaderStaticSection />
 
             <div className='options right'>
-                <Link className='option' to='/student/:id'>
+                <Link className='option' to={`/student/${userID}`}>
                     MY LEARNING
                 </Link>
                 <div className='option'>

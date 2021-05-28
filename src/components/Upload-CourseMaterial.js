@@ -5,7 +5,7 @@ import Axios from "axios"
 import './Modal-UpdateCourse.css'
 import placeholder from '../assets/whale.svg'
 
-const UploadCourseMaterial = ({ courseID, fileUse, description }) => {
+const UploadCourseMaterial = ({ currentFileID, courseID, fileUse, description }) => {
     const [selectedFile, setSelectedFile] = useState()
     const [isSelected, setIsSelected] = useState(false)
     const [isSuccessful, setIsSuccessful] = useState(false)
@@ -45,22 +45,57 @@ const UploadCourseMaterial = ({ courseID, fileUse, description }) => {
         }
     }
     
+   /*check if there is already an existing file defined.  If so, store
+      the fileID, so when the new file is uploaded, the old one can be deleted
+      from the gridfs database*/
+
+     const deleteFile = async (currentFileID) => {
+
+    /*delete module file from gridfs database*/
+    alert (`request to delete ${currentFileID}`)
     try {
+            
+        let response = await fetch(`/coursesMaterials/delete/${currentFileID}`,
+        {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+        })
+    }    
+    catch (err) {
+            console.log(`Problem deleting data`, err)
+        }
+    }
+
+    /*check if there is already an existing file defined.  If so, store
+      the fileID, so when the new file is uploaded, the old one can be deleted
+      from the gridfs database*/
+    if (currentFileID) {
+        deleteFile()
+        console.log("file deleted")
+    }
+
+    try {
+        alert (`request to upload ${currentFileID}`)
         let response = await fetch(`/courses/${courseID}`,
             {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(update, null, 2)
             })
-    } catch (err) {
+        // delete exisiting file
+        if (currentFileID) {
+            deleteFile()
+            console.log("file deleted")
+        }
+        } catch (err) {
         console.log(`Problem with posting data`)
     }
 
-    /*if this is a replacement file, delete the existing one from database*/
-    /*delete module file from gridfs database*/
-    
-    /*** CODE REQUIRED ***/
+    /*check if there is already an existing file defined.  If so, store
+      the fileID, so when the new file is uploaded, the old one can be deleted
+      from the gridfs database*/
 
+    
     }
 
     return (

@@ -83,7 +83,7 @@ const CourseDetails = props => {
         <div className='course-details'>
             <div className='course-details-container'>
                 <div className='course-details-header'>
-                    <img src={course.courseImage.filename} alt='course-img' />
+                    <img src={`/courseMaterial/image/${course.courseImage.fileID}`} alt='course-img' />
                     <h2 className='course-details-title'>{course.courseName}</h2>
                     <h4>{course.description}</h4>
                     <Rating value={course.rating} precision={0.1} readOnly />

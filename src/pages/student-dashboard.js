@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react'
-
+import { useParams } from 'react-router-dom'
 import './student-dashboard.css'
 import ViewStudentCurrent from '../components/View-StudentCurrent'
 
 
 const StudentDashboard = () => {
     const [viewMode, setViewMode] = useState('Enrolled')
+    const { id } = useParams()
+    
     const [user, setUser] = useState(null)
 
     /* hard coded for testing purposes*/ 
-    let studentID = "60ab3978f7d205756ee94709"    
+    //let studentID = "60ab3978f7d205756ee94709"    
     
     useEffect(() => {
         const getUser = async () => {
-            let response = await fetch(`/users/${studentID}`)
+            let response = await fetch(`/users/${id}`)
             let data = await response.json()
             setUser(data)
         }
@@ -28,6 +30,13 @@ const StudentDashboard = () => {
     return (
         <div className='student-dashboard'>
             <div className='dashboard-tab-container'>
+
+            <div className='dashboard-user-details'>
+                    <h3>Welcome back {user && user.firstName} {user && user.lastName}</h3>
+                    <p>Your Account Number: {user && user._id}</p>                    
+                </div>
+
+
                 <div className='dashboard-tab-options'>
                     <button
                         className={`${viewMode === 'Enrolled' ? 'dashboard-active-view' : ''} dashboard-tab-btn`}
@@ -53,7 +62,7 @@ const StudentDashboard = () => {
                 </div>
 
                 <div className='dashboard-tab-content'>
-                    {viewMode === 'Enrolled' && <ViewStudentCurrent studentID={studentID} student={user} />}
+                    {viewMode === 'Enrolled' && <ViewStudentCurrent studentID={id} student={user} />}
                 </div>
 
 
