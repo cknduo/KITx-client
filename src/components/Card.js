@@ -8,9 +8,9 @@ const Card = ({ courseID, courseImage, courseName, courseDescription, courseKit,
     return (
         <div className='card-container'>
             <div className='card-img-container'>
-                <img src='https://images.unsplash.com/photo-1541701494587-cb58502866ab?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80' alt='course-img' className='card-img' />        
-                >
-                {/* <img src={courseImage} className='card-img' />         */}
+                {/*<img src='https://images.unsplash.com/photo-1541701494587-cb58502866ab?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80' alt='course-img' className='card-img' />*/}        
+                
+                <img src={`/courseMaterial/image/${courseImage.fileID}`} alt='course-img' className='card-img' />  
                        
             </div>
             <div className='card-content'>                

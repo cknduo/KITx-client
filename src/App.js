@@ -17,6 +17,8 @@ import StudentDashboard from './pages/student-dashboard'
 import TeacherDashboard from './pages/teacher-dashboard'
 import CourseDetails from './pages/course-details'
 import ShoppingCart from './pages/shopping-cart'
+import StudentLearning from './pages/student-learning'
+
 
 function App() {
 
@@ -99,12 +101,13 @@ function App() {
   }
 
   return (
+
     <div className='app'>
 
       <div className='app-header'>
         {accountType === '' && <HeaderPublic />}
-        {accountType === 'student' && <HeaderStudent cartSize={cart.length} logout={logout} />}
-        {accountType === 'teacher' && <HeaderTeacher logout={logout} />}    
+        {accountType === 'student' && <HeaderStudent cartSize={cart.length} logout={logout} userID={userID}/>}
+        {accountType === 'teacher' && <HeaderTeacher logout={logout} userID={userID} />}    
       </div>
 
       <div className='app-content'>
@@ -116,6 +119,7 @@ function App() {
           <Route exact path='/student/:id' component={StudentDashboard} />
           <Route exact path='/teacher/:id' component={TeacherDashboard} />
           <Route exact path='/course/:id' render={() => (<CourseDetails cart={cart} setCart={setCart} userID={userID}/>)} />
+          <Route exact path='/student/:id/course/:courseid/learn' component={StudentLearning}/>
         </Switch>       
       </div>
 
@@ -123,6 +127,7 @@ function App() {
         <Footer />
       </div>
       
+
     </div>
   )
 }

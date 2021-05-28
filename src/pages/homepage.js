@@ -37,7 +37,7 @@ const HomePage = props => {
                     return (
                             <Card
                                 courseID={course._id}
-                                courseImage={course.courseImage.filename}
+                                courseImage={course.courseImage}
                                 courseName={course.courseName}
                                 courseDescription={course.description}      
                                 courseKit={course.requiredKits.kitName}

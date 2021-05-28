@@ -37,6 +37,11 @@ const ViewTeacherInProgress = ({teacherID, courseUpdated}) => {
                 fileID:"",
                 fileName:"",
                 description:"",    
+            }],
+            modules: [{
+                fileID:"",
+                fileName:"",
+                description:"",    
             }]
         }
          

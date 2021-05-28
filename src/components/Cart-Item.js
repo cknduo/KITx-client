@@ -121,8 +121,8 @@ const CartItem = ( {mapItem, cart, setCart, subtotal, setSubtotal, userID} ) => 
       }
       {courseName &&
         <div className='cart-item'>
-          <div className='image-container'> <ImageCourseMaterial fileID={coursePhotoURL} /> </div>
-          {/* <div className='image-container'> <img src={`${coursePhotoURL}`} alt="course image" width="200" height="150" /> </div> */}
+          {/*<div className='image-container'> <ImageCourseMaterial imageFileID={coursePhotoURL} /> </div>*/}
+          <div className='image-container'> <img src={`/courseMaterial/image/${coursePhotoURL}`} alt="course image" width="200px" /> </div> 
           <span className='title'>{courseName}</span>
           <span className='price'>${price}</span>
           <div className='remove-button' onClick=

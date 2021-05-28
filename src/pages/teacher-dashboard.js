@@ -13,9 +13,6 @@ import './teacher-dashboard.css'
 const TeacherDash = () => {   
     
     const { id } = useParams()
-    /* Wesley Follis for testing purposes only */
-        const teacherID = "60a2ece8201b091de34f1902"
-
 
     const [viewMode, setViewMode] = useState('Active')
 
@@ -26,7 +23,7 @@ const TeacherDash = () => {
     
      useEffect(() => {
         const getUser = async () => {
-            let response = await fetch(`/users/${teacherID}`)
+            let response = await fetch(`/users/${id}`)
             let data = await response.json()
             setUser(data)
         }
@@ -72,9 +69,9 @@ const TeacherDash = () => {
                 </div>
 
                 <div className='dashboard-tab-content'>
-                    {viewMode === 'Current' && <ViewTeacherCurrent teacherID={teacherID}/>}
-                    {viewMode === 'InProgress' && <ViewTeacherInProgress teacherID={teacherID} courseUpdated={toggleCourseUpdated} />}    
-                    {viewMode === 'Archived' && <ViewTeacherArchived teacherID={teacherID}/>}    
+                    {viewMode === 'Active' && <ViewTeacherCurrent teacherID={id}/>}
+                    {viewMode === 'InProgress' && <ViewTeacherInProgress teacherID={id} courseUpdated={toggleCourseUpdated} />}    
+                    {viewMode === 'Archived' && <ViewTeacherArchived teacherID={id}/>}    
                 </div>
 
             </div>

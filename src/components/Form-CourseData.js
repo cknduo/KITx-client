@@ -4,6 +4,10 @@ import * as yup from 'yup';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import RadioGroup from '@material-ui/core/RadioGroup'
+import Radio from '@material-ui/core/Radio'
+
 
 import './Modal-UpdateCourse.css'
 
@@ -22,6 +26,8 @@ const FormCourseData = ({ course, teacherID }) => {
 
     const classes = useStyles()
 
+    //const [courseStatus, setCourseStatus] = useState("draft") // Default selection is Student
+
     const validationSchema = yup.object({
         courseName: yup
             .string('Enter course name'),
@@ -31,12 +37,13 @@ const FormCourseData = ({ course, teacherID }) => {
         //           .required('Course description is required'),
         preRequisites: yup
             .string('Enter the preRequisites for your course'),
-        keywords: yup
-            .string('Enter some keywords for your course'),
+        /*keywords: yup
+            .string('Enter some keywords for your course'),*/
         coursePrice: yup
             .string('Enter course price'),
         //            .required('Course price is required')
-
+        courseStatus: yup
+            .string('Enter course status'),
         /*  NEED TO ADD COURSE STATUS AS A DROPDOWN*/
 
     })
@@ -45,8 +52,9 @@ const FormCourseData = ({ course, teacherID }) => {
         courseName: course.courseName,
         description: course.description,
         //preRequisites: course.preRequisites,
-        keywords: course.keywords,
-        coursePrice: course.coursePrice
+        /*keywords: course.keywords,*/
+        coursePrice: course.coursePrice,
+        courseStatus: course.courseStatus
     }
     //}   
 
@@ -61,10 +69,11 @@ const FormCourseData = ({ course, teacherID }) => {
                 courseName: values.courseName,
                 description: values.description,
                 //preRequisites: values.preRequisites,
-                keywords: values.keywords,  // work on parsing into array
+                /*keywords: values.keywords,*/  // work on parsing into array
                 teacher: teacherID, // pass in instructor name
                 rating: null, // placeholder to future rating given by student to course
                 coursePrice: values.coursePrice,
+                courseStatus: values.courseStatus
             }
             const addCourseOptions = {
                 method: 'PUT',
@@ -124,7 +133,7 @@ const FormCourseData = ({ course, teacherID }) => {
             onChange={formik.handleChange}
             error={formik.touched.preRequisites && Boolean(formik.errors.preRequisites)}
             helperText={formik.touched.preRequisites && formik.errors.preRequisites}
-        />*/}
+        />
 
             <TextField
                 fullWidth
@@ -138,7 +147,7 @@ const FormCourseData = ({ course, teacherID }) => {
                 onChange={formik.handleChange}
                 error={formik.touched.keywords && Boolean(formik.errors.keywords)}
                 helperText={formik.touched.keywords && formik.errors.keywords}
-            />
+            />*/}
 
             <TextField
                 fullWidth
@@ -153,6 +162,15 @@ const FormCourseData = ({ course, teacherID }) => {
                 error={formik.touched.coursePrice && Boolean(formik.errors.coursePrice)}
                 helperText={formik.touched.coursePrice && formik.errors.coursePrice}
             />
+
+            <h3> Course Status</h3>
+                <RadioGroup defaultValue={course.courseStatus} name="courseStatus">
+                    <FormControlLabel value="Current" control={<Radio color="primary" />} label="Current" />
+                    <FormControlLabel value='Draft' control={<Radio color="primary" />} label="In Progress" />
+                    <FormControlLabel value='Archived' control={<Radio color="primary" />} label="Archived" />
+                </RadioGroup>
+
+
             <Button color="primary" variant="contained" type="submit">
                 Submit
         </Button>

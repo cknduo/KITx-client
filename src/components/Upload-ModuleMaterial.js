@@ -12,10 +12,6 @@ import placeholder from '../assets/whale.svg'
 const UploadModuleMaterial = ({ courseID, fileUse, description}) => {
     const [selectedFile, setSelectedFile] = useState()
     const [isSelected, setIsSelected] = useState(false)
-    const [isSuccessful, setIsSuccessful] = useState(false)
-    const [uploadedFile, setUploadedFile] = useState()
-    const [materialAdded, setMaterialAdded] = useState()
-    const [previewImage, setPreviewImage] = useState(placeholder)
 
     const classes = useStyles()
 
@@ -25,10 +21,10 @@ const UploadModuleMaterial = ({ courseID, fileUse, description}) => {
         setIsSelected(true)
         const fileReader = new window.FileReader()
         fileReader.readAsDataURL(file)
-        fileReader.onloadend = () => {
-            setPreviewImage(fileReader.result)
+//        fileReader.onloadend = () => {
+//            setPreviewImage(fileReader.result)
         }
-    }
+    
 
     const formik = useFormik({
         initialValues: {
@@ -47,9 +43,11 @@ const UploadModuleMaterial = ({ courseID, fileUse, description}) => {
             console.log("onSubmit called")
 
             /* Upload File */
-            await fileUpload()
+            let uploadedFile = await fileUpload()
             console.log("submit")
+
             alert(JSON.stringify(values, null, 2))
+            alert(JSON.stringify(uploadedFile, null, 2))
 
             /* Update course database with file information */
             const update = {
@@ -79,22 +77,30 @@ const UploadModuleMaterial = ({ courseID, fileUse, description}) => {
         let data = new FormData()
         data.append('file', fileInfo)
 
-        const fileUploadData = await Axios.post(`/courseMaterial/upload/${courseID}/${fileUse}/${description}`, data, {
+        const fileUploadData = await Axios.post(`/courseMaterial/upload/`, data, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
         })
-        let file = await fileUploadData.data
-        setIsSuccessful(true)
-        setUploadedFile(file) 
+        let fileUploaded = await fileUploadData.data
+        return fileUploaded
     }
-
-     
-        
 
     return (
         <div>
             <form className={classes.root} onSubmit={formik.handleSubmit}>
+
+                <TextField
+                    id="materialModuleNumber"
+                    name="materialModuleNumber"
+                    label="Module Number"
+                    variant="filled"
+                    style={{ margin: "16px 0px" }}
+                    //value={formik.values.materialModuleNumber}
+                    onChange={formik.handleChange}
+                    error={formik.touched.materialModuleNumber && Boolean(formik.errors.materialModuleNumber)}
+                    helperText={formik.touched.materialModuleNumber && formik.errors.materialModuleNumber}
+                />
 
                 <TextField
                     id="materialDescription"
@@ -108,17 +114,7 @@ const UploadModuleMaterial = ({ courseID, fileUse, description}) => {
                     helperText={formik.touched.materialDescription && formik.errors.materialDescription}
                 />
 
-                <TextField
-                    id="materialModuleNumber"
-                    name="materialModuleNumber"
-                    label="Module Number"
-                    variant="filled"
-                    style={{ margin: "16px 0px" }}
-                    //value={formik.values.materialModuleNumber}
-                    onChange={formik.handleChange}
-                    error={formik.touched.materialModuleNumber && Boolean(formik.errors.materialModuleNumber)}
-                    helperText={formik.touched.materialModuleNumber && formik.errors.materialModuleNumber}
-                />
+
 
                 <input type="file" name="file" id="file" onChange={filechangeHandler}/>
 
