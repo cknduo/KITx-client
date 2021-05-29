@@ -44,13 +44,10 @@ const CourseDetails = props => {
             while (counter < props.cart.length){
                 // Insert a new entry into the tempArray, a copy of the cart's element
                 // at the same index position.
-                console.log("inner counter = ",counter)
                 tempArray[counter] = props.cart[counter].courseID
                 counter += 1  //increment counter
             }
-            console.log("exited the loop counter = ",counter)
             tempArray[counter] = course._id
-            console.log("final array before sending to DB = ",tempArray)
             
             modifyDBCartItems(props.userID,tempArray)
 
