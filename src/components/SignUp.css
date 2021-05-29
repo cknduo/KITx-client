@@ -1,15 +1,15 @@
 .sign-up {
     width: 100%;
-    margin-top: 2rem;
-}
-
-.account-type-prompt {
-    margin-right: 1rem;
 }
 
 .radio-container {
     display: flex;
     align-items: center;
+    color: var(--neutral);
+}
+
+.account-type-prompt {
+    margin-right: 0.8rem;
 }
 
 .name-container {
@@ -98,21 +98,20 @@
 
 .sign-up-button {
     margin-top: 2rem;
-    width: 39%;
-    height: 2rem;
+    padding: 0.5rem 1rem;
     letter-spacing: 0.5px;
-    font-size: 1rem;
     color: white;
-    background-color: rgb(108, 167, 255);
+    font-weight: bold;
+    font-size: 1rem;
+    background-color: var(--secondary);
     border: none;
+    border-radius: 20px;
     outline: none;
-    text-transform: uppercase;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     cursor: pointer;
+    transition: all .2s ease-in-out;
 }
 
 .sign-up-button:hover {
-    border: 2px solid black;
+    transform: scale(1.05);
+    box-shadow: 0 0 20px var(--secondary);
 }

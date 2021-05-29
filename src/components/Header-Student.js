@@ -26,7 +26,7 @@ const StudentHeader = ({ cartSize, logout, userID }) => (
                     </Badge>
                 </div>
                 <div className='option'>
-                    <DropdownIconNav icon={<User />} linkTo='#'>
+                    <DropdownIconNav icon={<User />} linkTo=''>
                         <DropdownProfile logout={logout} />
                     </DropdownIconNav>
                 </div>

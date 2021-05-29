@@ -28,25 +28,32 @@ const SignIn = ({ setUserID, setUserInfo, setAccountType }) => {
 
   return (
     <div className='sign-in'>
-      <TextField
-        fullWidth
-        label="Email"
-        type='email'
-        required={true}
-        onChange={(e) => setLoginUsername(e.target.value)}
-      />
-      <TextField
-        style={{ margin: "1rem 0rem" }}
-        fullWidth
-        label="Password"
-        type='password'
-        required={true}
-        onChange={(e) => setLoginPassword(e.target.value)}
-      />
+      <div className='sign-in-form'>
+        <div className='sign-in-form-email'>
+          <TextField
+            fullWidth
+            label="Email"
+            type='email'
+            required={true}
+            onChange={(e) => setLoginUsername(e.target.value)}
+          />          
+        </div>
+        <div className='sign-in-form-password'>
+          <TextField
+            fullWidth
+            label="Password"
+            type='password'
+            required={true}
+            onChange={(e) => setLoginPassword(e.target.value)}
+          />          
+        </div>
+      </div>
 
-      <button className='sign-in-button' onClick={login}>
-        Sign In
-      </button>
+      <div className='sign-in-button-container'>
+        <button className='sign-in-button' onClick={login}>
+          Sign In
+        </button>        
+      </div>
     </div>
   )
 }

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { CSSTransition } from 'react-transition-group'
 
-import { ReactComponent as ChevronIcon } from '../assets/chevron.svg'
 import { ReactComponent as BackArrowIcon } from '../assets/left-arrow.svg'
 
 import './Dropdown.css'
@@ -28,13 +27,11 @@ const DropdownExplore = () => {
             >
                 <div className='menu'>
                     <DropdownItem
-                        rightIcon={<ChevronIcon />}
                         goToMenu='science'
                     >
                         Science
                     </DropdownItem>
                     <DropdownItem
-                        rightIcon={<ChevronIcon />}
                         goToMenu='arts-and-crafts'
                     >
                         Arts & Crafts

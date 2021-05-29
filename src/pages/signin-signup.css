@@ -3,29 +3,29 @@
     justify-content: center;
 }
 
-.option-tabs {
-    width: 90%;
-}
-
 .tab-container {
-    min-width: 60%;
+    margin: 2rem 0 0 0;
+    min-width: 70%;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 8px 8px 1px var(--primary-shadow);
 }
 
 .tab-options {
     display: flex;
     justify-content: center;
-    margin-top: 2rem;
-    border-bottom: 3px solid rgb(108, 167, 255);
 }
 
 .signin-signup-button {
     min-width: 50%;
-    height: 2rem;
+    height: 2.5rem;
     letter-spacing: 0.5px;
     font-size: 1rem;
-    color: white;
-    background-color: rgb(177, 208, 255);
+    font-weight: bold;
+    color: var(--primary);
+    background-color: var(--background-light);
     border: none;
+    border-radius: 8px 8px 0 0;
     outline: none;
     text-transform: uppercase;
     display: flex;
@@ -35,10 +35,12 @@
 }
 
 .active-view {
-    background-color: rgb(108, 167, 255);
+    background-color: white;
 }
 
 .tab-content {
     display: flex;
     justify-content: center;
+    padding: 2rem;
+    background-color: white;
 }

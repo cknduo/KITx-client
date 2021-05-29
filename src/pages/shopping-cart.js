@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Axios from "axios"
 import { useHistory } from "react-router-dom"
+
 import CartItem from '../components/Cart-Item'
 import addNewDBCart from '../functions/AddNewDBCart.js'
 import modifyDBCartItems from '../functions/ModifyDBCartItems'
@@ -221,23 +222,22 @@ const ShoppingCart = ( { cart, setCart, userID, userInfo, setUserInfo } ) => {
     return (
         <div className='shopping-cart'>
             <div className='shopping-cart-container'>
-
-                <h1> SHOPPING CART</h1>
                 <h4> Welcome {userInfo.firstName}, here are the courses you are about to purchase:</h4>
                 <div className='shopping-cart-items'>
                     {cart.length === 0 &&
                         <h3>No items in your cart</h3>
                     }
                     {cart.map(mapItem => {
-                        return <div key={mapItem.courseID}><CartItem mapItem={mapItem} cart={cart} setCart={setCart} subtotal={subtotal} setSubtotal={setSubtotal} userID={userID} /></div>
+                        return (
+                            <div key={mapItem.courseID}>
+                                <CartItem mapItem={mapItem} cart={cart} setCart={setCart} subtotal={subtotal} setSubtotal={setSubtotal} userID={userID} />
+                            </div>
+                        )
                     })}
                 </div>
-                <br /> <br />
                 {cart.length !== 0 &&
-                    <div> Subtotal  ${subtotal} (+tax)
-                    </div>
+                    <div> Subtotal  ${subtotal} (+tax)</div>
                 }
-                <br /><br /><br />
                 <div>
                     <button
                         className='clear-cart-button'
@@ -256,7 +256,6 @@ const ShoppingCart = ( { cart, setCart, userID, userInfo, setUserInfo } ) => {
                         BUY NOW
                     </button>
                 </div>
-                <br /> <br />
             </div>
         </div>
     )
