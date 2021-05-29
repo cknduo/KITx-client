@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Axios from "axios"
 import modifyDBCartItems from '../functions/ModifyDBCartItems'
-import ImageCourseMaterial from './Image-CourseMaterial'
+// import ImageCourseMaterial from './Image-CourseMaterial'
 
 
 import './Cart-Item.css'
@@ -99,8 +99,6 @@ const CartItem = ( {mapItem, cart, setCart, subtotal, setSubtotal, userID} ) => 
 
         // Trigger a refresh of the subTotal on ShoppingCart
         setSubtotal(subtotal + res.data.coursePrice)
-        console.log("res.data.courseImage for this line is: ",res.data.courseImage )
-        console.log("res.data.courseImage.fileID for this line is: ",res.data.courseImage.fileID )
       })
     }
     getCourseDetails()
@@ -122,7 +120,7 @@ const CartItem = ( {mapItem, cart, setCart, subtotal, setSubtotal, userID} ) => 
       {courseName &&
         <div className='cart-item'>
           {/*<div className='image-container'> <ImageCourseMaterial imageFileID={coursePhotoURL} /> </div>*/}
-          <div className='image-container'> <img src={`/courseMaterial/image/${coursePhotoURL}`} alt="course image" width="200px" /> </div> 
+          <div className='image-container'> <img src={`/courseMaterial/image/${coursePhotoURL}`} alt="courseimg" width="200px" /> </div> 
           <span className='title'>{courseName}</span>
           <span className='price'>${price}</span>
           <div className='remove-button' onClick=

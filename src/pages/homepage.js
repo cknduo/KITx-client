@@ -36,6 +36,7 @@ const HomePage = props => {
                     // Fix "Each child in a list should have a unique 'key' prop" Warning in Browser Console
                     return (
                             <Card
+                                key={course._id}
                                 courseID={course._id}
                                 courseImage={course.courseImage}
                                 courseName={course.courseName}

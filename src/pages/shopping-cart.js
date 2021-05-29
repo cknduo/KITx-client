@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import Axios from "axios"
+import { useHistory } from "react-router-dom"
 import CartItem from '../components/Cart-Item'
 import addNewDBCart from '../functions/AddNewDBCart.js'
 import modifyDBCartItems from '../functions/ModifyDBCartItems'
 import './shopping-cart.css'
 
-const ShoppingCart = ( { cart, setCart, userID } ) => {
+const ShoppingCart = ( { cart, setCart, userID, userInfo, setUserInfo } ) => {
 
     //Define STATE for variable "subtotal"
     const [subtotal, setSubtotal] = useState(0)
-    // const [userFirstName, setUserFirstName] = useState("")
 
-    // let currentUser = "60a2ece8201b091de34f1902"
-    let userFirstName = "Hard CODED"
-    // setUserFirstName("Hard CODED")
-
+    let history = useHistory()
 
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // "CLEAR THE CART" Function gets called by button 'onClick'
@@ -46,51 +43,83 @@ const ShoppingCart = ( { cart, setCart, userID } ) => {
     }
     //---------------------------------------------------------------------
 
-
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    // useEffect(() => {
-    //     // Define USER Information if exists
-    //     // let currentUser = ""
-    //     // let userFirstName = ""
+    // Function to process the order. Add courses to the User's 'enrolled'
+    // list, then clear the cart in both DB and state.
 
-    //     // Get userID from STATE and find related FirstName of user.
-    //     // currentUser = userID
-    //     // currentUser = Object.assign({}, userID)
+    const processOrder = ()=>{
 
-    //     //currentUser = "60a2ece8201b091de34f1902"
-    //     if (userID !== "") {
-            
-    //         // setUserFirstName(getUserInfo(userID))  // Retrieve userName from DB
-    //         console.log("FirstName returned to main program from function call = ", userFirstName)
+        // Add the courses into the User's list of enrolled courses in the DB
+        // First, fetch the existing list of enrolled courses, then add the
+        // current list of cart items to it.
+        if ((userID !== "") && (userInfo.accountType === "student")) {
+            let tempNewList = []
+            let alreadyEnrolledList = []
+            let simplifiedCartList = []
+            alreadyEnrolledList = userInfo.coursesLearning.enrolled
+            if (cart.length !== 0) {
+                // Make list of only the courseIds found in cart state
+                for (let counter = 0; counter < cart.length; counter++) {
+                    //Insert a new entry into the simplifiedCartList, just the courseID.
+                    simplifiedCartList[counter] = cart[counter].courseID
+                }
+            }
+            // Combine the two arrays into one, adding the new ShoppingCart
+            // courses onto the list of existing courses already enrolled.
+            // tempNewList = [...alreadyEnrolledList, simplifiedCartList]
+            tempNewList = alreadyEnrolledList.concat(simplifiedCartList)
 
-    //         let DBUsersname = ""
-    //         const getUserInfo = async () => {
-    //             const getRes = await Axios({
-    //                 method: "GET",
-    //                 withCredentials: true,
-    //                 url: `/users/${userID}`, 
-    //             })
-            
-    //             DBUsersname = getRes.data.firstName
-    //             if(DBUsersname !== userFirstName){
-    //                 setUserFirstName(DBUsersname)
-    //             }
-    //             console.log("1. usersname = ",DBUsersname)
-    //         }
-    //         getUserInfo()
-            
-    //         console.log("2. state of user name = ", userFirstName)
+            // Perform update to DB. Remember that userID state (AUTH ID)
+            // and userInfo._id are different values. User CARTS are stored
+            // using their AUTH ID, but when working with the USER data
+            // collection, we update records by their USERS document _id.
+            const enrollInCourses = async () => {
+                let statusMessage = "" 
+                let userUpdateResponse = await Axios({
+                        method: "PUT",
+                        data: {
+                            coursesLearning: {
+                                enrolled: tempNewList,
+                                bookmarked: userInfo.coursesLearning.bookmarked,
+                                completed: userInfo.coursesLearning.completed,
+                            },
+                        },
+                        withCredentials: true,
+                        url: `/users/${userInfo._id}`,
+                    })
+                statusMessage = userUpdateResponse.statusText
+                if (userUpdateResponse.status !== 200) {
+                    // error!
+                    console.log('We had an error trying to update. It was: ', statusMessage)
+                    return (statusMessage)
+                }
+                else {
+                    // Update to database was successful, proceed with
+                    // updating the userInfo state and then clearing out
+                    // the shopping cart. 
+                    let tempUserInfo = userInfo
+                    tempUserInfo.coursesLearning.enrolled = tempNewList
+                    setUserInfo(tempUserInfo)
 
-    //     }
-    //     else {
-    //         console.log("running ELSE condition")
-    //         currentUser = "12345"
-    //         setUserFirstName("12345 USERID STATE NOT FOUND")        
-    //     }
-    // },[]) // call only first time page loads after being navigated to
-    //---------------------------------------------------------------------
+                    // Clear the DB cart
+                    if (userID !== ""){
+                        let newCartArray = []
+                        modifyDBCartItems(userID,newCartArray)
+                    }
 
+                    // Clear the cart state
+                    setCart([])
+                    return (statusMessage)
+                }
+            }
+            let updateStatus = enrollInCourses()
 
+            // Send user to Student Dashboard
+            history.push(`/student/${userID}`)
+        }
+    }
+    // --------------------------------------------------------------------
+    
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // This UseEffect function is used to build the CART state from an
     // existing/persisted CART record alread saved in the database for the
@@ -98,14 +127,9 @@ const ShoppingCart = ( { cart, setCart, userID } ) => {
     useEffect(() => {
         // Using the currentUser ID, retrieve user's cart details
         // if they exist.
-
-        // As a precaution, update UserName field here
-        // currentUser = userID
     
-        // Only attempt to populate an EMPTY cart. Never overwrite a
-        // cart that already has items.
-
-        
+        // Only attempt to populate an EMPTY cart. Never overwrite the
+        // cart state if it already has items.
         if ((userID !== "") && (cart.length === 0)) {
             let tempCartArray = []
             let loadUserCartList = async () => {
@@ -156,7 +180,6 @@ const ShoppingCart = ( { cart, setCart, userID } ) => {
         // setSubtotal(sumCart())
 
     })  // Call this effect EVERY TIME!
-
     // },[cart,subtotal])
     //---------------------------------------------------------------------
 
@@ -165,8 +188,7 @@ const ShoppingCart = ( { cart, setCart, userID } ) => {
             <div className='shopping-cart-container'>
 
                 <h1> SHOPPING CART</h1>
-                {/* <h4> Welcome {userFirstName}, here are the courses you are about to purchase:</h4> */}
-                <h4> Welcome {userID}, here are the courses you are about to purchase:</h4>
+                <h4> Welcome {userInfo.firstName}, here are the courses you are about to purchase:</h4>
                 <div className='shopping-cart-items'>
                     {cart.length === 0 &&
                         <h3>No items in your cart</h3>
@@ -177,7 +199,7 @@ const ShoppingCart = ( { cart, setCart, userID } ) => {
                 </div>
                 <br /> <br />
                 {cart.length !== 0 &&
-                    <div> Subtotal  ${subtotal}
+                    <div> Subtotal  ${subtotal} (+tax)
                     </div>
                 }
                 <br /><br /><br />
@@ -190,14 +212,13 @@ const ShoppingCart = ( { cart, setCart, userID } ) => {
                     >
                         CLEAR CART
                     </button>
-            
                     <button 
                         className='checkout-button'
                         type='button'
                         disabled={cart.length === 0}
-                        // onClick={checkOut}
+                        onClick={processOrder}
                     >
-                        CHECKOUT
+                        BUY NOW
                     </button>
                 </div>
                 <br /> <br />

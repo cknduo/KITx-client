@@ -8,8 +8,9 @@ import './course-details.css'
 
 const CourseDetails = props => {
     const [course, setCourse] = useState(null)
+    
     const { id } = useParams()
-
+    
     useEffect(() => {
         const getCourse = async () => {
             let response = await fetch(`/courses/${id}`)
@@ -19,13 +20,15 @@ const CourseDetails = props => {
         getCourse()
         console.log(course)
     }, [])
-
+    
     if (!course) {
         return ''
     }
-
+    
+    
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++    
     const addToCart = ()=>{
-
+        
         // Based on how the buttons work, user can only click
         // on ENROLL to call this function if the user is logged in.
         // Adding an extra check just to be safe.
@@ -48,7 +51,7 @@ const CourseDetails = props => {
             console.log("exited the loop counter = ",counter)
             tempArray[counter] = course._id
             console.log("final array before sending to DB = ",tempArray)
-
+            
             modifyDBCartItems(props.userID,tempArray)
 
             // Add course to cart STATE
@@ -59,25 +62,57 @@ const CourseDetails = props => {
             props.setCart( item => [...item, courseToAdd])
         }
     }
+    // --------------------------------------------------------------------------
 
-    const courseInCart = ()=>{ 
-        // Note: Only need to check the cart's STATE for existence of the item.
-        // No need to query the DB, because the process of LOG IN will populate
-        // the cart STATE for us, based on what is found in the DB. 
-        
-        let isInCart = false
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    // useEffect(() => {
+        const courseIsValid = ()=>{ 
+            // Before allowing the user to Enroll in the course, validate what
+            // type of user they are, and whether or not they have already enrolled
+            // in this class before. If they are a TEACHER, then they should NOT
+            // be allowed to enroll in ANY courses. If they have already added the
+            // course to their shopping cart, or are currently enrolled or have
+            // completed the course, then they should NOT be allowed to enroll again.
+            // Note: Only need to check the cart's STATE for existence of the item.
+            // No need to query the DB, because the process of LOG IN will populate
+            // the cart STATE for us, based on what is found in the DB. 
+            
+            let messageToUser = ""
+            let inArray = false
+            
+            if (props.userInfo.accountType === 'student') {
 
-        // Test the cart STATE array...
-        if (props.cart.length !== 0){
-            for (let counter = 0; counter < props.cart.length; counter++) {
-                if (props.cart[counter].courseID === course._id){
-                    isInCart = true
-                    return (isInCart)
+                // Inspect the cart STATE array...
+                if (props.cart.length !== 0){
+                    for (let counter = 0; counter < props.cart.length; counter++) {
+                        if (props.cart[counter].courseID === course._id){
+                            messageToUser = "Already in Shopping Cart"
+                            return(messageToUser)
+                        }
+                    }
+                } 
+                
+                // Inspect the courses this user has already enrolled in.
+                inArray = props.userInfo.coursesLearning.enrolled.includes(course._id)
+                if(inArray){
+                    messageToUser = "Already enrolled"
+                    return(messageToUser)
+                }
+                
+                // Inspect the courses this user has already completed.
+                inArray = props.userInfo.coursesLearning.completed.includes(course._id)
+                if(inArray){
+                    messageToUser = "Course completed"
+                    return(messageToUser)
                 }
             }
-        }        
-        return (isInCart)
-    } 
+            else {  // teachers should not be allowed to enroll
+                messageToUser = "Only STUDENTS may enroll" 
+                return(messageToUser)
+            }
+            return(messageToUser)
+        }
+    // --------------------------------------------------------------------------
 
     return (
         <div className='course-details'>
@@ -109,12 +144,15 @@ const CourseDetails = props => {
                     }
                 </div>
 
-                <div className='course-details-enroll-btn'> 
+                <div className='course-details-enroll-btn'>
                     {props.userID !== "" &&
                         <button className='enroll-btn' 
-                            disabled={courseInCart() === true}
-                            onClick={addToCart}>ENROLL NOW</button>
+                        disabled={courseIsValid() !== ""}
+                        onClick={addToCart}>ENROLL NOW</button>
                     }
+                </div>
+                <div className='message-to-user'>
+                    <span >{courseIsValid()}</span> 
                 </div>               
             </div>
         </div>
