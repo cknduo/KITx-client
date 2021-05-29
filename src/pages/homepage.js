@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import Card from '../components/Card'
 import './homepage.css'
 
-const HomePage = props => {
+const HomePage = () => {
     const [courses, setCourses] = useState([])
 
     useEffect(() => {
@@ -12,11 +12,8 @@ const HomePage = props => {
             let response = await fetch('/courses')
             let data = await response.json()
             setCourses(data)
-            console.log(data)
         }
         getCourses()
-        console.log(courses)
-        console.log(props.accountType)
     }, [])
 
     return (
@@ -32,18 +29,21 @@ const HomePage = props => {
             </div>
             <div className='courses-preview-title'><h2>Featured Courses</h2></div>
             <div className='courses-preview'>
-                {courses.map(course => {
-                    // Fix "Each child in a list should have a unique 'key' prop" Warning in Browser Console
-                    return (
-                            <Card
-                                courseID={course._id}
-                                courseImage={course.courseImage}
-                                courseName={course.courseName}
-                                courseDescription={course.description}      
-                                courseKit={course.requiredKits.kitName}
-                                courseRating={course.rating}                          
-                            />
-                    )
+                {courses
+                    .sort(() => Math.random() - 0.5)
+                    .slice(0,4)
+                    .map(course => {
+                        return (
+                                <Card
+                                    key={course._id}
+                                    courseID={course._id}
+                                    courseImage={course.courseImage}
+                                    courseName={course.courseName}
+                                    courseDescription={course.description}      
+                                    courseKit={course.requiredKits.kitName}
+                                    courseRating={course.rating}                          
+                                />
+                        )
                 })}
             </div>
         </div>

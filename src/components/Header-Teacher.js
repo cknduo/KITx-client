@@ -18,7 +18,7 @@ const TeacherHeader = ({ logout, userID }) => (
                     MY TEACHING
                 </Link>
                 <div className='option'>
-                    <DropdownIconNav icon={<User />} linkTo='#'>
+                    <DropdownIconNav icon={<User />} linkTo=''>
                         <DropdownProfile logout={logout}/>
                     </DropdownIconNav>
                 </div>
