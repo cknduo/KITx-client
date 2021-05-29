@@ -1,16 +1,14 @@
 import React from 'react'
-import Axios from 'axios'
+import { Link } from 'react-router-dom'
 
 import './Dropdown.css'
 
 const DropdownProfile = ({ logout }) => {
-
-
     function DropdownItem(props) {
         return (
-            <a href={props.goToLink} className='menu-item profile-menu-item' onClick={props.logout}>
+            <Link to={props.goToLink} className='menu-item profile-menu-item' onClick={props.logout}>
                 {props.children}
-            </a>
+            </Link>
         )
     }
 
@@ -24,7 +22,5 @@ const DropdownProfile = ({ logout }) => {
         </div>
     )
 }
-
-
 
 export default DropdownProfile

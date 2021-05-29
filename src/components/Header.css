@@ -1,9 +1,9 @@
 .header {
-    height: 3rem;
-    width: 100%;
+    height: 2rem;
+    width: 100vw;
     display: flex;
     justify-content: center;
-    padding: 1rem;
+    padding: 0.5rem;
 }
 
 .options-width {
@@ -24,23 +24,23 @@
 }
 
 .option {
+    position: relative;
     display: flex;
     padding: 0 1rem;
     cursor: pointer;
     font-weight: bold;
-    font-size: 1.4rem;
 }
 
 .option:hover {
-    color: #00a9ec;
+    color: var(--primary);
 }
 
 .option:focus {
-    color: #00a9ec;
+    color: var(--primary);
 }
 
 .logo {
-    height: 2rem;
+    height: 1.4rem;
     transition: all .2s ease-in-out;
 }
 

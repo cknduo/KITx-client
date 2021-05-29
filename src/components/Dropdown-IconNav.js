@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 
-import './Dropdown-IconNav.css'
+import './Dropdown.css'
 
 const DropdownIconNav = props => {
     const [open, setOpen] = useState(false)
@@ -24,10 +24,17 @@ const DropdownIconNav = props => {
 
     return (
         <div className='nav-item' ref={ref}>
+          {props.linkTo && 
             <Link to={`${props.linkTo}`} className='icon-button' onClick={() => setOpen(!open)}>
                 {props.icon}
-            </Link>
-            {open && props.children}
+            </Link>                
+          }
+          {!props.linkTo &&
+            <div className='icon-button' onClick={() => setOpen(!open)}>
+              {props.icon}
+            </div>             
+          }
+          {open && props.children}
         </div>
     )
 }
