@@ -65,7 +65,6 @@ const FormCourseData = ({ course, teacherID }) => {
         validationSchema: validationSchema,
         onSubmit(values) {
             console.log("submit")
-            alert(JSON.stringify(values, null, 2))
             let courseToAdd = {
                 courseName: values.courseName,
                 description: values.description,

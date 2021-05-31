@@ -32,7 +32,6 @@ const UploadCourseMaterial = ({ currentFileID, courseID, fileUse, description, r
     const deleteFile = async () => {
 
         /*delete module file from gridfs database*/
-        alert (`request to delete ${currentFileID}`)
         try {
                 
             let response = await fetch(`/coursesMaterials/delete/${currentFileID}`,
@@ -85,7 +84,6 @@ const UploadCourseMaterial = ({ currentFileID, courseID, fileUse, description, r
 
 
     try {
-        alert (`request to upload ${currentFileID}`)
         let response = await fetch(`/courses/${courseID}`,
             {
                 method: 'PUT',
