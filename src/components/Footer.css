@@ -4,19 +4,30 @@
     display: flex;
     justify-content: center;
     background-color: #314555;
+    flex-wrap: wrap;
 }
 
 .footer-container {
     width: 90%;
-    padding: 0.7rem 0 0.4rem 0;
+    padding: 0.8rem 0 0.4rem 0;
     text-align: center;
-    color: #00a9ec;
-    font-weight: bold;
+    color: var(--neutral);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-links-container {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
 }
 
 .footer-item {
-    margin: 0 3rem;
+    /* margin: 0 3rem; */
     font-size: 0.8rem;
+    font-weight: bold;
 }
 
 .footer-copyright {

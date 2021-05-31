@@ -103,7 +103,7 @@
     color: white;
     font-weight: bold;
     font-size: 1rem;
-    background-color: var(--secondary);
+    background-color: var(--primary);
     border: none;
     border-radius: 20px;
     outline: none;
@@ -113,5 +113,5 @@
 
 .sign-up-button:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 20px var(--secondary);
+    box-shadow: 0 0 20px var(--primary);
 }

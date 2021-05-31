@@ -8,7 +8,7 @@
     min-width: 70%;
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 8px 8px 1px var(--primary-shadow);
+    /* box-shadow: 8px 8px 1px var(--primary-shadow); */
 }
 
 .tab-options {

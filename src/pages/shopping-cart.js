@@ -222,33 +222,46 @@ const ShoppingCart = ( { cart, setCart, userID, userInfo, setUserInfo } ) => {
     return (
         <div className='shopping-cart'>
             <div className='shopping-cart-container'>
-                <h4> Welcome {userInfo.firstName}, here are the courses you are about to purchase:</h4>
-                <div className='shopping-cart-items'>
-                    {cart.length === 0 &&
-                        <h3>No items in your cart</h3>
-                    }
-                    {cart.map(mapItem => {
-                        return (
-                            <div key={mapItem.courseID}>
-                                <CartItem mapItem={mapItem} cart={cart} setCart={setCart} subtotal={subtotal} setSubtotal={setSubtotal} userID={userID} />
-                            </div>
-                        )
-                    })}
+                <div className='shopping-cart-user'>
+                    <h4> Welcome {userInfo.firstName}, here are the courses you are about to purchase:</h4>                    
                 </div>
-                {cart.length !== 0 &&
-                    <div> Subtotal  ${subtotal} (+tax)</div>
-                }
-                <div>
+                <div className='shopping-cart-clear-btn'>
                     <button
-                        className='clear-cart-button'
+                        className='clear-btn'
                         type='button'
                         disabled={cart.length === 0}
                         onClick={clearCart}
                     >
                         CLEAR CART
                     </button>
+                </div>
+                <div className='shopping-cart-items'>
+                    <div className='shopping-cart-items-header'>
+                        <h4 className='cart-header-course'>Course</h4>
+                        <h4 className='cart-header-price'>Price</h4>
+                        <h4 className='cart-header-remove'>Remove</h4>
+                    </div>
+                    <div className='shopping-cart-items-content'>
+                        {cart.length === 0 &&
+                            <p className='shopping-cart-no-items'>There are no items in your cart.</p>
+                        }
+                        {cart.map(mapItem => {
+                            return (
+                                <div key={mapItem.courseID}>
+                                    <CartItem mapItem={mapItem} cart={cart} setCart={setCart} subtotal={subtotal} setSubtotal={setSubtotal} userID={userID} />
+                                </div>
+                            )
+                        })}                        
+                    </div>
+                </div>
+                <div className='shopping-cart-subtotal'>
+                    {cart.length !== 0 &&
+                        <div> Subtotal: ${subtotal}.00 + shipping fee + tax</div>
+                    }                    
+                </div>
+                <div className='shopping-cart-checkout-btn'>
                     <button 
-                        className='checkout-button'
+                        className='checkout-btn'
                         type='button'
                         disabled={cart.length === 0}
                         onClick={processOrder}

@@ -12,6 +12,7 @@ const CartItem = ( {mapItem, cart, setCart, subtotal, setSubtotal, userID} ) => 
   const [price, setPrice] = useState(0)
   const [courseName, setCourseName] = useState("")
   const [coursePhotoURL, setCoursePhotoURL] = useState("")
+  const [kitName, setKitName] = useState("")
 
   // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   // REMOVE ITEM FROM CART function, called by 'onClick' of X button
@@ -90,6 +91,7 @@ const CartItem = ( {mapItem, cart, setCart, subtotal, setSubtotal, userID} ) => 
       }).then((res) => {
         setPrice(res.data.coursePrice)
         setCourseName(res.data.courseName)
+        setKitName(res.data.requiredKits.kitName)
 
         setCoursePhotoURL(res.data.courseImage.fileID)
         // setCoursePhotoURL("https://www.trademarksandbrandsonline.com/media/image/unnamed-1--1.jpg")
@@ -109,7 +111,7 @@ const CartItem = ( {mapItem, cart, setCart, subtotal, setSubtotal, userID} ) => 
     <div className='cart-item'>
       {!courseName &&
         <div className='cart-item'>
-          <div className='image-container'> <img src={"https://cdn0.iconfinder.com/data/icons/mobile-ui-outline/512/__Folder_Not_Exist_Delete_Emty_Cross-512.png"} alt="course dne" width="200" height="150" /> </div>
+          <div className='image-container'> <img src={"https://cdn0.iconfinder.com/data/icons/mobile-ui-outline/512/__Folder_Not_Exist_Delete_Emty_Cross-512.png"} alt="course dne" className='cart-item-img' /> </div>
           <span>This course ({mapItem.courseID}) no longer exists, please remove from cart.</span>
           <div className='remove-button' onClick=
             {() => removeCartItem(mapItem.courseID)} 
@@ -119,10 +121,12 @@ const CartItem = ( {mapItem, cart, setCart, subtotal, setSubtotal, userID} ) => 
       }
       {courseName &&
         <div className='cart-item'>
-          {/*<div className='image-container'> <ImageCourseMaterial imageFileID={coursePhotoURL} /> </div>*/}
-          <div className='image-container'> <img src={`/courseMaterial/image/${coursePhotoURL}`} alt="courseimg" width="200px" /> </div> 
-          <span className='title'>{courseName}</span>
-          <span className='price'>${price}</span>
+          <div className='image-container'> <img src={`/courseMaterial/image/${coursePhotoURL}`} alt="courseimg" className='cart-item-img' /> </div> 
+          <div className='title'>
+            <h4>{courseName}</h4>
+            <h5 className='cart-kit'>Kit: {kitName}</h5>
+          </div>
+          <span className='price'>${price}.00</span>
           <div className='remove-button' onClick=
             {() => removeCartItem(mapItem.courseID)} 
           >

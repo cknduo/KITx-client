@@ -18,13 +18,11 @@ const CourseDetails = props => {
             setCourse(data)
         }
         getCourse()
-        console.log(course)
     }, [])
     
     if (!course) {
         return ''
     }
-    
     
     // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++    
     const addToCart = ()=>{
@@ -83,7 +81,7 @@ const CourseDetails = props => {
                 if (props.cart.length !== 0){
                     for (let counter = 0; counter < props.cart.length; counter++) {
                         if (props.cart[counter].courseID === course._id){
-                            messageToUser = "Already in Shopping Cart"
+                            messageToUser = "This course has been added to your shopping cart."
                             return(messageToUser)
                         }
                     }
@@ -92,19 +90,19 @@ const CourseDetails = props => {
                 // Inspect the courses this user has already enrolled in.
                 inArray = props.userInfo.coursesLearning.enrolled.includes(course._id)
                 if(inArray){
-                    messageToUser = "Already enrolled"
+                    messageToUser = "You are already enrolled in this course. Find it in My Learning."
                     return(messageToUser)
                 }
                 
                 // Inspect the courses this user has already completed.
                 inArray = props.userInfo.coursesLearning.completed.includes(course._id)
                 if(inArray){
-                    messageToUser = "Course completed"
+                    messageToUser = "You've already completed this course. Find it in My Learning"
                     return(messageToUser)
                 }
             }
             else {  // teachers should not be allowed to enroll
-                messageToUser = "Only STUDENTS may enroll" 
+                messageToUser = "Only student accounts may enroll in this course." 
                 return(messageToUser)
             }
             return(messageToUser)
@@ -114,29 +112,44 @@ const CourseDetails = props => {
     return (
         <div className='course-details'>
             <div className='course-details-container'>
-                <div className='course-details-header'>
-                    <img src={`/courseMaterial/image/${course.courseImage.fileID}`} alt='course-img' />
-                    <h2 className='course-details-title'>{course.courseName}</h2>
-                    <h4>{course.description}</h4>
-                    <Rating value={course.rating} precision={0.1} readOnly />
-                    <p>Instructor: {course.instructor}</p>
-                    <p>Price: ${course.coursePrice}</p>
+                <div className='course-details-section'>
+                    <div className='course-details-section-main'>
+                        <h2 className='course-details-title'>{course.courseName}</h2>
+                        <h4 className='course-details-description'>{course.description}</h4>
+                        <Rating value={course.rating} precision={0.1} readOnly />
+                        <p>Instructor: Westley Follis</p>
+                        <p>Price: ${course.coursePrice}</p>                        
+                    </div>
+                    <div className='course-details-section-side'>
+                        <img className='course-details-img' src={`/courseMaterial/image/${course.courseImage.fileID}`} alt='course-img' />                        
+                    </div>
                 </div>
                 
-                <div className='course-details-content'>
-                    <h4>Course Content</h4>
-                    {/* <p>{course.modules[0].moduleNumber}. {course.modules[0].description}</p> */}
+                <div className='course-details-section'>
+                    <div className='course-details-section-main'>
+                        <div className='course-details-content'>
+                            <h4 className='course-details-section-title'>COURSE CONTENT</h4>
+                            <div className='course-details-content-list'>
+                                {course.modules.map(module => {
+                                    return (
+                                        <span className='module-item'>{module.moduleNumber}. {module.description}</span>
+                                    )
+                                })}                            
+                            </div>
+                        </div>                        
+                    </div>
+                    <div className='course-details-section-side'>
+                        <div className='course-details-kits'>
+                            <h4 className='course-details-section-title'>KIT: {course.requiredKits.kitName}</h4>
+                            <p>{course.requiredKits.kitDescription}</p>
+                        </div>                               
+                    </div>       
                 </div>
 
-                <div className='course-details-kits'>
-                    <h4>Required Kit: {course.requiredKits.kitName}</h4>
-                    <p>{course.requiredKits.kitDescription}</p>
-                </div>
-                
                 <div className='course-details-enroll-btn'>
                     {props.userID === "" &&
                         <Link to={'/sign-in'}>
-                            <button className='login-button'>LOG IN TO ENROLL</button>
+                            <button className='enroll-btn'>LOG IN TO ENROLL</button>
                         </Link>
                     }
                 </div>
@@ -148,8 +161,9 @@ const CourseDetails = props => {
                         onClick={addToCart}>ENROLL NOW</button>
                     }
                 </div>
+
                 <div className='message-to-user'>
-                    <span >{courseIsValid()}</span> 
+                    <span>{courseIsValid()}</span> 
                 </div>               
             </div>
         </div>

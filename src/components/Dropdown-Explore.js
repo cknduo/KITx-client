@@ -50,9 +50,8 @@ const DropdownExplore = () => {
                         <span className='icon-button'><BackArrowIcon /></span>
                         Go Back
                     </DropdownItem>
+                    <DropdownItem goToLink='#'>Electrical</DropdownItem>
                     <DropdownItem goToLink='#'>Chemistry</DropdownItem>
-                    <DropdownItem goToLink='#'>Physics</DropdownItem>
-                    <DropdownItem goToLink='#'>Robotics</DropdownItem>
                 </div>
             </CSSTransition>
 
@@ -67,8 +66,7 @@ const DropdownExplore = () => {
                         <span className='icon-button'><BackArrowIcon /></span>
                         Go Back
                     </DropdownItem>
-                    <DropdownItem goToLink='#'>Blacksmithery</DropdownItem>
-                    <DropdownItem goToLink='#'>Pottery</DropdownItem>
+                    <DropdownItem goToLink='#'>Decor</DropdownItem>
                 </div>
             </CSSTransition>
 
