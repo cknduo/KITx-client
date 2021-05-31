@@ -1,8 +1,10 @@
 .modal-update-course-container {
     color: var(--primary);
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    /* grid-template-rows: auto auto auto auto auto auto */
+    grid-template-columns: 500px 500px;
+    grid-template-rows: auto auto auto auto auto auto;
+    color: black;
+
 }
 
 /*.formgrid {
@@ -12,11 +14,9 @@
     grid-column:1; grid-row:1
 }*/
 
-.modal-course-image{
-
-    /* margin:10px; */
-    grid-column: 1 / 2; 
-    /* grid-row: 1; */
+.course-image{
+    margin:10px;
+    grid-column:1; grid-row:1;
     /*border: 2px solid rgb(173, 172, 172);*/
     /* border-radius: 10px;
     box-shadow: 0 3px 8px rgba(0,0,0,0.2); */
@@ -43,7 +43,7 @@
     padding: 10px
 }
 
-.modal-form-grid{
+.course-info{
     margin:10px;
     grid-row:4;
     grid-column: span 2;
@@ -78,4 +78,11 @@
 .price{
     grid-column:1; grid-row:6
 
+}
+
+.update-module {
+    margin:10px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    padding: 10px
 }

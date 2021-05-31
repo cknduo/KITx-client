@@ -33,7 +33,6 @@ const FormKitInfo = ({ courseID, fileUse, course }) => {
         validationSchema: validationSchema,
         onSubmit(values) {
             console.log("submit")
-            alert(JSON.stringify(values, null, 2))
             let kitToUpdate = {
                 requiredKits: { kitName: values.kitName, kitDescription: values.kitDescription },
             }

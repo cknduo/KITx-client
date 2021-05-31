@@ -5,25 +5,18 @@ import ImageCourseMaterial from './Image-CourseMaterial'
 import Modal from 'react-modal'
 import Button from '@material-ui/core/Button';
 import Edit from '@material-ui/icons/Edit';
-import { 
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableRow,
-} from '@material-ui/core';
+import { Paper, Table, TableBody, TableCell, TableContainer, TableRow} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom'
 
-const TableTeacherCourses = ({teacherID, /*courseAdded,*/ courseStatus}) => {
+const TableTeacherCourses = ({teacherID, courseAddedToggle, courseStatus}) => {
   
-  const [UpdateCourseModalIsOpen, setUpdateCourseModalIsOpen] = useState()
+  const [updateCourseModalIsOpen, setUpdateCourseModalIsOpen] = useState()
   const [courseIDtoUpdate, setCourseIDtoUpdate] = useState()
-  const [rows, setRows] = useState([]);
+  const [rows, setRows] = useState([]);  // each row is a course object
 
   const toggleUpdateCourseModal = () => {
-    setUpdateCourseModalIsOpen(!UpdateCourseModalIsOpen)
+    setUpdateCourseModalIsOpen(!updateCourseModalIsOpen)
   }    
   
   const classes = useStyles();
@@ -37,7 +30,7 @@ const TableTeacherCourses = ({teacherID, /*courseAdded,*/ courseStatus}) => {
       setRows(data);
     };
     getCourses();
-  }, []);
+  }, [courseAddedToggle, updateCourseModalIsOpen]);
 
   return (
     <div>
@@ -78,24 +71,24 @@ const TableTeacherCourses = ({teacherID, /*courseAdded,*/ courseStatus}) => {
       </Table>
     </TableContainer>
 
-  <Modal 
-    isOpen={UpdateCourseModalIsOpen}
-    style={{
-      overlay: {
-        backgroundColor: 'rgba(31, 40, 47, 0.5)'
-      },
-      content: {
-        top: '5rem',
-        left: '2rem',
-        right: '2rem',
-        bottom: '2rem',
-        borderRadius: '8px',
-      }
-    }}
-  >
-      {courseIDtoUpdate && < ModalUpdateCourse courseID={courseIDtoUpdate} teacher={teacherID}/>}
-      <Button color="primary" variant="contained" onClick={toggleUpdateCourseModal}> Close </Button>
-  </Modal>
+    <Modal 
+      isOpen={updateCourseModalIsOpen}
+      style={{
+        overlay: {
+          backgroundColor: 'rgba(31, 40, 47, 0.5)'
+        },
+        content: {
+          top: '5rem',
+          left: '2rem',
+          right: '2rem',
+          bottom: '2rem',
+          borderRadius: '8px',
+        }
+      }}
+    >
+        {courseIDtoUpdate && < ModalUpdateCourse courseID={courseIDtoUpdate} teacher={teacherID}/>}
+        <Button color="primary" variant="contained" onClick={toggleUpdateCourseModal}> Close </Button>
+    </Modal>
   </div>
   );
 };
