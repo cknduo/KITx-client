@@ -49,9 +49,6 @@ const UploadModuleMaterial = ({ courseID, fileUse, description, modules, refresh
             let uploadedFile = await fileUpload()
             console.log("submit")
 
-            alert(JSON.stringify(values, null, 2))
-            alert(JSON.stringify(uploadedFile, null, 2))
-
             /* Update course database with file information */
             const update = {
                 fileID: uploadedFile._id,
@@ -60,8 +57,6 @@ const UploadModuleMaterial = ({ courseID, fileUse, description, modules, refresh
                 moduleNumber: values.materialModuleNumber
             }
             console.log('update course files', update)
-            alert(JSON.stringify(update, null, 2))
-            alert(JSON.stringify(courseID, null, 2))
             try {
                 let response = await fetch(`/courses/${courseID}/modulefiles`,
                     {

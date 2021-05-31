@@ -69,7 +69,7 @@ const TableCourseMaterial = ({courseID, materialAdded, course, refreshModal}) =>
                   </TableRow>
               </TableHead>
               <TableBody>
-                    {rows.map((row) => (<Row key={row.moduleNumber} row={row} moduleFiles={moduleFiles} moduleNumber={row.moduleNumber} courseID={courseID} refreshModal={refreshModal}/> ))}
+                    {rows.map((row) => (<Row key={row.moduleNumber} row={row} moduleFiles={course.moduleFiles} moduleNumber={row.moduleNumber} courseID={courseID} refreshModal={refreshModal}/> ))}
               </TableBody>
               </Table>
           </TableContainer>
@@ -84,13 +84,14 @@ function Row({row, moduleFiles, moduleNumber, courseID, refreshModal }) {
 /* each row is a module.  For each row, a nested table is rendered which shows the associated module files */
 
 
-  const [open, setOpen] = useState(false);  // determines whether the nested table should be visible (open) or not
-  const classes = useRowStyles();
+  const [open, setOpen] = useState(false)  // determines whether the nested table should be visible (open) or not
+  //const [updated, setUpdated] = useState(false) //row properties have been updated
+  const classes = useRowStyles()
 
   const deleteFile = async (fileID) => {
 
     /*delete module file from gridfs database*/
-    alert (`request to delete ${fileID}`)
+
     try {
             
       let response = await fetch(`/coursesMaterials/delete/${fileID}`,
@@ -116,7 +117,8 @@ function Row({row, moduleFiles, moduleNumber, courseID, refreshModal }) {
             console.log(`Problem deleting data`, err)
         }
     refreshModal()
-  }
+    //setUpdated(!updated)  
+}
 
   return (
     <React.Fragment>
