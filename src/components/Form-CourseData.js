@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import FormControlLabel from '@material-ui/core/FormControlLabel'
+import FormLabel from '@material-ui/core/FormLabel'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import Radio from '@material-ui/core/Radio'
 
@@ -40,7 +41,7 @@ const FormCourseData = ({ course, teacherID }) => {
         /*keywords: yup
             .string('Enter some keywords for your course'),*/
         coursePrice: yup
-            .string('Enter course price'),
+            .number('Enter the price for the course'),
         //            .required('Course price is required')
         courseStatus: yup
             .string('Enter course status'),
@@ -163,17 +164,18 @@ const FormCourseData = ({ course, teacherID }) => {
                 helperText={formik.touched.coursePrice && formik.errors.coursePrice}
             />
 
-            <h3> Course Status</h3>
-                <RadioGroup defaultValue={course.courseStatus} name="courseStatus">
-                    <FormControlLabel value="Current" control={<Radio color="primary" />} label="Current" />
+            <h3>Course Status:</h3>
+
+                <RadioGroup defaultValue={course.courseStatus} name="courseStatus" onChange={formik.handleChange}>
+                         <FormControlLabel value="Current" control={<Radio color="primary" />} label="Current" />
                     <FormControlLabel value='Draft' control={<Radio color="primary" />} label="In Progress" />
                     <FormControlLabel value='Archived' control={<Radio color="primary" />} label="Archived" />
                 </RadioGroup>
 
-
             <Button color="primary" variant="contained" type="submit">
                 Submit
-        </Button>
+            </Button>
+
         </form>
     )
 }

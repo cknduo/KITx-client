@@ -44,7 +44,7 @@
     padding: 10px
 }
 
-.formgrid{
+.course-info{
     margin:10px;
     grid-row:4;
     grid-column: span 2;
@@ -81,4 +81,11 @@
 .price{
     grid-column:1; grid-row:6
 
+}
+
+.update-module {
+    margin:10px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    padding: 10px
 }

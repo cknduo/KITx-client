@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import TableTeacherCourses from '../components/Table-TeacherCourses'
-import FunctionAddCourse from '../components/Function-AddCourse'
-import Button from '@material-ui/core/Button';
 
 import ViewTeacherCurrent from '../components/View-TeacherCurrent'
 import ViewTeacherArchived from '../components/View-TeacherArchived'
@@ -17,8 +14,6 @@ const TeacherDash = () => {
     const [viewMode, setViewMode] = useState('Active')
 
     const [user, setUser] = useState(null)
-    //const [updateCourseID, setUpdateCourseID] = useState(null)
-    //const [addCourseModalIsOpen, setAddCourseModalIsOpen] = useState(false)
     const [courseUpdated, setCourseUpdated] = useState()
     
      useEffect(() => {

@@ -8,20 +8,51 @@ import IconButton from '@material-ui/core/IconButton';
 import Box from '@material-ui/core/Box';
 import Collapse from '@material-ui/core/Collapse';
 import Button from '@material-ui/core/Button';
-import Edit from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-
-const TableCourseMaterial = ({courseID, materialAdded, course}) => {
+const TableCourseMaterial = ({courseID, materialAdded, course, refreshModal}) => {
+/* This table is the list of course modules, and the module files associated with the modules */
 
   const classes = useStyles();
-
   let rows = course.modules
   let moduleFiles = course.moduleFiles
 
-  /* function for adding modules */  
-  const addModule = () => {}
+  const addModule = async () => {
+    /*add new module to course database*/
+  
+    /*check what the last module number was, and increment to the next one*/
+    /* parse array of strings to array of numbers*/
+    /* if modules are empty, then assign 1 to maxModuleNumber */
+    let maxModuleNumber
+    
+    if (rows.length!==0) {
+      let moduleNumberArray = rows.map(module => parseInt(module.moduleNumber))
+      maxModuleNumber = Math.max(...moduleNumberArray) + 1
+    } else {
+      maxModuleNumber =  `1`
+    }
+  
 
+    /*module info to push into modules Array - Module Number and Description*/
+    const newModule = {
+      moduleNumber : `${maxModuleNumber}`,
+      description : ""
+    }
+
+    try {
+      let response = await fetch(`/courses/${courseID}/modules`,
+          {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(newModule, null, 2)
+          })
+      } catch (err) {
+          console.log(`Problem encoutered while trying to add module`)
+      }
+    
+    refreshModal()
+
+  }
 
   return (
       <div>
@@ -38,20 +69,22 @@ const TableCourseMaterial = ({courseID, materialAdded, course}) => {
                   </TableRow>
               </TableHead>
               <TableBody>
-                    {rows.map((row) => (<Row key={row.moduleNumber} row={row} moduleFiles={moduleFiles} moduleNumber={row.moduleNumber} courseID={courseID}/> ))}
+                    {rows.map((row) => (<Row key={row.moduleNumber} row={row} moduleFiles={moduleFiles} moduleNumber={row.moduleNumber} courseID={courseID} refreshModal={refreshModal}/> ))}
               </TableBody>
               </Table>
           </TableContainer>
-                    <Button color="primary" variant="contained" onClick={addModule}/*; setCourseAdded(!courseAdded);*/ > Add Module </Button>
-    </div>
+          
+          <Button color="primary" variant="contained" onClick={()=>{addModule()}}> Add Module </Button>
 
-) 
-  
+    </div>
+  ) 
 }
 
-function Row(props) {
-  const { row, moduleFiles, moduleNumber, courseID } = props;
-  const [open, setOpen] = React.useState(false);
+function Row({row, moduleFiles, moduleNumber, courseID, refreshModal }) {
+/* each row is a module.  For each row, a nested table is rendered which shows the associated module files */
+
+
+  const [open, setOpen] = useState(false);  // determines whether the nested table should be visible (open) or not
   const classes = useRowStyles();
 
   const deleteFile = async (fileID) => {
@@ -82,10 +115,8 @@ function Row(props) {
     catch (err) {
             console.log(`Problem deleting data`, err)
         }
-
-
+    refreshModal()
   }
-
 
   return (
     <React.Fragment>
@@ -97,17 +128,6 @@ function Row(props) {
           </TableCell>
           <TableCell component="th" scope="row"> {row.moduleNumber} </TableCell>
           <TableCell >{row.description} </TableCell>
-          <TableCell >
-           <Button
-              variant="contained"
-              color="primary"
-              size="small"
-              startIcon={<Edit/>}
-              style={{ marginLeft: 16 }}
-              /*onClick={()=>{setCourseIDtoUpdate(row._id); toggleUpdateCourseModal()}}*/>
-               UPDATE
-            </Button>
-          </TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0}} colSpan={4}>
@@ -129,16 +149,9 @@ function Row(props) {
                               <TableCell component="th" scope="row">{moduleFilesRow.filename}</TableCell>
                               <TableCell>{moduleFilesRow.description}</TableCell>
                               <TableCell>
-                              <Button
-                                  variant="contained"
-                                  color="secondary"
-                                  size="small"
-                                  className={classes.button}
-                                  startIcon={<DeleteIcon />}
-                                  style={{ marginLeft: 16 }}
-                                  onClick={()=>{deleteFile(moduleFilesRow.fileID)}}>
-                                 Delete
-                              </Button>
+                                  <IconButton aria-label="delete" color="secondary" onClick={()=>{deleteFile(moduleFilesRow.fileID)}}>
+                                      <DeleteIcon />
+                                  </IconButton>
                               </TableCell>
                           </TableRow>
                         )
@@ -154,6 +167,7 @@ function Row(props) {
   );
 }
 
+/** material ui functions */
 
 const useStyles = makeStyles({
   headerCell: {

@@ -7,7 +7,6 @@ const ImageCourseMaterial = ({imageFileID}) => {
             return <img src={placeholder} alt="Placeholder" width="200px"/>
           } else {
             return <img src={`/courseMaterial/image/${imageFileID}`} alt="Course" width="200px"/>
-          //return null
           }
 
 }

@@ -4,11 +4,14 @@ import Button from '@material-ui/core/Button';
 
 const ViewTeacherInProgress = ({teacherID, courseUpdated}) => {   
 
+    const [courseAddedToggle, setCourseAddedToggle] = useState(false) 
+
+
     async function addCourse () {
         // Function adds a new course entry to course database and course material database
         // Intialized to empty strings, except for course name, called New Course
         // New course can be referenced by courseID
-    
+        
         // intialize values for databases
         const initialValuesCourseDB = {
             courseName: "NEW COURSE",
@@ -38,11 +41,8 @@ const ViewTeacherInProgress = ({teacherID, courseUpdated}) => {
                 fileName:"",
                 description:"",    
             }],
-            modules: [{
-                fileID:"",
-                fileName:"",
-                description:"",    
-            }]
+            modules: []  
+            
         }
          
         // create new entry in course DB
@@ -61,12 +61,14 @@ const ViewTeacherInProgress = ({teacherID, courseUpdated}) => {
                 console.log(`Problem with posting data`, err)
             }
         
+        // changes the state of the course added toggle.  This will be sent to TableTeacherCourses component to indicate that table should be re-rendered
+        setCourseAddedToggle(!courseAddedToggle)    
     }
 
     return (
         <div>
-                <TableTeacherCourses teacherID={teacherID} courseStatus={"Draft"} /*courseAdded={courseAdded}*//>
-                <Button color="primary" variant="contained" onClick={addCourse}/*; setCourseAdded(!courseAdded);*/ > Add Course </Button>
+                <TableTeacherCourses teacherID={teacherID} courseStatus={"Draft"} courseAddedToggle={courseAddedToggle}/>
+                <Button color="primary" variant="contained" onClick={addCourse}> Add Course </Button>
         </div>
     )
 }
