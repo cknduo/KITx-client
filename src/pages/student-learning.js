@@ -86,7 +86,6 @@ function CardModule(props) {
           });
     }
 
-
     return (
 
             <div>
@@ -131,10 +130,10 @@ const VideoPlayback = ({videoFileID}) => {
             <video controls>
             </video>
         )
-    
+
     return (
         <video controls>
-            <source src = {`/courseMaterial/image/${videoFileID}`} type="video/mp4"/>
+           <source src = {`/courseMaterial/image/${videoFileID}`} type="video/mp4"/>
         </video>
     )  
 
