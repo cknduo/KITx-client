@@ -29,34 +29,34 @@ const ModalUpdateCourse = ({ courseID, teacherID }) => {
     let modules = course.modules
 
     return (
-        <div className="container">
+        <div className="modal-update-course-container">
 
-            <div className="course-image">
+            <div className="modal-course-image">
                 <h3> Course Image</h3>
                 <ImageCourseMaterial imageFileID={course.courseImage.fileID} />
                 <UploadCourseMaterial currentFileID={course.courseImage.fileID} courseID={courseID} fileUse={"courseImage"} description={"Course Image"}/>
                 
             </div>
 
-            <div className="certificate">
+            <div className="modal-certificate">
                 <h3> Course Certificate</h3>
                 <UploadCourseMaterial currentFileID={course.certificate.fileID} courseID={courseID} fileUse={"certificate"} description={"Course Certificate"}/>
             </div> 
 
-            <div className="kit-info">
+            <div className="modal-kit-info">
                 <h3> Kit Information</h3>
                 <ImageCourseMaterial imageFileID={course.kitImage.fileID} />
                 <UploadCourseMaterial currentFileID={course.kitImage.fileID} courseID={courseID} fileUse={"kitImage"} description={"Kit Image"}/>
                 <FormKitInfo courseID={courseID} course={course}/>
             </div> 
 
-            <div className="course-material">
+            <div className="modal-course-material">
                 <h3> Course Materials </h3>
                 <TableCourseMaterial courseID={courseID} course={course} module={modules} />
                 <UploadModuleMaterial courseID={courseID} fileUse={"module"} course={course} />
             </div>
 
-            <div className="formgrid">
+            <div className="modal-form-grid">
                 <h3> Course Details</h3>
                 <h4> Course ID#: {courseID}</h4>
                 <FormCourseData course={course} teacher={teacherID} />

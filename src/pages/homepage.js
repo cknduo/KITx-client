@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import Card from '../components/Card'
 import './homepage.css'
 
-const HomePage = () => {
+const HomePage = ({ accountType, userID }) => {
     const [courses, setCourses] = useState([])
 
     useEffect(() => {
@@ -21,13 +21,24 @@ const HomePage = () => {
             <div className='landing'>
                 <p className='landing-title'>EXPERIENCE OUR CAMPUS WHEREVER YOU ARE</p>
                 <div className='landing-btn-container'>
-                    <Link to='/sign-in'>
-                        <button className='landing-btn'>START LEARNING</button>
-                    </Link>                    
+                    {accountType === '' && 
+                        <Link to='/sign-in'>
+                            <button className='landing-btn'>START LEARNING</button>
+                        </Link>                      
+                    }
+                    {accountType === 'student' && 
+                        <Link to={`/student/${userID}`}>
+                            <button className='landing-btn'>START LEARNING</button>
+                        </Link>                      
+                    }
+                    {accountType === 'teacher' && 
+                        <Link to={`/teacher/${userID}`}>
+                            <button className='landing-btn'>START TEACHING</button>
+                        </Link>                      
+                    }
                 </div>
-
             </div>
-            <div className='courses-preview-title'><h2>Featured Courses</h2></div>
+            <div className='courses-preview-title'><h3>Featured Courses</h3></div>
             <div className='courses-preview'>
                 {courses
                     .sort(() => Math.random() - 0.5)

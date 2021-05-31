@@ -1,7 +1,7 @@
 .card-container {
     border-radius: 10px;
     background: white;
-    box-shadow: 8px 8px 1px var(--primary-shadow);
+    /* box-shadow: 8px 8px 1px var(--primary-shadow); */
     display: flex;
     flex-direction: column;
     min-height: 100%;
@@ -19,7 +19,9 @@
 }
 
 .card-img {
-    max-width: 100%;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
 }
 
 .card-content {
@@ -63,7 +65,7 @@
     font-size: 0.6rem;
     font-family: inherit;
     font-weight: bold;
-    background-color: var(--secondary);
+    background-color: var(--primary);
     border: none;
     border-radius: 20px;
     outline: none;
@@ -73,6 +75,6 @@
 
 .card-button:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 20px var(--secondary);
+    box-shadow: 0 0 20px var(--primary);
 }
 

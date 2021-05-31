@@ -18,6 +18,7 @@ import TeacherDashboard from './pages/teacher-dashboard'
 import CourseDetails from './pages/course-details'
 import ShoppingCart from './pages/shopping-cart'
 import StudentLearning from './pages/student-learning'
+import About from './pages/about'
 
 
 function App() {
@@ -124,7 +125,7 @@ function App() {
 
       <div className='app-content'>
         <Switch>
-          <Route exact path='/' render={() => (<HomePage accountType={accountType} />)} />
+          <Route exact path='/' render={() => (<HomePage accountType={accountType} userID={userID} />)} />
           <Route exact path='/teach' component={Teach} />
           <Route exact path='/sign-in' render={() => (<SignInSignUpPage setUserID={setUserID} setUserInfo={setUserInfo} setAccountType={setAccountType} />)} />
           <Route exact path='/cart' render={() => (<ShoppingCart cart={cart} setCart={setCart} userID={userID} userInfo={userInfo} setUserInfo={setUserInfo} />)} />
@@ -132,6 +133,7 @@ function App() {
           <Route exact path='/teacher/:id' component={TeacherDashboard} />
           <Route exact path='/course/:id' render={() => (<CourseDetails cart={cart} setCart={setCart} userID={userID} userInfo={userInfo} />)} />
           <Route exact path='/student/:id/course/:courseid/learn' component={StudentLearning}/>
+          <Route exact path='/about' component={About} />
         </Switch>       
       </div>
 

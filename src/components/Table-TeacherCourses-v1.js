@@ -78,21 +78,7 @@ const TableTeacherCourses = ({teacherID, /*courseAdded,*/ courseStatus}) => {
       </Table>
     </TableContainer>
 
-  <Modal 
-    isOpen={UpdateCourseModalIsOpen}
-    style={{
-      overlay: {
-        backgroundColor: 'rgba(31, 40, 47, 0.5)'
-      },
-      content: {
-        top: '5rem',
-        left: '2rem',
-        right: '2rem',
-        bottom: '2rem',
-        borderRadius: '8px',
-      }
-    }}
-  >
+  <Modal isOpen={UpdateCourseModalIsOpen}>
       {courseIDtoUpdate && < ModalUpdateCourse courseID={courseIDtoUpdate} teacher={teacherID}/>}
       <Button color="primary" variant="contained" onClick={toggleUpdateCourseModal}> Close </Button>
   </Modal>

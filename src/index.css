@@ -1,8 +1,4 @@
-@font-face {
-  font-family: 'Fredoka One';
-  src: url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
-  font-display: block;
-}
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 
 body {
   margin: 0;
@@ -24,6 +20,14 @@ code {
 a {
   color: white;
   text-decoration: none;
+}
+
+h1 {
+  margin: 0;
+}
+
+h2 {
+  margin: 0;
 }
 
 ::-moz-selection {

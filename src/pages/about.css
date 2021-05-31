@@ -1,0 +1,14 @@
+.about {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+
+.about-container {
+    width: 90%;
+}
+
+.about-team {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
