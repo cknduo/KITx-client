@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import Axios from "axios"
 
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
@@ -17,8 +18,6 @@ const StudentLearning = () => {
     const [moduleFiles, setModuleFiles] = useState()
     const [course, setCourse] = useState()
     
-    console.log(courseid)
-
     useEffect(() => {
             const getCourse = async () => {
             let response = await fetch(`/courses/${courseid}`)
@@ -34,10 +33,12 @@ const StudentLearning = () => {
         return null
     }
 
+    /* if another video is selected in the course list to view, refresh the video screen with the new file*/
     const updateVideoFileID = (fileID) => {
         setVideoFileID (fileID)
         console.log(fileID)
     }
+
 
     let courseImageURL = `/courseMaterial/image/${course.courseImage.fileID}`
     
@@ -68,6 +69,23 @@ function CardModule(props) {
     const { module, moduleFiles, updateVideoFileID } = props;
     const [open, setOpen] = React.useState(false);
   
+
+    const fileDownload = (fileID, filename) => {
+
+        Axios({
+            url: `/courseMaterial/image/${fileID}`,
+            method: 'GET',
+            responseType: 'blob', // download as a binary stream
+          }).then((response) => {
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', `${filename}`);
+            document.body.appendChild(link);
+            link.click();
+          });
+    }
+
     return (
 
             <div>
@@ -93,7 +111,7 @@ function CardModule(props) {
                             }
                             
                             {((moduleFile.filename.split('.').pop() !== "mp4") && (moduleFile.filename.split('.').pop() !== "mov")) &&
-                                <button onClick={()=>{window.open(`http://localhost:3000/courseMaterial/image/${moduleFile.fileID}`)}}> Download File </button> }
+                                <button onClick={()=>{/*window.open(`/courseMaterial/image/${moduleFile.fileID}`)}*/fileDownload(moduleFile.fileID, moduleFile.filename)}}> Download File </button> }
                             </p>
                             </div>                       
                         )
@@ -112,10 +130,10 @@ const VideoPlayback = ({videoFileID}) => {
             <video controls>
             </video>
         )
-    
+
     return (
         <video controls>
-            <source src = {`/courseMaterial/image/${videoFileID}`} type="video/mp4"/>
+           <source src = {`/courseMaterial/image/${videoFileID}`} type="video/mp4"/>
         </video>
     )  
 
