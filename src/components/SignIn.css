@@ -1,26 +1,43 @@
 .sign-in {
-    width: 50%;
-    margin-top: 2rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.sign-in-form {
+    display: grid;
+    grid-template-columns: 4fr 0.5fr 4fr;
+}
+
+.sign-in-form-email {
+    grid-column: 1 / 2;
+}
+
+.sign-in-form-password {
+    grid-column: 3 / 4;
+}
+
+.sign-in-button-container {
+    display: flex;
+    justify-content: center;
 }
 
 .sign-in-button {
     margin-top: 2rem;
-    float: right;
-    min-width: 30%;
-    height: 2rem;
+    padding: 0.5rem 1rem;
     letter-spacing: 0.5px;
-    font-size: 1rem;
     color: white;
-    background-color: rgb(108, 167, 255);
+    font-weight: bold;
+    font-size: 1rem;
+    background-color: var(--secondary);
     border: none;
+    border-radius: 20px;
     outline: none;
-    text-transform: uppercase;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     cursor: pointer;
+    transition: all .2s ease-in-out;
 }
 
 .sign-in-button:hover {
-    border: 2px solid black;
+    transform: scale(1.05);
+    box-shadow: 0 0 20px var(--secondary);
 }

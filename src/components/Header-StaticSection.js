@@ -13,7 +13,7 @@ const HeaderStaticSection = () => {
                 <img src={Logo} alt='logo' className='option logo' />
             </Link>
             <div className='option'>
-                <DropdownTextNav>
+                <DropdownTextNav >
                     <DropdownExplore />
                 </DropdownTextNav>
             </div>

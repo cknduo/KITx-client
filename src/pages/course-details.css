@@ -46,3 +46,7 @@
     transform: none;
     cursor: default;
 }
+.message-to-user {
+    align-self: flex-end;
+    color:crimson;
+}

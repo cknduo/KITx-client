@@ -51,7 +51,7 @@ function App() {
     checkLogin()
   }, [])
 
-  useEffect(() => {
+  useEffect(() => {  //Pre-load cart state with items found in DB
     
     if (userID !== "") {
       let loadUserDBCartList = async () => {
@@ -68,10 +68,22 @@ function App() {
           // Loop through the array of cart items in the DB
           if (dbCartArray.length !== 0){
             for (let counter = 0; counter < dbCartArray.length; counter++) {
+
+              //Fetch the current PRICE for the course before
+              let itemPrice = 0  //reset variable before each iteration
+              let courseData = await Axios({
+                method: "GET",
+                withCredentials: true,
+                url: `/courses/${dbCartArray[counter]}`,
+              })
+              if(courseData.data) {  //related course found
+                itemPrice = courseData.data.coursePrice
+              }
+
               //Insert a new entry into the CART state, in proper format.
               let objectToAdd = {
                 courseID: dbCartArray[counter],
-                coursePrice: 0, 
+                coursePrice: itemPrice, 
               }
               tempCartArray[counter] = objectToAdd
             }
@@ -115,10 +127,10 @@ function App() {
           <Route exact path='/' render={() => (<HomePage accountType={accountType} />)} />
           <Route exact path='/teach' component={Teach} />
           <Route exact path='/sign-in' render={() => (<SignInSignUpPage setUserID={setUserID} setUserInfo={setUserInfo} setAccountType={setAccountType} />)} />
-          <Route exact path='/cart' render={() => (<ShoppingCart cart={cart} setCart={setCart} userID={userID}/>)} />
+          <Route exact path='/cart' render={() => (<ShoppingCart cart={cart} setCart={setCart} userID={userID} userInfo={userInfo} setUserInfo={setUserInfo} />)} />
           <Route exact path='/student/:id' component={StudentDashboard} />
           <Route exact path='/teacher/:id' component={TeacherDashboard} />
-          <Route exact path='/course/:id' render={() => (<CourseDetails cart={cart} setCart={setCart} userID={userID}/>)} />
+          <Route exact path='/course/:id' render={() => (<CourseDetails cart={cart} setCart={setCart} userID={userID} userInfo={userInfo} />)} />
           <Route exact path='/student/:id/course/:courseid/learn' component={StudentLearning}/>
         </Switch>       
       </div>

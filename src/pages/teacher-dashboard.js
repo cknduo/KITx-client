@@ -5,7 +5,7 @@ import ViewTeacherCurrent from '../components/View-TeacherCurrent'
 import ViewTeacherArchived from '../components/View-TeacherArchived'
 import ViewTeacherInProgress from '../components/View-TeacherInProgress'
 
-import './teacher-dashboard.css'
+import './user-dashboard.css'
 
 const TeacherDash = () => {   
     
@@ -34,7 +34,7 @@ const TeacherDash = () => {
     }
 
     return (
-        <div className='teacher-dashboard'>
+        <div className='user-dashboard'>
             <div className='dashboard-tab-container'>
                 
                 <div className='dashboard-user-details'>

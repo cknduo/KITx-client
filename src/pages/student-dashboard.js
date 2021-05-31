@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import './student-dashboard.css'
-import ViewStudentCurrent from '../components/View-StudentCurrent'
 
+import ViewStudentCurrent from '../components/View-StudentCurrent'
+import './user-dashboard.css'
 
 const StudentDashboard = () => {
     const [viewMode, setViewMode] = useState('Enrolled')
@@ -26,17 +26,13 @@ const StudentDashboard = () => {
         return null
     }
 
-
     return (
-        <div className='student-dashboard'>
+        <div className='user-dashboard'>
             <div className='dashboard-tab-container'>
-
-            <div className='dashboard-user-details'>
-                    <h3>Welcome back {user && user.firstName} {user && user.lastName}</h3>
-                    <p>Your Account Number: {user && user._id}</p>                    
+                <div className='dashboard-user-details'>
+                        <h3>Welcome back {user && user.firstName} {user && user.lastName}</h3>
+                        <p>Your Account Number: {user && user._id}</p>                    
                 </div>
-
-
                 <div className='dashboard-tab-options'>
                     <button
                         className={`${viewMode === 'Enrolled' ? 'dashboard-active-view' : ''} dashboard-tab-btn`}
@@ -50,23 +46,10 @@ const StudentDashboard = () => {
                     >
                         COMPLETED
                     </button>
-                    {/* <button
-                        className={`${viewMode === 'Bookmarked' ? 'dashboard-active-view' : ''} dashboard-tab-btn`}
-                        onClick={() => setViewMode('Bookmarked')}
-                    >
-                        BOOKMARKED
-                    </button> */}
-                    <div className='dashboard-tab-content'>
-
-                    </div>
                 </div>
-
                 <div className='dashboard-tab-content'>
                     {viewMode === 'Enrolled' && <ViewStudentCurrent studentID={id} student={user} />}
-                </div>
-
-
-
+                </div>  
             </div>
         </div>
     )

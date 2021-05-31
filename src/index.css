@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'Fredoka One';
+  src: url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+  font-display: block;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -6,6 +12,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #1f282f;
+  color: white;
+  font-size: 1rem;
 }
 
 code {
@@ -16,4 +24,22 @@ code {
 a {
   color: white;
   text-decoration: none;
+}
+
+::-moz-selection {
+  background-color: #c9c9c9;
+}
+
+::selection {
+  background-color: #c9c9c9;
+}
+
+:root {
+  --primary: #00a9ec;
+  --primary-shadow: rgba(0, 169, 236, 0.5);
+  --secondary: #ff9113;
+  --neutral: #939393;
+  --background: #1f282f;
+  --background-light: #314555;
+  --logo-font: 'Fredoka One', cursive;
 }
