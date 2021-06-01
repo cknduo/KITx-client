@@ -31,7 +31,7 @@ const StudentDashboard = () => {
             <div className='dashboard-tab-container'>
                 <div className='dashboard-user-details'>
                         <h3>Welcome back {user && user.firstName} {user && user.lastName}</h3>
-                        <p>Your Account Number: {user && user._id}</p>                    
+                                           
                 </div>
                 <div className='dashboard-tab-options'>
                     <button
