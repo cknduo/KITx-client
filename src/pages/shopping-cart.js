@@ -7,7 +7,7 @@ import addNewDBCart from '../functions/AddNewDBCart.js'
 import modifyDBCartItems from '../functions/ModifyDBCartItems'
 import './shopping-cart.css'
 
-const ShoppingCart = ( { cart, setCart, userID, userInfo, setUserInfo } ) => {
+const ShoppingCart = ( { cart, setCart, userID, userInfo, setUserInfo, accountType } ) => {
 
     //Define STATE for variable "subtotal"
     const [subtotal, setSubtotal] = useState(0)
@@ -120,7 +120,7 @@ const ShoppingCart = ( { cart, setCart, userID, userInfo, setUserInfo } ) => {
                             let courseUpdateResponse = await Axios({
                                 method: "PUT",
                                 data: {
-                                    $push: { studentIDs: userInfo._id },
+                                    $push: { studentIDs: userID },
                                 },
                                 withCredentials: true,
                                 url: `/courses/${simplifiedCartList[loopCounter]}`,
@@ -167,7 +167,7 @@ const ShoppingCart = ( { cart, setCart, userID, userInfo, setUserInfo } ) => {
     
         // Only attempt to populate an EMPTY cart. Never overwrite the
         // cart state if it already has items.
-        if ((userID !== "") && (cart.length === 0)) {
+        if ((cart.length === 0) && (userID !== "") && (userInfo !== "") && (accountType === "student")) {
             let tempCartArray = []
             let loadUserCartList = async () => {
                 let getCart = await Axios({
