@@ -39,14 +39,9 @@ function App() {
         withCredentials: true,
         url: "/userinfo/user",
       })
-      setUserID(getRes.data.userID)
-      setAccountType(getRes.data.userInfo.accountType)
-      setUserInfo(getRes.data.userInfo)
-
-      // Console Messages
-      console.log("User ID exported to App.js is: ", getRes.data.userID)
-      console.log("User Info received from server is : ", getRes.data)
-      console.log("Account Type is: ", getRes.data.userInfo.accountType)
+      getRes.data.userID? setUserID(getRes.data.userID) : setUserID("")
+      getRes.data.userInfo.accountType? setAccountType(getRes.data.userInfo.accountType) : setAccountType("")
+      getRes.data.userInfo? setUserInfo(getRes.data.userInfo) : setUserInfo("")
     }
 
     checkLogin()
@@ -64,10 +59,10 @@ function App() {
           withCredentials: true,
           url: `/carts/${userID}`,
         })
-        if(DBCartItems.data) { // A cart record DOES exist in DB for this user!
+        if (DBCartItems.data) { // A cart record DOES exist in DB for this user!
           dbCartArray = DBCartItems.data.cartItems
           // Loop through the array of cart items in the DB
-          if (dbCartArray.length !== 0){
+          if (dbCartArray.length !== 0) {
             for (let counter = 0; counter < dbCartArray.length; counter++) {
 
               //Fetch the current PRICE for the course before
@@ -77,14 +72,14 @@ function App() {
                 withCredentials: true,
                 url: `/courses/${dbCartArray[counter]}`,
               })
-              if(courseData.data) {  //related course found
+              if (courseData.data) {  //related course found
                 itemPrice = courseData.data.coursePrice
               }
 
               //Insert a new entry into the CART state, in proper format.
               let objectToAdd = {
                 courseID: dbCartArray[counter],
-                coursePrice: itemPrice, 
+                coursePrice: itemPrice,
               }
               tempCartArray[counter] = objectToAdd
             }
@@ -92,7 +87,7 @@ function App() {
         }
         else {
           // No cart record exists in DB for this user, need to create an empty cart in DB!
-          addNewDBCart(userID,tempCartArray)
+          addNewDBCart(userID, tempCartArray)
         }
         setCart(tempCartArray)
       }
@@ -102,12 +97,12 @@ function App() {
 
   const logout = async () => {
     const logoutRes = await Axios({
-        method: "GET",
-        withCredentials: true,
-        url: "/logout/",
+      method: "GET",
+      withCredentials: true,
+      url: "/logout/",
     })
     console.log(logoutRes.data)
-    setCart([]) //so that Art's Cart can go back to the Start ;)
+    setCart([])
     setUserID("")
     setUserInfo("")
     setAccountType("")
@@ -119,8 +114,8 @@ function App() {
 
       <div className='app-header'>
         {accountType === '' && <HeaderPublic />}
-        {accountType === 'student' && <HeaderStudent cartSize={cart.length} logout={logout} userID={userID}/>}
-        {accountType === 'teacher' && <HeaderTeacher logout={logout} userID={userID} />}    
+        {accountType === 'student' && <HeaderStudent cartSize={cart.length} logout={logout} userID={userID} />}
+        {accountType === 'teacher' && <HeaderTeacher logout={logout} userID={userID} />}
       </div>
 
       <div className='app-content'>
@@ -132,15 +127,15 @@ function App() {
           <Route exact path='/student/:id' component={StudentDashboard} />
           <Route exact path='/teacher/:id' component={TeacherDashboard} />
           <Route exact path='/course/:id' render={() => (<CourseDetails cart={cart} setCart={setCart} userID={userID} userInfo={userInfo} />)} />
-          <Route exact path='/student/:id/course/:courseid/learn' component={StudentLearning}/>
+          <Route exact path='/student/:id/course/:courseid/learn' component={StudentLearning} />
           <Route exact path='/about' component={About} />
-        </Switch>       
+        </Switch>
       </div>
 
       <div className='app-footer'>
         <Footer />
       </div>
-      
+
 
     </div>
   )

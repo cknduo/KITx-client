@@ -26,7 +26,7 @@ const SignInSignUpPage = ({ setUserID, setUserInfo, setAccountType }) => {
                 </div>
                 <div className='tab-content'>
                     {viewMode === 'SignInView' && <SignIn setUserID={setUserID} setUserInfo={setUserInfo} setAccountType={setAccountType} />}
-                    {viewMode === 'SignUpView' && <SignUp />}
+                    {viewMode === 'SignUpView' && <SignUp setUserID={setUserID} setUserInfo={setUserInfo} setAccountType={setAccountType} />}
                 </div>
             </div>
         </div>
