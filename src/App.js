@@ -54,7 +54,7 @@ function App() {
 
   useEffect(() => {  //Pre-load cart state with items found in DB
     
-    if (userID !== "") {
+    if ((userID !== "") && (accountType === "student") && (userInfo !== "")){
       let loadUserDBCartList = async () => {
         let tempCartArray = [] // initialize
         let dbCartArray = []
@@ -128,7 +128,7 @@ function App() {
           <Route exact path='/' render={() => (<HomePage accountType={accountType} userID={userID} />)} />
           <Route exact path='/teach' component={Teach} />
           <Route exact path='/sign-in' render={() => (<SignInSignUpPage setUserID={setUserID} setUserInfo={setUserInfo} setAccountType={setAccountType} />)} />
-          <Route exact path='/cart' render={() => (<ShoppingCart cart={cart} setCart={setCart} userID={userID} userInfo={userInfo} setUserInfo={setUserInfo} />)} />
+          <Route exact path='/cart' render={() => (<ShoppingCart cart={cart} setCart={setCart} userID={userID} userInfo={userInfo} setUserInfo={setUserInfo} accountType={accountType} />)} />
           <Route exact path='/student/:id' component={StudentDashboard} />
           <Route exact path='/teacher/:id' component={TeacherDashboard} />
           <Route exact path='/course/:id' render={() => (<CourseDetails cart={cart} setCart={setCart} userID={userID} userInfo={userInfo} />)} />
