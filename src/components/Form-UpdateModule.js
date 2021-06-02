@@ -73,7 +73,7 @@ const FormUpdateModule = ({ courseID, modules, refreshModal }) => {
           label="Module Number"
           id="moduleNumber"
           name = "moduleNumber"
-          variant = "filled"
+          variant = "outlined"
           onChange={formik.handleChange}
           error={formik.touched.moduleNumber && Boolean(formik.errors.moduleNumber)}
           helperText={formik.touched.moduleNumber && formik.errors.moduleNumber}
@@ -90,7 +90,7 @@ const FormUpdateModule = ({ courseID, modules, refreshModal }) => {
                 name="description"
                 label="Module Description"
                 defaultValue=""
-                variant="filled"
+                variant="outlined"
                 style={{ margin: "0px 16px 16px", width:"70%" }}
                 onChange={formik.handleChange}
                 error={formik.touched.courseName && Boolean(formik.errors.courseName)}

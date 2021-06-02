@@ -18,13 +18,14 @@
 }
 
 .sign-in-button-container {
+    grid-column: 1 / 4;
     display: flex;
     justify-content: center;
 }
 
 .sign-in-button {
     margin-top: 2rem;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 5rem;
     letter-spacing: 0.5px;
     color: white;
     font-weight: bold;

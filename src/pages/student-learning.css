@@ -1,4 +1,14 @@
-.banner {
+.learner-page {
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+}
+
+.learner-page-container {
+    width: 90%;
+}
+
+/* .banner {
     width: 100%;
     height: 9rem;
     background-image: url('https://images.pexels.com/photos/5973963/pexels-photo-5973963.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940');
@@ -9,41 +19,60 @@
     flex-direction: column;
     justify-content: center;
     overflow: hidden;    
-}
+} */
 
-.banner-title {
+.learner-page-course-title {
     color: white;
-    font-family: 'Fredoka One', cursive;
-    font-size: 3rem;
-    /*margin: 5rem 0 3rem 0;*/
-    text-shadow: 5px 5px 1px rgba(0, 169, 236, 0.5);
+    font-weight: bold;
+    text-align: center;
 }
 
 .learner-view {
     display: grid;
-    grid-template-columns: 70% 30%;
+    grid-template-columns: 1fr;
  
 }
+
+@media only screen and (min-width: 480px) {
+    .learner-view {
+      grid-template-columns: 3fr 1.5fr;
+    }  
+}
+
 .video-view {
     grid-column:1;    
     flex-direction: column;
     text-align: center;
-    background-color:black;
-    height: 35rem;
+    background-color: black;
+    /* height: 35rem; */
 }
 
 .module-details-view {
-
+    border-radius: 8px;
+    margin-left: 1rem;
     grid-column:2;  
-    background-color: rgb(108, 167, 255);
+    background-color: white;
+    color: var(--neutral);
+    font-size: 0.8rem;
+    text-align: center;
+    padding: 10px;
+}
+
+video {
+    max-width: 75%;
+    min-height: 35rem;
+}
+
+.video-btn {
+    padding: 0.5rem 1rem;
+    letter-spacing: 0.5px;
     color: white;
-    padding: 10px
-
+    font-size: 0.6rem;
+    font-family: inherit;
+    font-weight: bold;
+    background-color: var(--primary);
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    cursor: pointer;
 }
-
-video{
-    max-width: 80%;
-    min-height: 50rem;
-}
-
-

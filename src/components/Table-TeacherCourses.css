@@ -1,0 +1,83 @@
+.table-teacher-courses {
+    background-color: white;
+}
+
+.table-teacher-courses-item {
+    padding: 1rem;
+    border-bottom: 1px solid rgb(218, 218, 218);
+    display: grid;
+}
+
+@media only screen and (min-width: 480px) {
+    .table-teacher-courses-item {
+      grid-template-columns: 1fr 2fr 1fr;
+    }  
+}
+
+.teacher-courses-item-img-container {
+    height: 8rem;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.teacher-courses-item-course-name {
+    margin: 0;
+}
+
+.teacher-courses-item-kit-name {
+    color: var(--neutral);
+}
+
+.teacher-courses-item-enrollment {
+    color: var(--neutral);
+    font-size: 0.8rem;
+}
+
+.teacher-courses-item-edit-btn-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.teacher-courses-item-btn {
+    margin: 0.5rem;
+    padding: 0.5rem 1rem;
+    letter-spacing: 0.5px;
+    color: white;
+    font-size: 0.8rem;
+    font-family: inherit;
+    font-weight: bold;
+    background-color: var(--primary);
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+}
+
+.teacher-courses-item-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px var(--primary);
+}
+
+.pen-icon {
+    width: 0.8rem;
+    height: 0.8rem;
+    fill: white;
+    stroke: white;
+}
+
+.modal-close-btn {
+    margin: 1rem 1rem;
+    padding: 0.5rem 5rem;
+    letter-spacing: 0.5px;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    background-color: var(--secondary);
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    cursor: pointer;
+}

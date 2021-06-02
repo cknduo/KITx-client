@@ -101,7 +101,7 @@ const SignUp = ({ setUserID, setUserInfo, setAccountType }) => {
   return (
     <div className="sign-up">
       <div className='radio-container'>
-        <span className='account-type-prompt'>I'm a</span>
+        <span className='account-type-prompt'>I am a</span>
         <RadioGroup row value={registerAccountType} onChange={(e) => setregisterAccountType(e.target.value)}>
           <FormControlLabel value="student" control={<Radio color="primary" />} label="Student" />
           <FormControlLabel value='teacher' control={<Radio color="primary" />} label="Teacher" />

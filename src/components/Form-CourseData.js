@@ -13,6 +13,7 @@ import './Modal-UpdateCourse.css'
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
+        flexDirection: 'column',
         flexWrap: 'wrap',
     },
     margin: {
@@ -95,7 +96,7 @@ const FormCourseData = ({ course, teacherID }) => {
                 name="courseName"
                 label="Course Name"
                 defaultValue={course.courseName}
-                variant="filled"
+                variant="outlined"
                 style={{ margin: "16px 0px" }}
                 //value={course.courseName}
                 onChange={formik.handleChange}
@@ -108,11 +109,12 @@ const FormCourseData = ({ course, teacherID }) => {
                 id="description"
                 name="description"
                 label="Course Description"
-                variant="filled"
+                variant="outlined"
                 defaultValue={course.description}
                 multiline
                 rows={4}
                 style={{ margin: "16px 0px" }}
+                color="primary"
                 //value={formik.values.description}
                 onChange={formik.handleChange}
                 error={formik.touched.description && Boolean(formik.errors.description)}
@@ -151,8 +153,8 @@ const FormCourseData = ({ course, teacherID }) => {
                 fullWidth
                 id="coursePrice"
                 name="coursePrice"
-                label="Course Price (in $CAD)"
-                variant="filled"
+                label="Course Price"
+                variant="outlined"
                 style={{ margin: "16px 0px" }}
                 defaultValue={course.coursePrice}
                 // value={formik.values.coursePrice}
@@ -161,13 +163,17 @@ const FormCourseData = ({ course, teacherID }) => {
                 helperText={formik.touched.coursePrice && formik.errors.coursePrice}
             />
 
-            <h3>Course Status:</h3>
+            <div className='course-details-status'>
+                <h3>Course Status:​&emsp;
+                    <RadioGroup row defaultValue={course.courseStatus} name="courseStatus" onChange={formik.handleChange}>
+                        <FormControlLabel value="Current" control={<Radio color="primary" />} label="Current" />
+                        <FormControlLabel value='Draft' control={<Radio color="primary" />} label="In Progress" />
+                        <FormControlLabel value='Archived' control={<Radio color="primary" />} label="Archived" />
+                    </RadioGroup>                          
+                </h3>
+          
+            </div>
 
-                <RadioGroup defaultValue={course.courseStatus} name="courseStatus" onChange={formik.handleChange}>
-                         <FormControlLabel value="Current" control={<Radio color="primary" />} label="Current" />
-                    <FormControlLabel value='Draft' control={<Radio color="primary" />} label="In Progress" />
-                    <FormControlLabel value='Archived' control={<Radio color="primary" />} label="Archived" />
-                </RadioGroup>
 
             <Button color="primary" variant="contained" type="submit">
                 Submit

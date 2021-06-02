@@ -38,9 +38,8 @@ const TeacherDash = () => {
             <div className='dashboard-tab-container'>
                 
                 <div className='dashboard-user-details'>
-                    <h3>Welcome back {user && user.firstName} {user && user.lastName}</h3>
- 
-                 </div>
+                    <h3>Welcome to your teacher dashboard, {user && user.firstName} {user && user.lastName}!</h3>                   
+                </div>
 
                 <div className='dashboard-tab-options'>
                     <button 

@@ -77,40 +77,36 @@ const SignIn = ({ setUserID, setUserInfo, setAccountType }) => {
   return (
 
     <div className='sign-in'>
-      <div className='sign-in-form'>
-        <form onSubmit={formik.handleSubmit}>
-          <div className='sign-in-form-email'>
-            <TextField
-              fullWidth
-              label="Email"
-              name="email"
-              id="email"
-              onChange={formik.handleChange}
-              error={formik.touched.email && Boolean(formik.errors.email)}
-              helperText={formik.touched.email && formik.errors.email}
-            />
-          </div>
-          <div className='sign-in-form-password'>
-            <TextField
-              fullWidth
-              label="Password"
-              type='password'
-              name="password"
-              id="password"
-              onChange={formik.handleChange}
-              error={formik.touched.password && Boolean(formik.errors.password)}
-              helperText={formik.touched.password && formik.errors.password}
-            />
-          </div>
-
-          <div className='sign-in-button-container'>
-            <button className='sign-in-button' type="submit">
-              Sign In
+      <form onSubmit={formik.handleSubmit} className='sign-in-form'>
+        <div className='sign-in-form-email'>
+          <TextField
+            fullWidth
+            label="Email"
+            name="email"
+            id="email"
+            onChange={formik.handleChange}
+            error={formik.touched.email && Boolean(formik.errors.email)}
+            helperText={formik.touched.email && formik.errors.email}
+          />
+        </div>
+        <div className='sign-in-form-password'>
+          <TextField
+            fullWidth
+            label="Password"
+            type='password'
+            name="password"
+            id="password"
+            onChange={formik.handleChange}
+            error={formik.touched.password && Boolean(formik.errors.password)}
+            helperText={formik.touched.password && formik.errors.password}
+          />
+        </div>
+        <div className='sign-in-button-container'>
+          <button className='sign-in-button' type="submit">
+            Sign In
           </button>
-          </div>
-
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   )
 }

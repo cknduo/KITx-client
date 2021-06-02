@@ -1,15 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import ImageCourseMaterial from './Image-CourseMaterial'
-import Button from '@material-ui/core/Button';
-import { 
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableRow,
-} from '@material-ui/core';
 import { useHistory } from 'react-router-dom'
+
+import './Table-StudentCourses.css'
 
 const TableStudentCourses = ({studentID, /*courseAdded,*/ courseStatus, student}) => {
   
@@ -33,38 +26,32 @@ useEffect(() => {
   }, []);
   
   return (
-     <div>
+    <div className='table-student-courses'>
+      {rows.map(row => (
+        <div key={row._id}>
+          <div className='table-student-courses-item'>
+            <div className='student-courses-item-img-container'>
+              <ImageCourseMaterial className='student-courses-item-img' imageFileID={row.courseImage.fileID}/>
+            </div>
+            <div className='student-courses-item-course-name-container'>
+              <h4 className='student-courses-item-course-name'>{row.courseName}</h4>
+              <h5 className='student-courses-item-kit-name'>Kit: {row.requiredKits.kitName}</h5>
+            </div>
+            <div className='student-courses-item-btn-container'>
+              <button 
+                className='student-courses-item-resume-btn' 
+                onClick={()=>{history.push(`/student/${studentID}/course/${row._id}/learn`)}}
+              >
+                RESUME LEARNING
+              </button>                 
+            </div>
+            
+          </div>
 
-    <TableContainer component={Paper}>
-      <Table aria-label='simple table'>
-        <TableBody> 
-          {rows.map((row) => (
-            <TableRow key={row._id}>
-              <TableCell component='th' scope='row'>
-                 <TableCell><ImageCourseMaterial imageFileID={row.courseImage.fileID}/></TableCell>
-              </TableCell>
-              <TableCell>{row.courseName}</TableCell>
-              <TableCell>Total Enrollment: {row.studentIDs.length}</TableCell>
-              <TableCell>
-              <Button
-                      variant="contained"
-                      color="primary"
-                      size="small"
-                      style={{ marginLeft: 16 }}
-                      onClick={()=>{history.push(`/student/${studentID}/course/${row._id}/learn`)}}>
-                  LEARNING PAGE
-              </Button>
-              </TableCell>
-            </TableRow>
-          ))} 
-        </TableBody>
-      </Table>
-    </TableContainer>
-
-
-   </div>
-   )
+        </div>   
+      ))}
+    </div>
+  )
 }
-
 
 export default TableStudentCourses

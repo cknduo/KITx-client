@@ -1,0 +1,65 @@
+.table-student-courses {
+    background-color: white;
+}
+
+.table-student-courses-container {
+
+}
+
+.table-student-courses-item {
+    padding: 1rem;
+    border-bottom: 1px solid rgb(218, 218, 218);
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+@media only screen and (min-width: 480px) {
+    .table-student-courses-item {
+      grid-template-columns: 1fr 2fr 1fr;
+    }  
+}
+
+.student-courses-item-img-container {
+    height: 10rem;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.student-courses-item-course-name-container {
+    color: var(--primary);
+    margin-left: 2rem;
+}
+
+.student-courses-item-course-name {
+    margin: 0;
+}
+
+.student-courses-item-kit-name {
+    color: var(--neutral);
+}
+
+.student-courses-item-btn-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.student-courses-item-resume-btn {
+    padding: 0.5rem 1rem;
+    letter-spacing: 0.5px;
+    color: white;
+    font-size: 0.8rem;
+    font-family: inherit;
+    font-weight: bold;
+    background-color: var(--primary);
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    cursor: pointer;
+    transition: all .2s ease-in-out;
+}
+
+.student-courses-item-resume-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px var(--primary);
+}

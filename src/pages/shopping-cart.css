@@ -72,12 +72,12 @@
 }
 
 .checkout-btn {
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 2rem;
     letter-spacing: 0.5px;
     color: white;
     font-weight: bold;
     font-size: 1rem;
-    background-color: var(--primary);
+    background-color: var(--secondary);
     border: none;
     border-radius: 20px;
     outline: none;
@@ -87,5 +87,5 @@
 
 .checkout-btn:hover {
     transform: scale(1.05);
-    box-shadow: 0 0 20px var(--primary);
+    box-shadow: 0 0 20px var(--secondary);
 }

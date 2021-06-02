@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Axios from "axios"
+import { useHistory } from "react-router-dom"
+
 import modifyDBCartItems from '../functions/ModifyDBCartItems'
 // import ImageCourseMaterial from './Image-CourseMaterial'
 
@@ -13,6 +15,8 @@ const CartItem = ( {mapItem, cart, setCart, subtotal, setSubtotal, userID} ) => 
   const [courseName, setCourseName] = useState("")
   const [coursePhotoURL, setCoursePhotoURL] = useState("")
   const [kitName, setKitName] = useState("")
+
+  let history = useHistory()
 
   // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   // REMOVE ITEM FROM CART function, called by 'onClick' of X button
@@ -121,9 +125,9 @@ const CartItem = ( {mapItem, cart, setCart, subtotal, setSubtotal, userID} ) => 
       }
       {courseName &&
         <div className='cart-item'>
-          <div className='image-container'> <img src={`/courseMaterial/image/${coursePhotoURL}`} alt="courseimg" className='cart-item-img' /> </div> 
+          <div className='image-container'> <img src={`/courseMaterial/image/${coursePhotoURL}`} alt="courseimg" className='cart-item-img' onClick={() => history.push(`/course/${mapItem.courseID}`)}/> </div> 
           <div className='title'>
-            <h4>{courseName}</h4>
+            <h4 onClick={() => history.push(`/course/${mapItem.courseID}`)} className='cart-course-name'>{courseName}</h4>                  
             <h5 className='cart-kit'>Kit: {kitName}</h5>
           </div>
           <span className='price'>${price}.00</span>
