@@ -1,5 +1,3 @@
-import React, { useState, useEffect } from "react"
-
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import Button from '@material-ui/core/Button';
@@ -28,7 +26,8 @@ const FormUpdateModule = ({ courseID, modules, refreshModal }) => {
        
         const validationSchema = yup.object({
             moduleNumber: yup
-                .string('Enter module number'),
+                .string('Enter module number')
+                .required('Module required'),
             description: yup
                 .string('Enter module description'),
          })

@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react"
 
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-//import Axios from "axios"
 import { makeStyles } from '@material-ui/core/styles';
 
 const FormKitInfo = ({ courseID, fileUse, course }) => {

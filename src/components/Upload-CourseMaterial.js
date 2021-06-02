@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import Button from '@material-ui/core/Button';
 import Axios from "axios"
 import ImageCourseMaterial from './Image-CourseMaterial'
@@ -11,7 +11,7 @@ const UploadCourseMaterial = ({ currentFileID, courseID, fileUse, description, r
     const [selectedFile, setSelectedFile] = useState()
     const [isSelected, setIsSelected] = useState(false)
     const [isSuccessful, setIsSuccessful] = useState(false)
-    const [previewImage, setPreviewImage] = useState(placeholder)
+    //const [previewImage, setPreviewImage] = useState(placeholder)
 
     //for viewing preview of file to be submitted
     const filechangeHandler = (event) => {
@@ -34,7 +34,7 @@ const UploadCourseMaterial = ({ currentFileID, courseID, fileUse, description, r
         /*delete module file from gridfs database*/
         try {
                 
-            let response = await fetch(`/coursesMaterials/delete/${currentFileID}`,
+        let response = await fetch(`/courseMaterial/delete/${currentFileID}`,
             {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/json' },
@@ -62,48 +62,34 @@ const UploadCourseMaterial = ({ currentFileID, courseID, fileUse, description, r
         setIsSuccessful(true)
         refreshModal()
    
-        /*check if there is already an existing file defined.  If so, store
-        the fileID, so when the new file is uploaded, the old one can be deleted
-        from the gridfs database*/
-        if (currentFileID) {
-            deleteFile()
-            console.log("file deleted")
-        }
+        // if the currentFileID exists (not equal to ""), delete the existing file
+        // from the gridfs database*/
+         if ((currentFileID!=="60b70b4ee143353331068b39") && (currentFileID!=="")) {
+             deleteFile()
+             //console.log("file deleted called")
+         }
 
 
         const update = {
-        [fileUse]: {
-            fileID: uploadedFile._id,
-            filename: uploadedFile.filename,
-            description: description
+            [fileUse]: {
+                fileID: uploadedFile._id,
+                filename: uploadedFile.filename,
+                description: description
+            }
         }
-    }
-    
 
-
-
-
-    try {
-        let response = await fetch(`/courses/${courseID}`,
-            {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(update, null, 2)
-            })
-        // delete exisiting file
-        if (currentFileID) {
-            deleteFile()
-            console.log("file deleted")
+        try {
+            await fetch(`/courses/${courseID}`,
+                {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(update, null, 2)
+                })
+             } catch (err) {
+            console.log(`Problem with posting data`)
         }
-        } catch (err) {
-        console.log(`Problem with posting data`)
-    }
 
-    /*check if there is already an existing file defined.  If so, store
-      the fileID, so when the new file is uploaded, the old one can be deleted
-      from the gridfs database*/
-
-    
+   
     }
 
     return (

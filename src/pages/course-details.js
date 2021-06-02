@@ -13,7 +13,7 @@ const CourseDetails = props => {
     
     useEffect(() => {
         const getCourse = async () => {
-            let response = await fetch(`/courses/${id}`)
+            let response = await fetch(`/courses/${id}?courseStatus=Current`)
             let data = await response.json()
             setCourse(data)
         }

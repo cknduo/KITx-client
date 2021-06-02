@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -58,7 +58,7 @@ const UploadModuleMaterial = ({ courseID, fileUse, description, modules, refresh
             }
             console.log('update course files', update)
             try {
-                let response = await fetch(`/courses/${courseID}/modulefiles`,
+                await fetch(`/courses/${courseID}/modulefiles`,
                     {
                         method: 'PUT',
                         headers: { 'Content-Type': 'application/json' },

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -15,7 +15,6 @@ const TableCourseMaterial = ({courseID, materialAdded, course, refreshModal}) =>
 
   const classes = useStyles();
   let rows = course.modules
-  let moduleFiles = course.moduleFiles
 
   const addModule = async () => {
     /*add new module to course database*/
@@ -40,7 +39,7 @@ const TableCourseMaterial = ({courseID, materialAdded, course, refreshModal}) =>
     }
 
     try {
-      let response = await fetch(`/courses/${courseID}/modules`,
+      await fetch(`/courses/${courseID}/modules`,
           {
               method: 'PUT',
               headers: { 'Content-Type': 'application/json' },
@@ -94,7 +93,7 @@ function Row({row, moduleFiles, moduleNumber, courseID, refreshModal }) {
 
     try {
             
-      let response = await fetch(`/coursesMaterials/delete/${fileID}`,
+      await fetch(`/courseMaterial/delete/${fileID}`,
       {
           method: 'DELETE',
           headers: { 'Content-Type': 'application/json' },
@@ -107,7 +106,7 @@ function Row({row, moduleFiles, moduleNumber, courseID, refreshModal }) {
     /*delete module file from course database*/
     try {
             
-        let response = await fetch(`/courses/${courseID}/modulefiles/delete/${fileID}`,
+        await fetch(`/courses/${courseID}/modulefiles/delete/${fileID}`,
         {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },

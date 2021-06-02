@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import TableTeacherCourses from '../components/Table-TeacherCourses'
 import Button from '@material-ui/core/Button';
 
@@ -27,22 +27,18 @@ const ViewTeacherInProgress = ({teacherID, courseUpdated}) => {
             studentIDs:[],
             subject:"",
             courseImage: {
-                fileID:"",
-                description:""
+                fileID:"60b70b4ee143353331068b39",
+                description:"placeholder"
             },
             certificate: {
-                fileID:"",
-                description:""
+                fileID:"60b70b4ee143353331068b39",
+                description:"placeholder"
             },
             kitImage: {
-                fileID:"",
-                description:""
+                fileID:"60b70b4ee143353331068b39",
+                description:"placeholder"
             },
-            modulesFiles: [{
-                fileID:"",
-                fileName:"",
-                description:"",    
-            }],
+            modulesFiles: [],
             modules: []  
             
         }
@@ -50,7 +46,7 @@ const ViewTeacherInProgress = ({teacherID, courseUpdated}) => {
         // create new entry in course DB
         try {
             
-            let response = await fetch("/courses/addCourse",
+            await fetch("/courses/addCourse",
             {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
