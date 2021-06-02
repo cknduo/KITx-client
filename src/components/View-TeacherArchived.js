@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import TableTeacherCourses from '../components/Table-TeacherCourses'
 
 const ViewTeacherArchived = ({teacherID}) => {   

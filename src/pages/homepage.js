@@ -9,7 +9,7 @@ const HomePage = ({ accountType, userID }) => {
 
     useEffect(() => {
         const getCourses = async () => {
-            let response = await fetch('/courses/findByStatus/Current')
+            let response = await fetch('/courses?courseStatus=Current')
             let data = await response.json()
             setCourses(data)
         }

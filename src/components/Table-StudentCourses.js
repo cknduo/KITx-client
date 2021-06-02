@@ -13,7 +13,6 @@ import { useHistory } from 'react-router-dom'
 
 const TableStudentCourses = ({studentID, /*courseAdded,*/ courseStatus, student}) => {
   
-  const [courseIDtoUpdate, setCourseIDtoUpdate] = useState()
   const [rows, setRows] = useState([]);
 
   //const classes = useStyles();
