@@ -223,7 +223,7 @@ const ShoppingCart = ( { cart, setCart, userID, userInfo, setUserInfo, accountTy
         <div className='shopping-cart'>
             <div className='shopping-cart-container'>
                 <div className='shopping-cart-user'>
-                    <h4> Welcome {userInfo.firstName}, here are the courses you are about to purchase:</h4>                    
+                    <h4>Welcome {userInfo.firstName}, here are the courses you are about to purchase:</h4>                    
                 </div>
                 <div className='shopping-cart-clear-btn'>
                     <button
@@ -256,18 +256,20 @@ const ShoppingCart = ( { cart, setCart, userID, userInfo, setUserInfo, accountTy
                 </div>
                 <div className='shopping-cart-subtotal'>
                     {cart.length !== 0 &&
-                        <div> Subtotal: ${subtotal}.00 + shipping fee + tax</div>
+                        <div>Subtotal: ${subtotal}.00 + shipping fee + tax</div>
                     }                    
                 </div>
                 <div className='shopping-cart-checkout-btn'>
-                    <button 
-                        className='checkout-btn'
-                        type='button'
-                        disabled={cart.length === 0}
-                        onClick={processOrder}
-                    >
-                        BUY NOW
-                    </button>
+                    {cart.length !== 0 &&
+                        <button 
+                            className='checkout-btn'
+                            type='button'
+                            disabled={cart.length === 0}
+                            onClick={processOrder}
+                        >
+                            BUY NOW
+                        </button>
+                    }
                 </div>
             </div>
         </div>

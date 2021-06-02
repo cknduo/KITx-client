@@ -56,7 +56,7 @@ const FormKitInfo = ({ courseID, fileUse, course }) => {
             id="kitName"
             name="kitName"
             label="Kit Name"
-            variant="filled"
+            variant="outlined"
             style={{ margin: "16px 0px" }}
             defaultValue={course.requiredKits.kitName}
             onChange={formik.handleChange}
@@ -71,7 +71,7 @@ const FormKitInfo = ({ courseID, fileUse, course }) => {
             id="kitDescription"
             name="kitDescription"
             label="Kit Description"
-            variant="filled"
+            variant="outlined"
             style={{ margin: "16px 0px" }}
             defaultValue={course.requiredKits.kitDescription}
             onChange={formik.handleChange}

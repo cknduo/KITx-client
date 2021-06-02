@@ -4,6 +4,7 @@ import Axios from "axios"
 
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import { styled } from '@material-ui/core/styles'
 import IconButton from '@material-ui/core/IconButton';
 
 import './student-learning.css'
@@ -38,37 +39,32 @@ const StudentLearning = () => {
         console.log(fileID)
     }
 
-
-    let courseImageURL = `/courseMaterial/image/${course.courseImage.fileID}`
+    // let courseImageURL = `/courseMaterial/image/${course.courseImage.fileID}`
     
     return (
         <div className="learner-page">
-        
-            <div className="banner" style= {{backgroundImage:`url(${courseImageURL}`}}>
-                <p className='banner-title'>{course.courseName}</p>     
-            </div>
-
-            <div className="learner-view">
-
-                <div className="video-view">
-                    <VideoPlayback videoFileID={videoFileID} width="200px"/>
-                </div>
-
-                <div className="module-details-view">
-                    <h2> Course Material </h2>
-                    {modules.map((module) => (<CardModule module={module} moduleFiles={moduleFiles} updateVideoFileID={updateVideoFileID}/> ))}
-                </div>
-
+            <div className='learner-page-container'>
+                <p className='learner-page-course-title'>{course.courseName}</p>   
+                <div className="learner-view">
+                    <div className="video-view">
+                        <VideoPlayback videoFileID={videoFileID} />                        
+                    </div>
+                    <div className="module-details-view">
+                        <div className='module-details-view-title-container'>
+                            <h3>Course Content</h3>
+                        </div>
+                        {modules.map((module) => (<CardModule module={module} moduleFiles={moduleFiles} updateVideoFileID={updateVideoFileID}/> ))}
+                    </div>
+                </div>              
             </div>
         </div>
-  ) 
+    ) 
 }
 
 function CardModule(props) {
     const { module, moduleFiles, updateVideoFileID } = props;
     const [open, setOpen] = React.useState(false);
   
-
     const fileDownload = (fileID, filename) => {
 
         Axios({
@@ -85,14 +81,25 @@ function CardModule(props) {
           });
     }
 
-    return (
+    const ModuleButton = styled(IconButton)({
+        transition: 'none !important',
+        borderRadius: 0,
+        borderBottom: '1px solid rgb(218, 218, 218)',
+        width: '100%',
+        textAlign: 'left',
+        fontSize: '1rem',
+        display: 'flex',
+        justifyContent: 'flex-start',
+        color: '#b6b6b6',
+    })
 
-            <div>
+    return (
+        <div>
             <div className = "expand-file-view">
-                <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
+                <ModuleButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
                     {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
-                    <strong> Module {module.moduleNumber}: {module.description} </strong>
-                </IconButton>
+                    <p> {module.moduleNumber}. {module.description} </p>
+                </ModuleButton>
             </div>
 
             <div className = "file-action-buttons">
@@ -102,11 +109,11 @@ function CardModule(props) {
 
                         return (
                             <div>
-                            <p>&emsp; {moduleFile.description} &emsp; File: {moduleFile.filename} &emsp;
+                            <p>&emsp;{moduleFile.description}&emsp;File: {moduleFile.filename}&emsp;
                             
                             {/* extract the filename extension to determine action for button */}
                             { ((moduleFile.filename.split('.').pop() === "mp4") || (moduleFile.filename.split('.').pop() === "mov"))  &&
-                                <button onClick={()=>{updateVideoFileID(moduleFile.fileID)}}> Play Video </button>
+                                <button className='video-btn' onClick={()=>{updateVideoFileID(moduleFile.fileID)}}> Play Video </button>
                             }
                             
                             {((moduleFile.filename.split('.').pop() !== "mp4") && (moduleFile.filename.split('.').pop() !== "mov")) &&
@@ -117,8 +124,7 @@ function CardModule(props) {
                     } else return null  
                 })} 
             </div>
-
-            </div>
+        </div>
     )
 }  
   
@@ -132,7 +138,7 @@ const VideoPlayback = ({videoFileID}) => {
 
     return (
         <video controls>
-           <source src = {`/courseMaterial/image/${videoFileID}`} type="video/mp4"/>
+           <source src={`/courseMaterial/image/${videoFileID}`} type="video/mp4"/>
         </video>
     )  
 

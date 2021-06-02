@@ -3,11 +3,12 @@ import React, { useEffect, useState } from 'react'
 import ModalUpdateCourse from './Modal-UpdateCourse'
 import ImageCourseMaterial from './Image-CourseMaterial'
 import Modal from 'react-modal'
-import Button from '@material-ui/core/Button';
-import Edit from '@material-ui/icons/Edit';
-import { Paper, Table, TableBody, TableCell, TableContainer, TableRow} from '@material-ui/core';
+import Button from '@material-ui/core/Button'
+import { ReactComponent as Pen } from '../assets/pen.svg'
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom'
+
+import './Table-TeacherCourses.css'
 
 const TableTeacherCourses = ({teacherID, courseAddedToggle, courseStatus}) => {
   
@@ -19,7 +20,6 @@ const TableTeacherCourses = ({teacherID, courseAddedToggle, courseStatus}) => {
     setUpdateCourseModalIsOpen(!updateCourseModalIsOpen)
   }    
   
-  const classes = useStyles();
   const history = useHistory()
 
   useEffect(() => {
@@ -33,72 +33,45 @@ const TableTeacherCourses = ({teacherID, courseAddedToggle, courseStatus}) => {
   }, [courseAddedToggle, updateCourseModalIsOpen]);
 
   return (
-    <div>
-    <TableContainer component={Paper}>
-      <Table aria-label='simple table'>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row._id}>
-              <TableCell component='th' scope='row'>
-                 <TableCell><ImageCourseMaterial imageFileID={row.courseImage.fileID}/></TableCell>
-              </TableCell>
-              <TableCell>{row.courseName}</TableCell>
-              <TableCell>Total Enrollment: {row.studentIDs.length}</TableCell>
-              <TableCell>
-                  <Button
-                      variant="contained"
-                      color="primary"
-                      size="small"
-                      startIcon={<Edit/>}
-                      style={{ marginLeft: 16 }}
-                      onClick={()=>{setCourseIDtoUpdate(row._id); toggleUpdateCourseModal()}}>
-                      UPDATE
-                  </Button>
-              </TableCell>
-              <TableCell>
-              <Button
-                      variant="contained"
-                      color="primary"
-                      size="small"
-                      style={{ marginLeft: 16 }}
-                      onClick={()=>{history.push(`/course/${row._id}`)}}>
-                      VIEW COURSE PAGE
-              </Button>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <div className='table-teacher-courses'>
+        {rows.map(row => (
+          <div key={row._id}>
+            <div className='table-teacher-courses-item'>
+              <div className='teacher-courses-item-img-container'>
+                <ImageCourseMaterial className='teacher-courses-item-img' imageFileID={row.courseImage.fileID}/>
+              </div>
+              <div className='student-courses-item-course-name-container'>
+                <h4 className='teacher-courses-item-course-name'>{row.courseName}</h4>
+                <h5 className='teacher-courses-item-kit-name'>{row.requiredKits.kitName}</h5>
+                <p className='teacher-courses-item-enrollment'>Total Enrollment: {row.studentIDs.length}</p>                
+              </div>
+              <div className='teacher-courses-item-edit-btn-container'>
+                <button className='teacher-courses-item-btn' onClick={()=>{setCourseIDtoUpdate(row._id); toggleUpdateCourseModal()}}><Pen className='pen-icon'/> EDIT </button>
+                <button className='teacher-courses-item-btn' onClick={()=>{history.push(`/course/${row._id}`)}}>GO TO COURSE PAGE</button>                  
+              </div>
+            </div>
+          </div>   
+        ))}
 
-    <Modal 
-      isOpen={updateCourseModalIsOpen}
-      style={{
-        overlay: {
-          backgroundColor: 'rgba(31, 40, 47, 0.5)'
-        },
-        content: {
-          top: '5rem',
-          left: '2rem',
-          right: '2rem',
-          bottom: '2rem',
-          borderRadius: '8px',
-        }
-      }}
-    >
-        {courseIDtoUpdate && < ModalUpdateCourse courseID={courseIDtoUpdate} teacher={teacherID}/>}
-        <Button color="primary" variant="contained" onClick={toggleUpdateCourseModal}> Close </Button>
-    </Modal>
-  </div>
-  );
-};
-
-const useStyles = makeStyles({
-  headerCell: {
-    color: 'blue',
-    fontWeight: 'bold',
-  },
-});
-
+      <Modal 
+        isOpen={updateCourseModalIsOpen}
+        style={{
+          overlay: {
+            backgroundColor: 'rgba(31, 40, 47, 0.9)'
+          },
+          content: {
+            top: '5rem',
+            left: '2rem',
+            right: '2rem',
+            bottom: '2rem'
+          }
+        }}
+      >
+          {courseIDtoUpdate && < ModalUpdateCourse courseID={courseIDtoUpdate} teacher={teacherID}/>}
+          <button className='modal-close-btn' onClick={toggleUpdateCourseModal}>CLOSE EDIT</button>
+      </Modal>
+    </div>
+  )
+}
 
 export default TableTeacherCourses

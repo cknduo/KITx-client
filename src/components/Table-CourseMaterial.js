@@ -173,7 +173,7 @@ function Row({row, moduleFiles, moduleNumber, courseID, refreshModal }) {
 
 const useStyles = makeStyles({
   headerCell: {
-    color: 'blue',
+    color: '#0091ca',
     fontWeight: 'bold',
   },
   
@@ -186,7 +186,7 @@ const useRowStyles = makeStyles({
     }
     },
     headerCell: {
-      color: 'blue',
+      color: '#0091ca',
       fontWeight: 'bold',
   
     }
