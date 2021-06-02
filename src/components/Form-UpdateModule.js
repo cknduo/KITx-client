@@ -26,7 +26,8 @@ const FormUpdateModule = ({ courseID, modules, refreshModal }) => {
        
         const validationSchema = yup.object({
             moduleNumber: yup
-                .string('Enter module number'),
+                .string('Enter module number')
+                .required('Module required'),
             description: yup
                 .string('Enter module description'),
          })
