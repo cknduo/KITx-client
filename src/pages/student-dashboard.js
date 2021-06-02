@@ -30,8 +30,7 @@ const StudentDashboard = () => {
         <div className='user-dashboard'>
             <div className='dashboard-tab-container'>
                 <div className='dashboard-user-details'>
-                        <h3>Welcome back {user && user.firstName} {user && user.lastName}</h3>
-                        <p>Your Account Number: {user && user._id}</p>                    
+                    <h3>Welcome to your student dashboard, {user && user.firstName} {user && user.lastName}!</h3>                  
                 </div>
                 <div className='dashboard-tab-options'>
                     <button

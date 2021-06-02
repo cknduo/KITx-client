@@ -1,0 +1,18 @@
+.teach-in-progress-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-new-course-btn {
+    margin: 1rem 1rem;
+    padding: 0.5rem 1rem;
+    letter-spacing: 0.5px;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    background-color: var(--secondary);
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    cursor: pointer;
+}
