@@ -409,7 +409,6 @@ const SignUp = ({ setUserID, setUserInfo, setAccountType }) => {
               <FormControlLabel
                 control={
                   <Checkbox
-                    checked={(e) => setUserAgreement(true)}
                     onChange={formik.handleChange}
                     name="agreement"
                   />
