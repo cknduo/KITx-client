@@ -1,0 +1,27 @@
+.course-content-module-upload-btn {
+    padding: 0.5rem 2rem;
+    letter-spacing: 0.5px;
+    color: white;
+    font-size: 0.6rem;
+    font-family: inherit;
+    font-weight: bold;
+    background-color: var(--primary);
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    cursor: pointer;
+}
+
+.course-content-module-upload-btn:disabled {
+    padding: 0.5rem 1rem;
+    letter-spacing: 0.5px;
+    color: white;
+    font-size: 0.6rem;
+    font-family: inherit;
+    font-weight: bold;
+    background-color: var(--neutral);
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    cursor: default;
+}

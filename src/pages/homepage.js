@@ -41,8 +41,8 @@ const HomePage = ({ accountType, userID }) => {
             <div className='courses-preview-title'><h3>Featured Courses</h3></div>
             <div className='courses-preview'>
                 {courses
-                    .sort(() => Math.random() - 0.5)
-                    .slice(0,4)
+                    // .sort(() => Math.random() - 0.5)
+                    // .slice(0,4)
                     .map(course => {
                         return (
                                 <Card

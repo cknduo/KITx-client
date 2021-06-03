@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import TableTeacherCourses from '../components/Table-TeacherCourses'
-import Button from '@material-ui/core/Button';
 
 import './View-TeacherInProgress.css'
 
@@ -65,9 +64,9 @@ const ViewTeacherInProgress = ({teacherID, courseUpdated}) => {
 
     return (
         <div className='teach-in-progress-container'>
-            {/* <div className='add-new-course-btn-container'> */}
+            <div className='add-new-course-btn-container'>
                 <button className='add-new-course-btn' onClick={addCourse}>Add A New Course</button>                
-            {/* </div> */}
+            </div>
             <TableTeacherCourses teacherID={teacherID} courseStatus={"Draft"} courseAddedToggle={courseAddedToggle}/>
         </div>
     )

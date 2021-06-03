@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import Rating from '@material-ui/lab/Rating'
 import { Link } from 'react-router-dom'
 import modifyDBCartItems from '../functions/ModifyDBCartItems'
+import { useHistory } from "react-router-dom"
 
 import './course-details.css'
 
@@ -10,6 +11,7 @@ const CourseDetails = props => {
     const [course, setCourse] = useState(null)
     
     const { id } = useParams()
+    const history = useHistory()
     
     useEffect(() => {
         const getCourse = async () => {
@@ -148,9 +150,7 @@ const CourseDetails = props => {
 
                 <div className='course-details-enroll-btn'>
                     {props.userID === "" &&
-                        <Link to={'/sign-in'}>
-                            <button className='enroll-btn'>LOG IN TO ENROLL</button>
-                        </Link>
+                            <button className='enroll-btn' onClick={() => history.push(`/sign-in`)}>LOG IN TO ENROLL</button>
                     }
                 </div>
 

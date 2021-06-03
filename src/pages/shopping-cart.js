@@ -125,6 +125,7 @@ const ShoppingCart = ( { cart, setCart, userID, userInfo, setUserInfo, accountTy
                                 withCredentials: true,
                                 url: `/courses/${simplifiedCartList[loopCounter]}`,
                             })
+                            history.push(`/student/${userID}`)
                             statusMessage = courseUpdateResponse.statusText
                             statusDB = courseUpdateResponse.status
                             loopCounter += 1
@@ -152,7 +153,7 @@ const ShoppingCart = ( { cart, setCart, userID, userInfo, setUserInfo, accountTy
             console.log("Result of Enrollment process = ", messageToLog)
 
             // Send user to Student Dashboard
-            history.push(`/student/${userID}`)
+            // history.push(`/student/${userID}`)
         }
     }
     // --------------------------------------------------------------------

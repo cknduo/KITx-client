@@ -1,14 +1,13 @@
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import Radio from '@material-ui/core/Radio'
 
-
 import './Modal-UpdateCourse.css'
+import './Form-CourseData.css'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -174,11 +173,11 @@ const FormCourseData = ({ course, teacherID }) => {
           
             </div>
 
-
-            <Button color="primary" variant="contained" type="submit">
-                Submit
-            </Button>
-
+            <div className='form-course-data-btn-container'>
+                <button className='form-course-data-btn' type="submit">
+                    SUBMIT
+                </button>                
+            </div>
         </form>
     )
 }

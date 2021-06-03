@@ -68,8 +68,14 @@
     stroke: white;
 }
 
+.inside-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .modal-close-btn {
-    margin: 1rem 1rem;
+    margin-top: 1rem;
     padding: 0.5rem 5rem;
     letter-spacing: 0.5px;
     color: white;

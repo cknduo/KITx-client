@@ -1,9 +1,9 @@
-
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
+
+import './Form-KitInfo.css'
 
 const FormKitInfo = ({ courseID, fileUse, course }) => {
 
@@ -45,7 +45,7 @@ const FormKitInfo = ({ courseID, fileUse, course }) => {
     });
 
     return (
-        <div>
+        <div className='kit-info'>
 
         <form className={classes.root} onSubmit={formik.handleSubmit}>
 
@@ -77,9 +77,9 @@ const FormKitInfo = ({ courseID, fileUse, course }) => {
             helperText={formik.touched.kitDescription && formik.errors.kitDescription}
         />
 
-        <Button color="primary" variant="contained" type="submit">
-            Submit
-        </Button>
+        <button className='kit-info-btn' type="submit">
+            SUBMIT
+        </button>
         </form>
 
         </div>
