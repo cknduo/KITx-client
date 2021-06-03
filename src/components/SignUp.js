@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { useHistory } from 'react-router-dom'
 import Axios from "axios"
 import TextField from '@material-ui/core/TextField'
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
+import Checkbox from '@material-ui/core/Checkbox';
 import InputLabel from '@material-ui/core/InputLabel'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
@@ -22,13 +23,10 @@ const SignUp = ({ setUserID, setUserInfo, setAccountType }) => {
 
   // User Information
   const [registerAccountType, setregisterAccountType] = useState("student") // Default Selection: Student
-  // const [registerFirstName, setregisterFirstName] = useState("")
-  // const [registerLastName, setregisterLastName] = useState("")
-  // const [registerAddress, setregisterAddress] = useState("")
-  // const [registerCity, setregisterCity] = useState("")
   const [registerProvince, setregisterProvince] = useState("")
-  // const [registerPostalCode, setregisterPostalCode] = useState("")
+  const [registerPostalCode, setregisterPostalCode] = useState("")
   const [registerCountry, setregisterCountry] = useState("")
+  // const [userAgreement, setUserAgreement] = useState(false)
 
   let history = useHistory()
 
@@ -68,21 +66,16 @@ const SignUp = ({ setUserID, setUserInfo, setAccountType }) => {
       .required('City is Required'),
     postalCode: Yup
       .string('Enter Postal Code')
-      .matches(/^[ABCEGHJ-NPRSTVXY][0-9][ABCEGHJ-NPRSTV-Z][ -]?[0-9][ABCEGHJ-NPRSTV-Z][0-9]$/i, "Invalid Postal Code")
-      .required('Postal Code is Required'), //Set Value of Zip Code to "" When Selecting Postal Code
+      .matches(/^[ABCEGHJ-NPRSTVXY][0-9][ABCEGHJ-NPRSTV-Z][ -]?[0-9][ABCEGHJ-NPRSTV-Z][0-9]$/i, "Invalid Postal Code"),
     zipCode: Yup
       .string('Enter Zip Code')
-      .matches(/^[0-9]{5}(?:-[0-9]{4})?$/, "Invalid Zip Code") //Make Zip Code and Postal Code values interchangeable & also set one to "" when other is selected
-      .required('Zip Code is Required'),
+      .matches(/^[0-9]{5}(?:-[0-9]{4})?$/, "Invalid Zip Code"),
     province: Yup
-      .string('Enter Province')
-      .required('Province is Required'), //Set Value of State to "" When Selecting Province
+      .string('Enter Province'),
     state: Yup
-      .string('Enter State')
-      .required('State is Required'),
+      .string('Enter State'),
     country: Yup
       .string('Enter Country')
-      .required('Country is Required'),
   })
 
   // Form Function
@@ -90,6 +83,9 @@ const SignUp = ({ setUserID, setUserInfo, setAccountType }) => {
     initialValues: { firstName: "", lastName: "", email: "", confirmEmail: "", password: "", confirmPassword: "", streetAddress: "", city: "", postalCode: "", zipCode: "", province: "", state: "", country: "" },
     validationSchema: signUpValidationSchema,
     onSubmit(values) {
+
+
+
       let registrationInfo = {
         // Authentication
         username: values.email,
@@ -102,7 +98,7 @@ const SignUp = ({ setUserID, setUserInfo, setAccountType }) => {
         address: values.streetAddress,
         city: values.city,
         province: registerProvince,
-        postalCode: values.postalCode,
+        postalCode: registerPostalCode,
         country: registerCountry
       }
 
@@ -113,52 +109,48 @@ const SignUp = ({ setUserID, setUserInfo, setAccountType }) => {
   //Register Function
   const register = (regInfo) => {
 
-    // if (registerUsername !== confirmUsername) {
-    //   alert("Emails don't match")
-    // }
-
-    // else if (registerPassword !== confirmPassword) {
-    //   alert("Passwords don't match")
+    // if (userAgreement !== true) {
+    //   alert("Please Accept the Terms of Use & Privacy Policy")
     // }
 
     // else {
 
-    Axios({
-      method: "POST",
-      data: regInfo,
-      withCredentials: true,
-      url: "/register/",
-    }).then((signUpResponse) => {
-      console.log(signUpResponse.data)
+      Axios({
+        method: "POST",
+        data: regInfo,
+        withCredentials: true,
+        url: "/register/",
+      }).then((signUpResponse) => {
+        console.log(signUpResponse.data)
 
-      // Error Handling
-      if (signUpResponse.data.error) {
-        console.log({ "Error": signUpResponse.data.error, "Status": signUpResponse.status })
-        alert(signUpResponse.data.error)
-      }
-
-      else {
-        console.log({ "Response": signUpResponse.data.msg, "Status": signUpResponse.status })
-
-        //Value Setter for the first authentication {Using deconstruction}
-        setUserID(signUpResponse.data.userID)
-        setUserInfo(signUpResponse.data.userInfo)
-        setAccountType(signUpResponse.data.userInfo.accountType)
-
-        // Redirect after Login
-        if (signUpResponse.data.userInfo.accountType === "student") {
-          history.push("/student/" + signUpResponse.data.userID)
+        // Error Handling
+        if (signUpResponse.data.error) {
+          console.log({ "Error": signUpResponse.data.error, "Status": signUpResponse.status })
+          alert(signUpResponse.data.error)
         }
-        else if (signUpResponse.data.userInfo.accountType === "teacher") {
-          history.push("/teacher/" + signUpResponse.data.userID)
-        }
+
         else {
-          history.push("/")
-          console.log("Error: Account Type Not Set")
-        }
+          console.log({ "Response": signUpResponse.data.msg, "Status": signUpResponse.status })
 
-      }
-    })
+          //Value Setter for the first authentication {Using deconstruction}
+          setUserID(signUpResponse.data.userID)
+          setUserInfo(signUpResponse.data.userInfo)
+          setAccountType(signUpResponse.data.userInfo.accountType)
+
+          // Redirect after Login
+          if (signUpResponse.data.userInfo.accountType === "student") {
+            history.push("/student/" + signUpResponse.data.userID)
+          }
+          else if (signUpResponse.data.userInfo.accountType === "teacher") {
+            history.push("/teacher/" + signUpResponse.data.userID)
+          }
+          else {
+            history.push("/")
+            console.log("Error: Account Type Not Set")
+          }
+
+        }
+      })
     // }
   }
 
@@ -166,14 +158,14 @@ const SignUp = ({ setUserID, setUserInfo, setAccountType }) => {
     <div className="sign-up">
       <form onSubmit={formik.handleSubmit}>
         <div className='radio-container'>
-        <span className='account-type-prompt'>I am a</span>
-        <RadioGroup row value={registerAccountType} onChange={(e) => setregisterAccountType(e.target.value)}>
-          <FormControlLabel value="student" control={<Radio color="primary" />} label="Student" />
-          <FormControlLabel value='teacher' control={<Radio color="primary" />} label="Teacher" />
-        </RadioGroup>
-      </div>
+          <span className='account-type-prompt'>I am a</span>
+          <RadioGroup row value={registerAccountType} onChange={(e) => setregisterAccountType(e.target.value)}>
+            <FormControlLabel value="student" control={<Radio color="primary" />} label="Student" />
+            <FormControlLabel value='teacher' control={<Radio color="primary" />} label="Teacher" />
+          </RadioGroup>
+        </div>
 
-      <div className='name-container'>
+        <div className='name-container'>
 
           {/* First Name */}
           <div className='first-name'>
@@ -298,7 +290,7 @@ const SignUp = ({ setUserID, setUserInfo, setAccountType }) => {
                   label="Postal Code"
                   name="postalCode"
                   id="postalCode"
-                  onChange={formik.handleChange}
+                  onChange={(e) => setregisterPostalCode(e.target.value)}
                   error={formik.touched.postalCode && Boolean(formik.errors.postalCode)}
                   helperText={formik.touched.postalCode && formik.errors.postalCode}
                 />
@@ -308,7 +300,7 @@ const SignUp = ({ setUserID, setUserInfo, setAccountType }) => {
                   label="Zip Code"
                   name="zipCode"
                   id="zipCode"
-                  onChange={formik.handleChange}
+                  onChange={(e) => setregisterPostalCode(e.target.value)}
                   error={formik.touched.zipCode && Boolean(formik.errors.zipCode)}
                   helperText={formik.touched.zipCode && formik.errors.zipCode}
                 />
@@ -403,14 +395,30 @@ const SignUp = ({ setUserID, setUserInfo, setAccountType }) => {
             <div className='country'>
               <FormControl required style={{ width: "100%" }}>
                 <InputLabel label="select-country">Country</InputLabel>
-                <Select labelId="select-country" value={registerCountry} onChange={(e) => setregisterCountry(e.target.value)}>
+                <Select labelId="select-country" value={registerCountry} onChange={(e) => {
+                  setregisterCountry(e.target.value)
+                  setregisterProvince("")
+                }}>
                   <MenuItem value='Canada'>Canada</MenuItem>
                   <MenuItem value='United States of America'>United States of America</MenuItem>
                 </Select>
               </FormControl>
             </div>
 
-            {/* I accept the [Terms of Use] & [Privacy Policy] --> checkbox */}
+            <div className="checkbox">
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={(e) => setUserAgreement(true)}
+                    onChange={formik.handleChange}
+                    name="agreement"
+                  />
+                }
+                label="I accept the [Terms of Use] & [Privacy Policy]"
+              />
+
+            </div>
+
 
           </div>
 
@@ -427,6 +435,3 @@ const SignUp = ({ setUserID, setUserInfo, setAccountType }) => {
 }
 
 export default SignUp
-
-// email
-// password --- weak/strong?
