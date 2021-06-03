@@ -2,32 +2,46 @@ import React from "react"
 import { useHistory } from 'react-router-dom'
 import Axios from "axios"
 import { useFormik } from 'formik'
-import * as yup from 'yup'
+import * as Yup from 'yup'
 
 import TextField from '@material-ui/core/TextField'
 import './SignIn.css'
 
 const SignIn = ({ setUserID, setUserInfo, setAccountType }) => {
 
+  let history = useHistory()
+
   //Validation Schema
-  const validationSchema = yup.object({
-    email: yup
-      .string('Enter e-mail')
-      .email('Enter in an e-mail format')
-      .required('E-mail is required'),
-    password: yup
-      .string('Enter password')
-      .required('Password is required'),
+  const signInValidationSchema = Yup.object({
+    email: Yup
+      .string('Enter Email')
+      .email('Enter a Valid Email')
+      .required('E-mail is Required'),
+    password: Yup
+      .string('Enter Password')
+      .required('Password is Required'),
 
   })
 
-  let history = useHistory()
+  // Form Function
+  let formik = useFormik({
+    initialValues: { email: "", password: "" },
+    validationSchema: signInValidationSchema,
+    onSubmit(values) {
+      let authenticationInfo = {
+        username: values.email,
+        password: values.password
+      }
+
+      login(authenticationInfo)
+    }
+  })
 
   // Login Function
-  const login = async (info) => {
+  const login = async (authInfo) => {
     const loginRes = await Axios({
       method: "POST",
-      data: info,
+      data: authInfo,
       withCredentials: true,
       url: "/login/",
     })
@@ -59,20 +73,6 @@ const SignIn = ({ setUserID, setUserInfo, setAccountType }) => {
       }
     }
   }
-
-  // Form Function
-  let formik = useFormik({
-    initialValues: { email: "", password: "" },
-    validationSchema: validationSchema,
-    onSubmit(values) {
-      let authenticationInfo = {
-        username: values.email,
-        password: values.password
-      }
-
-      login(authenticationInfo)
-    }
-  })
 
   return (
 
