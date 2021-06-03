@@ -4,7 +4,8 @@ import Axios from "axios"
 import TextField from '@material-ui/core/TextField'
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
-import Checkbox from '@material-ui/core/Checkbox';
+import Checkbox from '@material-ui/core/Checkbox'
+import Link from '@material-ui/core/Link'
 import InputLabel from '@material-ui/core/InputLabel'
 import Select from '@material-ui/core/Select'
 import MenuItem from '@material-ui/core/MenuItem'
@@ -115,42 +116,42 @@ const SignUp = ({ setUserID, setUserInfo, setAccountType }) => {
 
     // else {
 
-      Axios({
-        method: "POST",
-        data: regInfo,
-        withCredentials: true,
-        url: "/register/",
-      }).then((signUpResponse) => {
-        console.log(signUpResponse.data)
+    Axios({
+      method: "POST",
+      data: regInfo,
+      withCredentials: true,
+      url: "/register/",
+    }).then((signUpResponse) => {
+      console.log(signUpResponse.data)
 
-        // Error Handling
-        if (signUpResponse.data.error) {
-          console.log({ "Error": signUpResponse.data.error, "Status": signUpResponse.status })
-          alert(signUpResponse.data.error)
+      // Error Handling
+      if (signUpResponse.data.error) {
+        console.log({ "Error": signUpResponse.data.error, "Status": signUpResponse.status })
+        alert(signUpResponse.data.error)
+      }
+
+      else {
+        console.log({ "Response": signUpResponse.data.msg, "Status": signUpResponse.status })
+
+        //Value Setter for the first authentication {Using deconstruction}
+        setUserID(signUpResponse.data.userID)
+        setUserInfo(signUpResponse.data.userInfo)
+        setAccountType(signUpResponse.data.userInfo.accountType)
+
+        // Redirect after Login
+        if (signUpResponse.data.userInfo.accountType === "student") {
+          history.push("/student/" + signUpResponse.data.userID)
         }
-
+        else if (signUpResponse.data.userInfo.accountType === "teacher") {
+          history.push("/teacher/" + signUpResponse.data.userID)
+        }
         else {
-          console.log({ "Response": signUpResponse.data.msg, "Status": signUpResponse.status })
-
-          //Value Setter for the first authentication {Using deconstruction}
-          setUserID(signUpResponse.data.userID)
-          setUserInfo(signUpResponse.data.userInfo)
-          setAccountType(signUpResponse.data.userInfo.accountType)
-
-          // Redirect after Login
-          if (signUpResponse.data.userInfo.accountType === "student") {
-            history.push("/student/" + signUpResponse.data.userID)
-          }
-          else if (signUpResponse.data.userInfo.accountType === "teacher") {
-            history.push("/teacher/" + signUpResponse.data.userID)
-          }
-          else {
-            history.push("/")
-            console.log("Error: Account Type Not Set")
-          }
-
+          history.push("/")
+          console.log("Error: Account Type Not Set")
         }
-      })
+
+      }
+    })
     // }
   }
 
@@ -414,7 +415,13 @@ const SignUp = ({ setUserID, setUserInfo, setAccountType }) => {
                     color="primary"
                   />
                 }
-                label="I accept the [Terms of Use] & [Privacy Policy]"
+                label={<div>
+                  <span>I accept the </span>
+                  <Link onClick={(e) => history.push('/terms-of-use')}>Terms of Use</Link>
+                  <span> and </span>
+                  <Link onClick={(e) => history.push('/privacy-policy')}>Privacy Policy</Link>
+                </div>
+                }
               />
 
             </div>
