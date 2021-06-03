@@ -52,9 +52,12 @@ const ModalUpdateCourse = ({ courseID, teacherID }) => {
             </div> 
 
             <div className="modal-kit-info">
-                <h3 classname='modal-subtitle'> Kit Information</h3>
-                <UploadCourseMaterial currentFileID={course.kitImage.fileID} courseID={courseID} fileUse={"kitImage"} description={"Kit Image"} refreshModal={refreshModal}/>
-                <FormKitInfo courseID={courseID} course={course}/>
+                <h3 classname='modal-subtitle'>Kit Information</h3>
+                <div className='modal-kit-container'>
+                    <UploadCourseMaterial currentFileID={course.kitImage.fileID} courseID={courseID} fileUse={"kitImage"} description={"Kit Image"} refreshModal={refreshModal}/>
+                    <FormKitInfo courseID={courseID} course={course}/>                    
+                </div>
+
             </div> 
 
             <div className="modal-course-material">

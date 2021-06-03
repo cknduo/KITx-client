@@ -1,9 +1,10 @@
 import React, { useState } from "react"
-import Button from '@material-ui/core/Button';
 import Axios from "axios"
+
 import ImageCourseMaterial from './Image-CourseMaterial'
 import './Modal-UpdateCourse.css'
-import placeholder from '../assets/whale.svg'
+
+import './Upload-CourseMaterial.css'
 
 const UploadCourseMaterial = ({ currentFileID, courseID, fileUse, description, refreshModal }) => {
 /* This loads the course image, course certificate, and kit image into the database */    
@@ -93,24 +94,27 @@ const UploadCourseMaterial = ({ currentFileID, courseID, fileUse, description, r
     }
 
     return (
-        <div>
+        <div className='upload-course-image-file-container'>
+            <div className='upload-img-container'>
+                <ImageCourseMaterial imageFileID={currentFileID} />                
+            </div>
 
-            <ImageCourseMaterial imageFileID={currentFileID} />
             {/*<img className="preview-image" src={previewImage} alt="No Preview Available" height="100px" width="100px" margin="20px" border="2px" />*/}
             
             {/* Only accept image files*/}
-            <input type="file" name="file" id="file" accept="image/*" onChange={filechangeHandler} />
-            
-            <Button color="primary" variant="contained" type="submit" disabled={!isSelected} onClick={()=>{fileUpload()}}>
-                Upload
-            </Button>
-            {isSuccessful && <> File upload complete </>}
+            <div className='upload-content-container'>
+                <input type="file" name="file" id="file" accept="image/*" onChange={filechangeHandler} />
+                
+                <div className='upload-btn-container'>
+                    <button className='file-upload-btn' type='submit' disabled={!isSelected} onClick={()=>{fileUpload()}}>
+                        UPLOAD
+                    </button>
+                </div>
+
+                {isSuccessful && <> File upload complete </>}                
+            </div>
         </div>
-
     )
-
-
-
 }
 
 export default UploadCourseMaterial

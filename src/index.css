@@ -42,7 +42,8 @@ h2 {
   --primary: #0091ca;
   --primary-shadow: rgba(0, 145, 202, 0.5);
   --secondary: #ff9100;
-  --neutral: #b6b6b6;
+  /* --secondary: #450085; */
+  --neutral: #888888;
   --background: #0e171d;
   --background-light: #223038;
   --logo-font: 'Fredoka One', cursive;

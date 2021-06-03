@@ -91,6 +91,13 @@
     grid-column: 3 / 4;
 }
 
+.check-box {
+    margin-top: 1rem;
+    color: var(--neutral);
+    grid-column: 1 / 4;
+    /* text-align: center; */
+}
+
 .button-container {
     display: flex;
     justify-content: center;

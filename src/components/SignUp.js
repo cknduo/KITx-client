@@ -405,12 +405,13 @@ const SignUp = ({ setUserID, setUserInfo, setAccountType }) => {
               </FormControl>
             </div>
 
-            <div className="checkbox">
+            <div className="check-box">
               <FormControlLabel
                 control={
                   <Checkbox
                     onChange={formik.handleChange}
                     name="agreement"
+                    color="primary"
                   />
                 }
                 label="I accept the [Terms of Use] & [Privacy Policy]"

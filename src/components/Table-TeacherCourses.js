@@ -3,9 +3,7 @@ import React, { useEffect, useState } from 'react'
 import ModalUpdateCourse from './Modal-UpdateCourse'
 import ImageCourseMaterial from './Image-CourseMaterial'
 import Modal from 'react-modal'
-import Button from '@material-ui/core/Button'
 import { ReactComponent as Pen } from '../assets/pen.svg'
-import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from 'react-router-dom'
 
 import './Table-TeacherCourses.css'
@@ -63,12 +61,18 @@ const TableTeacherCourses = ({teacherID, courseAddedToggle, courseStatus}) => {
             top: '5rem',
             left: '2rem',
             right: '2rem',
-            bottom: '2rem'
+            bottom: '2rem',
+            backgroundColor: '#0e171d',
           }
         }}
       >
+        <div className='inside-modal'>
           {courseIDtoUpdate && < ModalUpdateCourse courseID={courseIDtoUpdate} teacher={teacherID}/>}
-          <button className='modal-close-btn' onClick={toggleUpdateCourseModal}>CLOSE EDIT</button>
+          <div>
+            <button className='modal-close-btn' onClick={toggleUpdateCourseModal}>GO BACK TO DASHBOARD</button>               
+          </div>
+        </div>
+
       </Modal>
     </div>
   )

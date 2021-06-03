@@ -7,8 +7,9 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import IconButton from '@material-ui/core/IconButton';
 import Box from '@material-ui/core/Box';
 import Collapse from '@material-ui/core/Collapse';
-import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
+
+import './Table-CourseMaterial.css'
 
 const TableCourseMaterial = ({courseID, materialAdded, course, refreshModal}) => {
 /* This table is the list of course modules, and the module files associated with the modules */
@@ -73,7 +74,7 @@ const TableCourseMaterial = ({courseID, materialAdded, course, refreshModal}) =>
               </Table>
           </TableContainer>
           
-          <Button color="primary" variant="contained" onClick={()=>{addModule()}}> Add Module </Button>
+          <button className='course-content-upload-btn' onClick={()=>{addModule()}}>ADD MODULE</button>
 
     </div>
   ) 

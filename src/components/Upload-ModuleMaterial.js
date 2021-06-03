@@ -2,7 +2,6 @@ import React, { useState } from "react"
 
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Axios from "axios"
 import { makeStyles } from '@material-ui/core/styles';
@@ -11,6 +10,7 @@ import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl'
 
+import './Upload-ModuleMaterial.css'
 
 const UploadModuleMaterial = ({ courseID, fileUse, description, modules, refreshModal}) => {
     const [selectedFile, setSelectedFile] = useState()
@@ -121,9 +121,9 @@ const UploadModuleMaterial = ({ courseID, fileUse, description, modules, refresh
 
                 <input type="file" name="file" id="file" onChange={filechangeHandler}/>
 
-                <Button color="primary" variant="contained" type="Submit" disabled={!isSelected}>
-                    Upload
-                </Button>
+                <button className='course-content-module-upload-btn' type="Submit" disabled={!isSelected}>
+                    UPLOAD
+                </button>
 
             </form>
         </div>

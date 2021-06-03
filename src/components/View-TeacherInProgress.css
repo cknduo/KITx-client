@@ -1,11 +1,12 @@
 .teach-in-progress-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .add-new-course-btn {
     margin: 1rem 1rem;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 5rem;
     letter-spacing: 0.5px;
     color: white;
     font-weight: bold;

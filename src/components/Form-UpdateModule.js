@@ -1,12 +1,13 @@
 import { useFormik } from 'formik';
 import * as yup from 'yup';
-import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl'
+
+import './Form-UpdateModule.css'
 
 const useStyles = makeStyles({
     headerCell: {
@@ -99,9 +100,9 @@ const FormUpdateModule = ({ courseID, modules, refreshModal }) => {
             />
 
 
-            <Button color="primary" variant="contained" type="submit">
-                Submit
-            </Button>
+            <button className='form-update-module-btn' type="submit">
+                SUBMIT
+            </button>
         
         </form>
     ) 

@@ -1,0 +1,45 @@
+.upload-course-image-file-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+
+.upload-img-container {
+    max-height: 14rem;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.upload-content-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.file-upload-btn {
+    margin: 1rem 0;
+    padding: 0.5rem 1rem;
+    letter-spacing: 0.5px;
+    color: white;
+    font-size: 0.6rem;
+    font-family: inherit;
+    font-weight: bold;
+    background-color: var(--primary);
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    cursor: pointer;
+}
+
+.file-upload-btn:disabled {
+    padding: 0.5rem 1rem;
+    letter-spacing: 0.5px;
+    color: white;
+    font-size: 0.6rem;
+    font-family: inherit;
+    font-weight: bold;
+    background-color: var(--neutral);
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    cursor: default;
+}

@@ -1,0 +1,13 @@
+.kit-info-btn {
+    padding: 0.5rem 2rem;
+    letter-spacing: 0.5px;
+    color: white;
+    font-size: 0.8rem;
+    font-family: inherit;
+    font-weight: bold;
+    background-color: var(--primary);
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    cursor: pointer;
+}
